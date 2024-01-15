@@ -1,12 +1,11 @@
 {
-	"name": "sarkul",
+	"name": "backend",
 	"version": "1.0.0",
-	"description": "Sarkul Web App",
+	"description": "This is the backend for SarKul",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"keywords": [],
 	"author": "Tosmim",
 	"license": "ISC"
 }
