@@ -13,6 +13,10 @@ app.use(express.urlencoded({extended: true}));
 connectDB();
 const PORT = process.env.PORT;
 
+app.get("/", (req, res) => {
+    res.send("Please refer to the .todo file for instructions");
+});
+
 app.use("/api/v1/user", userRoutes);
 
 app.listen(PORT, () => {
