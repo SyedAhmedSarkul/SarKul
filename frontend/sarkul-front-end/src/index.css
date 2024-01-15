@@ -1,1 +1,27 @@
+:root
+{
+  --white: #e9f5f5;
+  --black: #111;
+  
+  --blue: #48ccac;
+  --darkblue:#154d3f;
+  --grey: #888;
+  --darkgrey:#1b1b1b;
+  --green:#61c96f;
+  --red:#f94141;
+}
 
+body {
+    background-color:var(--white);
+    color: var(--darkblue);
+   
+   }
+
+*
+{
+  transition: all 0.3s;
+}
+html
+{
+  scroll-behavior: smooth;
+}
