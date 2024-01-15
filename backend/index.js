@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 connectDB();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.use("/api/v1/user", userRoutes);
 
