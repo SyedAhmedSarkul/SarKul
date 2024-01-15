@@ -8,7 +8,9 @@ HSL: hsl(178°, 70%, 64%)
 }
 
 Send OTP url:
-"sarkul.com/api/v1/user/send-otp"
+data- email
+"https://sarkul.onrender.com/api/v1/user/send-otp"
 
 Verify OTP url:
-"sarkul.com/api/v1/user/verify-otp"
+data- email, otp
+"https://sarkul.onrender.com/api/v1/user/verify-otp"
