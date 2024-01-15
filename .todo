@@ -6,3 +6,11 @@ Hex code: #48CCAC
 RGB: rgb(72, 204, 172)
 HSL: hsl(178°, 70%, 64%)
 }
+
+Send OTP url:
+data- email
+"https://sarkul.onrender.com/api/v1/user/send-otp"
+
+Verify OTP url:
+data- email, otp
+"https://sarkul.onrender.com/api/v1/user/verify-otp"
