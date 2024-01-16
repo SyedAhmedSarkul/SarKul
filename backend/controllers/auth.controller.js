@@ -16,6 +16,9 @@ export const createUser = async (req, res) => {
 export const sendOtp = async (req, res) => {
     const {email} = req.body;
     try {
+        if (!email) {
+            throw new ApiError(400, "Email is required");
+        }
         const user = await User.findOne({email});
         if (!user) {
             throw new ApiError(404, "User not found");
@@ -34,6 +37,12 @@ export const verifyOtp = async (req, res) => {
     const {email, otp} = req.body;
 
     try {
+        if (!email) {
+            throw new ApiError(400, "Email is required");
+        }
+        if (!otp) {
+            throw new ApiError(400, "OTP is required");
+        }
         const user = await User.findOne({email});
         if (!user) {
             throw new ApiError(404, "User not found");
