@@ -1,3 +1,9 @@
+
+*
+{
+  transition: all 0.3s;
+}
+
 .login-slot
 {
    height: 400px;
@@ -40,6 +46,11 @@ button:hover
 {
   background-color: var(--grey);
   
+}
+
+.verify
+{
+  transform: translate(0,6rem);
 }
 
 .header {
