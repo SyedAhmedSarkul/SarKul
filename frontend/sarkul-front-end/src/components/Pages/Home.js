@@ -5,6 +5,12 @@ import StockManagementPage from './StockManagementPage';
 import PartTransaction from './PartTransaction';
 import ManPower from './ManPower';
 import NavBar from '../Navbar';
+import CallLogs from '../CallMaster/CallLogs';
+import CallAssign from '../CallMaster/CallAssign';
+import CallRegister from '../CallMaster/CallRegister';
+import CallUpdate from '../CallMaster/CallUpdate';
+import PendingCallReports from '../CallMaster/PendingCallReports';
+import ClosedCall from '../CallMaster/ClosedCall';
 
 
 function Home() {
@@ -14,6 +20,12 @@ function Home() {
        <NavBar/>
          <Routes>
          <Route path='/callmaster' element={<CallMasterPage/>}/>
+              <Route path='/callmaster/call-logs' element={<CallLogs/>}/>
+              <Route path='/callmaster/call-assign' element={<CallAssign/>}/>
+              <Route path='/callmaster/call-register' element={<CallRegister/>}/>
+              <Route path='/callmaster/call-update' element={<CallUpdate/>}/>
+              <Route path='/callmaster/call-closed' element={<ClosedCall/>}/>
+              <Route path='/callmaster/call-pending' element={<PendingCallReports/>}/>
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/manpower'element={<ManPower/>}/>

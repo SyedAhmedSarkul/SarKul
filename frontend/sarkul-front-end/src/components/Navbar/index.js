@@ -6,7 +6,7 @@ import Button from '../Button';
 function NavBar() {
   return (
     <div className='navbar'>
-          <h1 className='logo'>Sarkul Tech<span style={{color:"var(--blue)"}}>.</span></h1>
+          <h1 style={{color:"var(--white)"}}>Sarkul Tech<span style={{color:"var(--white)"}}>.</span></h1>
         <div className='links'>
         <Link to="/callmaster" className='link'>
         <Button text={"Call Master"}  outlined={true}/>
