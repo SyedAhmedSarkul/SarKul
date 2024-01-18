@@ -1,4 +1,12 @@
-- Admin Login
+##################################BACKEND#######################################
+
+- Admin Login based on OTP ✔️
+- Email validation ✔️
+- Call filters
+- Store token for authorisation
+
+
+##################################FRONTEND#######################################
 
 -theme color from logo detected
 {
@@ -7,10 +15,3 @@ RGB: rgb(72, 204, 172)
 HSL: hsl(178°, 70%, 64%)
 }
 
-Send OTP url:
-data- email
-"https://sarkul-v5cz.onrender.com/api/v1/user/send-otp"
-
-Verify OTP url:
-data- email, otp
-"https://sarkul-v5cz.onrender.com/api/v1/user/verify-otp"
