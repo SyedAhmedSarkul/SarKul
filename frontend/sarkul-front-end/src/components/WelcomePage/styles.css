@@ -1,0 +1,25 @@
+.content
+{
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+.image
+{
+    opacity: 0.3;
+    width: 58%;
+  height: auto;
+  display: block;
+  
+  transform: translate(35rem, 9rem);
+}
+.text
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(20rem, -4rem);
+    text-align: center;
+    color: var(--grey);
+  
+}
