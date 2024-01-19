@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/closed", getCompletedCalls);
 router.get("/pending", getPendingCalls);
-router.route("/").post(createCallValidation, createCall).get(getAllCalls);
+router.route("/").get(getAllCalls).post(createCallValidation, createCall);
 router.route("/:callId").get(callIdValidation, getCallById).patch(callIdValidation, updateCall).delete(callIdValidation, deleteCall);
 
 export default router;
