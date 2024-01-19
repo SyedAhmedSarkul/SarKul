@@ -2,6 +2,12 @@ import mongoose, {Schema} from "mongoose";
 import validator from "validator";
 
 const callSchema = new Schema({
+    callId: {
+        type: Number,
+        maxLength: [6, "Call ID must be 6 digits"],
+        unique: [true, "Call ID must be unique"],
+        index: true
+    },
     serialNumber: {
         type: String,
         required: [true, "Serial number is required"],
@@ -53,6 +59,12 @@ const callSchema = new Schema({
     itemModelNumber: {
         type: String,
         required: [true, "Item model number is required"],
+    },
+    engineerName: {
+        type: String
+    },
+    closedAt: {
+        type: Date
     }
 }, {timestamps: true});
 

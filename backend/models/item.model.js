@@ -9,6 +9,6 @@ const itemSchema = new Schema({
         type: String,
         required: [true, "Model number is required"],
     }
-});
+}, {timestamps: true});
 
 export const Item = mongoose.model("Item", itemSchema);

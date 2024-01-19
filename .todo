@@ -2,7 +2,13 @@
 
 - Admin Login based on OTP ✔️
 - Email validation ✔️
+- Create Call ✔️
+- Call register ✔️
+- Closed calls ✔️
+- Pending calls ✔️
 - Call filters
+- Call Update
+- Call Assign
 - Store token for authorisation
 
 
