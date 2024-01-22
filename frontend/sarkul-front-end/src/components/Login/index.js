@@ -70,7 +70,7 @@ function Login({setIsUser}) {
     <div className='login-slot'>
         <h1>Login Here</h1>
         <h3>Email: {email}</h3>
-        {otp?( isVerifying?(<button className='validate-btn verify'>Verifying... </button>):(<div><input type='number' placeholder='Enter OTP..' ref={input}/> <button className='validate-btn' onClick={validate}>Validate </button> </div>)):
+        {otp?( isVerifying?(<button className='validate-btn verify'>Verifying... </button>):(<div><input type='number' placeholder='Enter OTP..' ref={input} className='input'/> <button className='validate-btn' onClick={validate}>Validate </button> </div>)):
         ( isSent?(<button onClick={generateOtp}>Generate OTP</button>)
         :(<button>Sending...</button>))
         }

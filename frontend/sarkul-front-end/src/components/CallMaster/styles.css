@@ -1,0 +1,47 @@
+.form-input
+{
+   height: 2rem;
+   width: 15rem;
+   margin: 1rem;
+   font-size: medium;
+}
+.form{
+    display: flex;
+    width: 90%;
+    height: 90%;
+    position: fixed;
+    margin-left: 10rem;
+    padding-top: 1.8rem;
+}
+.form-right
+{
+    width: 100%;
+    padding-right: 10rem;
+   
+}
+.form-left
+{
+    width: 100%;
+    justify-content: start;
+    align-items: end;
+}
+.form-left-top 
+{
+    transform: translate(-1.8rem);
+}
+.model-number
+{
+    transform: translate(-1.8rem);
+}
+.form-btn
+{
+    width: 1rem;
+    margin: auto;
+}
+#dropdown
+{
+    width: 15rem;
+    height: 2rem;
+    font-size: medium;
+    margin: 1rem;
+}
