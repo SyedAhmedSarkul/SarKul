@@ -1,55 +1,90 @@
-import React, { useState, useRef} from 'react'
+import React, {useRef} from 'react'
 import SideBar from './SideBar';
 import './styles.css';
-import Button from '../Button';
+import axios from 'axios';
 
 function CallLogs() {
-const [serialNumber, setSerialNumber] = useState("");
-const [customerName, setCustomerName] = useState("");
-const [customerCode, setCustomerCode] = useState("");
-const [contact, setContact] = useState(0);
-const [email, setEmail] = useState("");
-const [address, setAddress] = useState("");
-const [category, setCategory] = useState("");
-const [problem, setProblem] = useState("");
-const [modelNumber, setModelNumber] = useState("");
-const [item, setItem] = useState("");
-const serialNumberRef = useRef(null);
-const customerNameRef = useRef(null);
-const customerCodeRef = useRef(null);
-const contactRef = useRef(null);
-const emailRef = useRef(null);
-const addressRef = useRef(null);
-const categoryRef = useRef(null);
-const problemRef = useRef(null);
-const modelNumberRef = useRef(null);
-const itemRef = useRef(null);
+let serialNumber=""
+let customerName=''
+let customerCode=''
+let contact = 0;
+let email=''
+let address= ''
+let category=''
+let problem=''
+let modelNumber=''
+let item=''
+let serialNumberRef = useRef(null);
+let customerNameRef = useRef(null);
+let customerCodeRef = useRef(null);
+let contactRef = useRef(null);
+let emailRef = useRef(null);
+let addressRef = useRef(null);
+let categoryRef = useRef(null);
+let problemRef = useRef(null);
+let modelNumberRef = useRef(null);
+let itemRef = useRef(null);
+let callId=0;
 
  
-  function handleSubmit(event)
+  async function handleSubmit(event)
   {
-    alert("submit")
+ 
     event.preventDefault();
-    setAddress(addressRef.current.value);
-    const obj={
+    serialNumber = serialNumberRef.current.value;
+    
+    customerName = customerNameRef.current.value;
+    customerCode = customerCodeRef.current.value;
+    contact = contactRef.current.value;
+    email = emailRef.current.value;
+    address = addressRef.current.value;
+    category= categoryRef.current.value;
+    problem = problemRef.current.value;
+    modelNumber = modelNumberRef.current.value;
+    item = itemRef.current.value;
+   
+    let obj={
       serialNumber:serialNumber,
       customerName:customerName,
-      customerCode:customerCode,
-      contact:contact,
-      email:email,
-      address:address,
-      category:category,
-      problem:problem,
-      modelNumber:modelNumber,
-      item:item
+    customerCode:customerCode,
+     contactNumber:contact,
+     customerEmail:email,
+     customerAddress:address,
+     problemDescription:problem,
+     category:category,
+     itemName:item,
+     itemModelNumber:modelNumber
     };
+    
+    await postData(obj);
+    alert("Call Created with call number: "+callId)
   }
+
+  async function postData(data) {
+    try {
+      let url = 'https://sarkul-v5cz.onrender.com/api/v1/call?callId=103693'
+      const config = {
+        headers: {
+          'Content-Type': 'Application/json'
+        },
+      };
+      const response = await axios.post(url,data,config);
+      console.log('Response:', response.data);
+      callId=response.data.data.callId;
+     
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
+  }
+  
   return (
     <div>
       <SideBar/>
      <h3>Call Log</h3>
-      <form onSubmit={handleSubmit}>
-      <div className='form'>
+      
+      <form className='form' onSubmit={handleSubmit}>
         <div className='form-left'>
           <div className='form-left-top'>
           <label>Serial number:</label> <input type='text' className='form-input' required ref={serialNumberRef}/><br/>
@@ -63,7 +98,7 @@ const itemRef = useRef(null);
         </div>
       <div className='form-right'>
       <label>Category:</label> 
-       <select id="dropdown" required>
+       <select id="dropdown" required ref={categoryRef}>
         <option value="">-- Select --</option>
         <option value="desktop">Desktop</option>
         <option value="laptop">Laptop</option>
@@ -78,16 +113,15 @@ const itemRef = useRef(null);
       </div>
       
       <label>Item:</label> <input type='text' className='form-input' required ref={itemRef}/><br/><br/><br/>
-      <div className='form-btn' onClick={handleSubmit}>
-         <Button text={"Submit"} outlined={true}/>
-         </div>
+      
+         <input type='submit' value='Submit' className='submit-btn' onSubmit={handleSubmit}/>
      
       </div>
-      
-      </div>
       </form>
+      </div>
       
-    </div>
+      
+    
   )
 }
 

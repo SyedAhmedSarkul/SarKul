@@ -45,3 +45,23 @@
     font-size: medium;
     margin: 1rem;
 }
+.submit-btn
+{
+    background-color: var(--darkblue);
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border:2px solid;
+    border-color: var(--blue);
+    border-radius: 3rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    min-width: 100px;
+   margin-top: 0.6rem;
+    text-transform: capitalize;
+}
+.submit-btn:hover{
+    /* background-color: var(--blue); */
+    box-shadow: 5px 5px 10px var(--blue);
+    transition: all 0.3s;
+}
