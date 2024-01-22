@@ -1,9 +1,9 @@
 import {ApiResponse} from "../utils/ApiResponse.js";
 
 export const createCallValidation = async (req, res, next) => {
-    const {serialNumber, customerName, customerCode, contactNumber, customerEmail, customerAddress, problemDescription, status, category, itemName, itemModelNumber} = req.body;
+    const {customerName, customerCode, contactNumber, customerEmail, customerAddress, problemDescription, status, category, itemName, itemModelNumber} = req.body;
 
-    if ([serialNumber, customerName, customerCode, contactNumber, customerEmail, customerAddress, problemDescription, category, itemName, itemModelNumber].includes(undefined)) {
+    if ([customerName, customerCode, contactNumber, customerEmail, customerAddress, problemDescription, category, itemName, itemModelNumber].includes(undefined).includes(null)) {
         return res.status(400).json(new ApiResponse(400, null, "All fields are required"));
     }
 
