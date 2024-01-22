@@ -47,7 +47,12 @@ const engineerSchema = new Schema({
         type: String
     },
     salary: {
-        type: String
+        type: Number,
+        required: [true, "Salary is required"],
+    },
+    assignedTo: {
+        type: Schema.Types.ObjectId,
+        ref: "Call"
     }
 }, {timestamps: true});
 
