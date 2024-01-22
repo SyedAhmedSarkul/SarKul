@@ -3,8 +3,7 @@ import validator from "validator";
 
 const callSchema = new Schema({
     callId: {
-        type: Number,
-        maxLength: [6, "Call ID must be 6 digits"],
+        type: String,
         unique: [true, "Call ID must be unique"],
         index: true
     },

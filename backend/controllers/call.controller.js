@@ -1,7 +1,7 @@
 import {Call} from "../models/call.model.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import {ApiError} from "../utils/ApiError.js";
-import {generateCallId} from "../utils/callIdGenerator.js";
+import {generateCallId} from "../utils/idGenerator.js";
 
 const createFilter = (query) => {
     let filter = {};
