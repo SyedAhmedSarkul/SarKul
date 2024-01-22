@@ -16,7 +16,7 @@
    box-shadow: 10px 10px 10px 10px var(--grey);
    background: linear-gradient(to right, var(--blue) 50%, transparent 50%);
 }
-input
+.input
 {
     width: 8rem;
     height: 1.5rem;
