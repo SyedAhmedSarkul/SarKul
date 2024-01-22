@@ -10,7 +10,6 @@ const callSchema = new Schema({
     },
     serialNumber: {
         type: String,
-        required: [true, "Serial number is required"],
     },
     customerName: {
         type: String,
@@ -24,7 +23,7 @@ const callSchema = new Schema({
         type: String,
         required: [true, "Contact number is required"],
         minLength: [10, "Contact number must be 11 digits"],
-        maxLength: [10, "Contact number must be 11 digits"],
+        maxLength: [13, "Contact number must be 11 digits"],
     },
     customerEmail: {
         type: String,
@@ -63,6 +62,10 @@ const callSchema = new Schema({
     engineerName: {
         type: String
     },
+    engineersAssigned: [{
+        type: Schema.Types.ObjectId,
+        ref: "Engineer"
+    }],
     closedAt: {
         type: Date
     }
