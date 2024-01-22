@@ -7,9 +7,9 @@
 - Closed calls ✔️
 - Pending calls ✔️
 - Call filters ✔️
-- Generate callId using Crypto module and not Math.random()
+- Generate callId using Crypto module and not Math.random() ✔️
 - Call Update   [21 Jan]
-- Call Assign   [21 Jan]
+- Call Assign ✔️
 - Store token for authorisation
 
 
