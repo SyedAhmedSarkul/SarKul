@@ -10,7 +10,6 @@ const callSchema = new Schema({
     },
     serialNumber: {
         type: String,
-        required: [true, "Serial number is required"],
     },
     customerName: {
         type: String,
