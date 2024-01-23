@@ -1,6 +1,7 @@
 ##################################BACKEND#######################################
 
 - Admin Login based on OTP ✔️
+- OTP validation with expiration set for 10 minutes ✔️
 - Email validation ✔️
 - Create Call ✔️
 - Call register ✔️

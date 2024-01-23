@@ -6,8 +6,7 @@ const userSchema = new Schema({
         default: "cheemstech01@gmail.com"
     },
     otp: {
-        type: Number,
-        maxLength: [6, "OTP must be 6 digits"],
+        type: String,
     }
 });
 
