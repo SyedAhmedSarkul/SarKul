@@ -56,7 +56,6 @@ const callSchema = new Schema({
     },
     itemModelNumber: {
         type: String,
-        required: [true, "Item model number is required"],
     },
     engineerName: {
         type: String
@@ -67,6 +66,16 @@ const callSchema = new Schema({
     }],
     closedAt: {
         type: Date
+    },
+    customerRemark: {
+        type: String
+    },
+    engineerRemark: {
+        type: String
+    },
+    itemStatus: {
+        type: String,
+        enum: ["required", "pending"],
     }
 }, {timestamps: true});
 

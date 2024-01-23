@@ -24,3 +24,13 @@ export const callAssignValidation = async (req, res, next) => {
     }
     next();
 };
+
+export const callUpdateValidation = async (req, res, next) => {
+    if (!req.params.callId) {
+        return res.status(400).json(new ApiResponse(400, null, "Call id is required"));
+    }
+    if (!req.body.customerRemark || !req.body.engineerRemark || !req.body.partStatus) {
+        return res.status(400).json(new ApiResponse(400, null, "Customer Remarks, Engineer Remarks and Part Status are required"));
+    }
+    next();
+};

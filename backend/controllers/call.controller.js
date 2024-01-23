@@ -135,18 +135,11 @@ export const updateCall = async (req, res) => {
     try {
         const {callId} = req.params;
         if (!callId) {
-            throw new ApiError(400, "Call id is required");
+            throw new ApiError(400, "Call ID is required");
         }
-        const {status} = req.body;
-        const call = await Call.findByIdAndUpdate(callId, req.body, {new: true});
-        if (!call) {
-            throw new ApiError(404, "Call not found");
-        }
-        if (status === 'completed') {
-            call.closedAt = call.updatedAt;
-            await call.save();
-        }
-        return res.status(200).json(new ApiResponse(200, call, "Call updated successfully"));
+        const {customerRemark, engineerRemark, partStatus} = req.body;
+        const call = await Call.findOneAndUpdate({callId}, {customerRemark, engineerRemark, partStatus}, {new: true});
+        return res.status(200).json(new ApiResponse(200, null, "Call updated successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while updating call"));
     }
@@ -208,5 +201,20 @@ export const assignCallToEngineer = async (req, res) => {
         return res.status(200).json(new ApiResponse(200, null, "Call assigned successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while assigning call"));
+    }
+};
+
+export const closeCall = async (req, res) => {
+    try {
+        const {callId} = req.params;
+        const call = await Call.findOne({callId});
+        if (!call) {
+            throw new ApiError(404, `Call with id ${callId} not found`);
+        }
+        call.status = "completed";
+        await call.save();
+        return res.status(200).json(new ApiResponse(200, null, "Call closed successfully"));
+    } catch (error) {
+        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while closing call"));
     }
 };
