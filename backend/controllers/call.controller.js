@@ -41,12 +41,12 @@ const createFilter = (query) => {
     }
     else if (query.startTime) {
         filter.createdAt = {
-            $gte: new Date(query.startTime)
+            $eq: new Date(query.startTime)
         };
     }
     else if (query.endTime) {
         filter.createdAt = {
-            $lte: new Date(query.endTime)
+            $eq: new Date(query.endTime)
         };
     }
 

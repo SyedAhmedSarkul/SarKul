@@ -49,6 +49,23 @@ const engineerSchema = new Schema({
     salary: {
         type: Number,
         required: [true, "Salary is required"],
+    },
+    status: {
+        type: String,
+        enum: {
+            values: ["active", "inactive", "resigned"],
+            message: "{VALUE} is not supported",
+        },
+        default: "active"
+    },
+    resignedAt: {
+        type: Date
+    },
+    incrementDueDate: {
+        type: Date
+    },
+    remarks: {
+        type: String
     }
 }, {timestamps: true});
 
