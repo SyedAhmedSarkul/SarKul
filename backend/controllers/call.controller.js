@@ -189,6 +189,9 @@ export const assignCallToEngineer = async (req, res) => {
         if (!call) {
             throw new ApiError(404, `Call with id ${callId} not found`);
         }
+        if (call.status !== "pending") {
+            throw new ApiError(400, `Call with id ${callId} is already closed`);
+        }
         const engineer = await Engineer.findOne({employeeName});
         if (!engineer) {
             throw new ApiError(404, `Engineer with name ${employeeName} not found`);
