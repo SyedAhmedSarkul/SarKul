@@ -10,6 +10,7 @@
 - Call filters ✔️
 - Generate callId using Crypto module and not Math.random() ✔️
 - Call Update ✔️
+- Call close ✔️
 - Call Assign ✔️
 - Engineer Create, getById, Update, getAll with filters ✔️
 - Store token for authorisation
