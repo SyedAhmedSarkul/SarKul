@@ -220,6 +220,11 @@ export const closeCall = async (req, res) => {
             throw new ApiError(404, `Call with id ${callId} not found`);
         }
         call.status = "completed";
+        call.engineersAssigned.forEach(async (engineerId) => {
+            const engineer = await Engineer.findById(engineerId);
+            engineer.assignedTo = "";
+            await engineer.save();
+        });
         await call.save();
         return res.status(200).json(new ApiResponse(200, null, "Call closed successfully"));
     } catch (error) {
