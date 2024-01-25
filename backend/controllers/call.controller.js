@@ -199,8 +199,13 @@ export const assignCallToEngineer = async (req, res) => {
         if (call.engineersAssigned.includes(engineer._id)) {
             throw new ApiError(400, `Engineer with name ${employeeName} is already assigned to this call`);
         }
+        if (engineer.assignedTo) {
+            throw new ApiError(400, `Engineer with name ${employeeName} is already assigned to another call`);
+        }
         call.engineersAssigned.push(engineer._id);
         await call.save();
+        engineer.assignedTo = call.callId;
+        await engineer.save();
         return res.status(200).json(new ApiResponse(200, null, "Call assigned successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while assigning call"));
