@@ -34,12 +34,14 @@ const createFilter = (query) => {
 
     if (query.joinDate) {
         filter.joinDate = {
-            $eq: new Date(query.joinDate)
+            $gte: new Date(query.joinDate).setUTCHours(0, 0, 0, 0),
+            $lt: new Date(query.joinDate).setUTCHours(23, 59, 59, 999)
         };
     }
     if (query.employeeDOB) {
         filter.employeeDOB = {
-            $eq: new Date(query.employeeDOB)
+            $gte: new Date(query.employeeDOB).setUTCHours(0, 0, 0, 0),
+            $lt: new Date(query.employeeDOB).setUTCHours(23, 59, 59, 999)
         };
     }
     return {filter, sort};

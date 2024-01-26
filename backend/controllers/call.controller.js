@@ -33,20 +33,22 @@ const createFilter = (query) => {
         // console.log(sort);
     }
 
-    if (query.startTime && query.endTime) {
+    if (query.startDate && query.endDate) {
         filter.createdAt = {
-            $gte: new Date(query.startTime),
-            $lte: new Date(query.endTime)
+            $gte: new Date(query.startDate),
+            $lte: new Date(query.endDate)
         };
     }
-    else if (query.startTime) {
+    else if (query.createdAt) {
         filter.createdAt = {
-            $eq: new Date(query.startTime)
+            $gte: new Date(query.createdAt).setUTCHours(0, 0, 0, 0),
+            $lt: new Date(query.createdAt).setUTCHours(23, 59, 59, 999)
         };
     }
-    else if (query.endTime) {
-        filter.createdAt = {
-            $eq: new Date(query.endTime)
+    else if (query.updatedAt) {
+        filter.updatedAt = {
+            $gte: new Date(query.updatedAt).setUTCHours(0, 0, 0, 0),
+            $lt: new Date(query.updatedAt).setUTCHours(23, 59, 59, 999)
         };
     }
 
@@ -139,7 +141,7 @@ export const updateCall = async (req, res) => {
         }
         const {customerRemark, engineerRemark, partStatus} = req.body;
         const call = await Call.findOneAndUpdate({callId}, {customerRemark, engineerRemark, partStatus}, {new: true});
-        return res.status(200).json(new ApiResponse(200, null, "Call updated successfully"));
+        return res.status(200).json(new ApiResponse(200, call, "Call updated successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while updating call"));
     }
@@ -159,10 +161,16 @@ export const deleteCall = async (req, res) => {
 
 export const getPendingCalls = async (req, res) => {
     try {
-        const calls = await Call.find({status: "pending"}).populate({
+        const {createdAt} = req.query;
+        const query = {};
+        query.status = "pending";
+        if (createdAt) {
+            query.createdAt = {$gte: new Date(createdAt).setUTCHours(0, 0, 0, 0), $lt: new Date(createdAt).setUTCHours(23, 59, 59, 999)};
+        }
+        const calls = await Call.find(query).populate({
             path: 'engineersAssigned',
             select: 'employeeName employeeCode employeeContact',
-        });
+        }).sort({callId: 1});
         return res.status(200).json(new ApiResponse(200, calls, "Calls retrieved successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while retrieving calls"));
