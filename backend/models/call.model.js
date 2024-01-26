@@ -3,8 +3,7 @@ import validator from "validator";
 
 const callSchema = new Schema({
     callId: {
-        type: Number,
-        maxLength: [6, "Call ID must be 6 digits"],
+        type: String,
         unique: [true, "Call ID must be unique"],
         index: true
     },
@@ -22,8 +21,8 @@ const callSchema = new Schema({
     contactNumber: {
         type: String,
         required: [true, "Contact number is required"],
-        minLength: [10, "Contact number must be 11 digits"],
-        maxLength: [13, "Contact number must be 11 digits"],
+        minLength: [10, "Contact number must be minimum 10 digits"],
+        maxLength: [14, "Contact number must be maximum 14 digits"],
     },
     customerEmail: {
         type: String,
@@ -57,7 +56,6 @@ const callSchema = new Schema({
     },
     itemModelNumber: {
         type: String,
-        required: [true, "Item model number is required"],
     },
     engineerName: {
         type: String
@@ -68,6 +66,16 @@ const callSchema = new Schema({
     }],
     closedAt: {
         type: Date
+    },
+    customerRemark: {
+        type: String
+    },
+    engineerRemark: {
+        type: String
+    },
+    itemStatus: {
+        type: String,
+        enum: ["required", "pending"],
     }
 }, {timestamps: true});
 

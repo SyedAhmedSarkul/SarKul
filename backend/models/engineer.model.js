@@ -6,8 +6,8 @@ const engineerSchema = new Schema({
         required: [true, "Employee name is required"],
     },
     employeeCode: {
-        type: String,
-        required: [true, "Employee code is required"],
+        type: Number,
+        unique: [true, "Employee code must be unique"],
     },
     employeeDOB: {
         type: Date,
@@ -24,8 +24,8 @@ const engineerSchema = new Schema({
     employeeContact: {
         type: String,
         required: [true, "Employee contact is required"],
-        minLength: [10, "Employee contact must be 11 digits"],
-        maxLength: [10, "Employee contact must be 11 digits"],
+        minLength: [10, "Employee contact must be minimum 10 digits"],
+        maxLength: [14, "Employee contact must be maximum 14 digits"],
     },
     joinDate: {
         type: Date,
@@ -50,9 +50,25 @@ const engineerSchema = new Schema({
         type: Number,
         required: [true, "Salary is required"],
     },
+    status: {
+        type: String,
+        enum: {
+            values: ["active", "inactive", "resigned"],
+            message: "{VALUE} is not supported",
+        },
+        default: "active"
+    },
+    resignedAt: {
+        type: Date
+    },
+    incrementDueDate: {
+        type: Date
+    },
+    remarks: {
+        type: String
+    },
     assignedTo: {
-        type: Schema.Types.ObjectId,
-        ref: "Call"
+        type: String,
     }
 }, {timestamps: true});
 
