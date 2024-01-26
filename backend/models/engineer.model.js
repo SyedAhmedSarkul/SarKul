@@ -24,8 +24,8 @@ const engineerSchema = new Schema({
     employeeContact: {
         type: String,
         required: [true, "Employee contact is required"],
-        minLength: [10, "Employee contact must be 11 digits"],
-        maxLength: [14, "Employee contact must be 11 digits"],
+        minLength: [10, "Employee contact must be minimum 10 digits"],
+        maxLength: [14, "Employee contact must be maximum 14 digits"],
     },
     joinDate: {
         type: Date,

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import {connectDB} from "./config/db.js";
-import {userRoutes, callRoutes, engineerRoutes} from "./routes/index.js";
+import {userRoutes, callRoutes, engineerRoutes, stockRoutes} from "./routes/index.js";
 
 const app = express();
 dotenv.config();
@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/call", callRoutes);
 app.use("/api/v1/engineer", engineerRoutes);
+app.use("/api/v1/stock", stockRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

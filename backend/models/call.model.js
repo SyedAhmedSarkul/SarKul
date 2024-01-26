@@ -21,8 +21,8 @@ const callSchema = new Schema({
     contactNumber: {
         type: String,
         required: [true, "Contact number is required"],
-        minLength: [10, "Contact number must be 11 digits"],
-        maxLength: [13, "Contact number must be 11 digits"],
+        minLength: [10, "Contact number must be minimum 10 digits"],
+        maxLength: [14, "Contact number must be maximum 14 digits"],
     },
     customerEmail: {
         type: String,

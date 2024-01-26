@@ -219,6 +219,12 @@ export const closeCall = async (req, res) => {
         if (!call) {
             throw new ApiError(404, `Call with id ${callId} not found`);
         }
+        if (call.engineersAssigned.length === 0) {
+            throw new ApiError(400, `Call with id ${callId} is not assigned to any engineer`);
+        }
+        if (call.status !== "pending") {
+            throw new ApiError(400, `Call with id ${callId} is already closed`);
+        }
         call.status = "completed";
         call.engineersAssigned.forEach(async (engineerId) => {
             const engineer = await Engineer.findById(engineerId);
