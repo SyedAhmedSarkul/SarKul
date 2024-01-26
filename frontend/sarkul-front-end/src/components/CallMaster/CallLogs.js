@@ -1,7 +1,8 @@
 import React, {useRef} from 'react'
-import SideBar from './SideBar';
+import SideBar from '../Sidebar/SideBar';
 import './styles.css';
 import axios from 'axios';
+import Image from '../../assets/Sarkul.png';
 
 function CallLogs() {
 let serialNumber=""
@@ -24,7 +25,7 @@ let categoryRef = useRef(null);
 let problemRef = useRef(null);
 let modelNumberRef = useRef(null);
 let itemRef = useRef(null);
-let callId=0;
+let callNumber=0;
 
  
   async function handleSubmit(event)
@@ -57,7 +58,7 @@ let callId=0;
     };
     
     await postData(obj);
-    alert("Call Created with call number: "+callId)
+    alert("Call Created with call number: "+callNumber)
   }
 
   async function postData(data) {
@@ -70,7 +71,7 @@ let callId=0;
       };
       const response = await axios.post(url,data,config);
       console.log('Response:', response.data);
-      callId=response.data.data.callId;
+      callNumber=response.data.data.callId;
      
 
     } catch (error) {
@@ -81,9 +82,9 @@ let callId=0;
   
   return (
     <div>
+     {/* <img className='image' src={Image} alt='Image here'/> */}
       <SideBar/>
-     <h3>Call Log</h3>
-      
+     <h2>Call Log</h2>
       <form className='form' onSubmit={handleSubmit}>
         <div className='form-left'>
           <div className='form-left-top'>

@@ -11,6 +11,7 @@ import CallRegister from '../CallMaster/CallRegister';
 import CallUpdate from '../CallMaster/CallUpdate';
 import PendingCallReports from '../CallMaster/PendingCallReports';
 import ClosedCall from '../CallMaster/ClosedCall';
+import Image from '../../assets/Sarkul.png';
 
 
 function Home() {
@@ -18,6 +19,7 @@ function Home() {
   return (
     <div>
        <NavBar/>
+      
          <Routes>
          <Route path='/callmaster' element={<CallMasterPage/>}/>
               <Route path='/callmaster/call-logs' element={<CallLogs/>}/>
@@ -31,7 +33,7 @@ function Home() {
         <Route path='/manpower'element={<ManPower/>}/>
       </Routes>
      
-      
+      {/* <img className='image' src={Image} alt='Image here'/> */}
     </div>
   )
 }

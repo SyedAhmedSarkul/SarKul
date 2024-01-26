@@ -1,3 +1,5 @@
+/************Call log********************************/
+
 .form-input
 {
    height: 2rem;
@@ -12,6 +14,7 @@
     position: fixed;
     margin-left: 10rem;
     padding-top: 1.8rem;
+    
 }
 .form-right
 {
@@ -64,4 +67,95 @@
     /* background-color: var(--blue); */
     box-shadow: 5px 5px 10px var(--blue);
     transition: all 0.3s;
+}
+/****************************************Call Assign**************************************************/
+
+.image
+{
+    opacity: 0.3;
+    width: 20rem;
+  height: auto;
+  display: block;
+
+}
+.call-assign-parent
+{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    
+}
+.call-assign-form
+{
+    transform: translate(0,-20rem);
+    
+}
+.call-assign-input
+{
+    margin: 4rem;
+}
+.call-assign-main
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/********************call update********************/
+
+.call-update-detail
+{
+    
+    position: absolute;
+    top: 9rem;
+    left: 13rem;
+    border: 2px solid var(--grey);
+    border-radius: 2rem;
+    width: 78%;
+    height: 30rem;
+    font-size: larger;
+    color: black;
+}
+.details
+{
+    display: flex;
+}
+.call-update-left
+{
+    margin-top: 1rem;
+    width: 100%;
+    text-align: start;
+    margin-left: 2rem;
+}
+.call-update-right
+{
+    margin-top: 1rem;
+    width: 100%;
+    text-align: start;
+}
+.update-form
+{
+    /* background-color: black; */
+    display: flex;
+    justify-self: start;
+    align-items: flex-start;
+    margin-left: 2rem;
+    padding-top: 0;
+}
+.update-btn
+{
+    transform: translate(-8rem,5.4rem);
+}
+#close-call
+{
+    background-color: var(--red);
+    height: 2rem;
+    transform: translate(29rem,-2rem);
+}
+.update-label{
+    font-weight: bold;
+}
+
+#part-label
+{
+    margin-left: 4rem;
 }
