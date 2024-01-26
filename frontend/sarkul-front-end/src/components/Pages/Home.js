@@ -12,6 +12,8 @@ import CallUpdate from '../CallMaster/CallUpdate';
 import PendingCallReports from '../CallMaster/PendingCallReports';
 import ClosedCall from '../CallMaster/ClosedCall';
 import Image from '../../assets/Sarkul.png';
+import CallDetails from '../Helper/CallDetail';
+import CallDetailsPage from '../CallMaster/CallDetailsPage';
 
 
 function Home() {
@@ -28,6 +30,7 @@ function Home() {
               <Route path='/callmaster/call-update' element={<CallUpdate/>}/>
               <Route path='/callmaster/call-closed' element={<ClosedCall/>}/>
               <Route path='/callmaster/call-pending' element={<PendingCallReports/>}/>
+              <Route path='/callmaster/call-details' element={<CallDetailsPage/>}/>
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/manpower'element={<ManPower/>}/>

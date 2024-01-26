@@ -1,0 +1,22 @@
+.call-card
+{
+    display: flex;
+    border: 2px solid var(--grey);
+    border-radius: 20px;
+    width: 80dvw;
+    margin-left: 14dvw;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.call-card:hover
+{
+    /* background-color: var(--darkblue); */
+    /* color: var(--white); */
+    box-shadow: 5px 5px 15px var(--blue);
+}
+.call-card-h3
+{
+    /* background-color: aqua; */
+    margin-left: 70px;
+    margin-right: 70px;
+}

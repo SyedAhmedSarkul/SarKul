@@ -30,6 +30,9 @@ function SideBar() {
         <Link to ='/callmaster/call-register' className='link-sb'>
             <Button text={"Call Register"}  outlined={true}/>
         </Link>
+        <Link to ='/callmaster/call-details' className='link-sb'>
+            <Button text={"Call Details"}  outlined={true}/>
+        </Link>
 
         </div> 
     </div>
