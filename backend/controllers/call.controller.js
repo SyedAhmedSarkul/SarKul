@@ -139,8 +139,8 @@ export const updateCall = async (req, res) => {
         if (!callId) {
             throw new ApiError(400, "Call ID is required");
         }
-        const {customerRemark, engineerRemark, partStatus} = req.body;
-        const call = await Call.findOneAndUpdate({callId}, {customerRemark, engineerRemark, partStatus}, {new: true});
+        const {customerRemark, engineerRemark, partStatus: itemStatus} = req.body;
+        const call = await Call.findOneAndUpdate({callId}, {customerRemark, engineerRemark, itemStatus}, {new: true});
         return res.status(200).json(new ApiResponse(200, call, "Call updated successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while updating call"));
