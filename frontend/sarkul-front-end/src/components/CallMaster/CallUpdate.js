@@ -29,8 +29,8 @@ async function getCall(e)
   try{
     let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumberRef.current.value}`;
     let response = await axios.get(url);
-    console.log("response dekhe")
-    console.log(response.data.data);
+    // console.log("response dekhe")
+    // console.log(response.data.data);
     setData(response.data.data);
     if(response.data.data.engineersAssigned[0]){
       setEngineer(response.data.data.engineersAssigned[0].employeeName);
@@ -50,24 +50,64 @@ async function getCall(e)
 
 
 
-function handleSubmit(e)
+async function handleSubmit(e)
 {
   e.preventDefault();
   setIsLoading(true);
-  setTimeout(()=>{setIsLoading(false)},3000);
+  
   customerRemarks=customerRef.current.value;
   engineerRemarks=engineerRef.current.value;
-  partStatus=partRef.current.value;
-  console.log(customerRemarks);
-  console.log(engineerRemarks);
-  console.log(partStatus);
+  partStatus = partRef.current.value;
+  try{
+    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumber}`;
+      let data = {
+        customerRemark:customerRemarks,
+        engineerRemark:engineerRemarks,
+        partStatus:partStatus
+      }
+      const config = {
+        headers: {
+          'Content-Type': 'Application/json'
+        },
+      };
+      let response = await axios.patch(url,data,config);
+      // console.log("response in updating : ")
+      // console.log(response.data.message);
+      setIsLoading(false);
+      alert(response.data.message);
+  }
+  catch(error)
+  {
+    // console.log("error in updating: ")
+    // console.log(error)
+    alert(error.response.data.message);
+    setIsLoading(false);
+  }
+  
   
 
 }
-function handleClose(){
+async function handleClose(){
   setIsLoading(true);
-  setTimeout(()=>{setIsLoading(false)},3000);
-    // alert("call closed")
+  try{
+    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/close/${callNumber}`;
+    const config = {
+      headers: {
+        'Content-Type': 'Application/json'
+      },
+    };
+    let response = await axios.post(url,null,config);
+    console.log(response.data);
+    alert(response.data.message);
+    setIsLoading(false);
+  }
+  catch(error)
+  {
+    console.log(error);
+    setIsLoading(false);
+    alert(error.response.data.message);
+  }
+  
 }
 
 

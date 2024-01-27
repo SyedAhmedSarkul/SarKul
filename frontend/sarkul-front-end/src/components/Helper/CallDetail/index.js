@@ -29,6 +29,7 @@ function CallDetails({callNumber}) {
   const [date, setDate] = useState("")
   const [serialNumber, setSerialNumber] = useState("")
   const [status, setStatus] = useState("")
+  const [obj,setObj] = useState({});
   
   
   async function getData()
@@ -42,6 +43,7 @@ function CallDetails({callNumber}) {
       let response = await axios.get(url);
       console.log("response.data");
       console.log(response.data.data);
+      setObj(response.data.data);
       setSerialNumber(response.data.data.serialNumber);
    setCustomerName(response.data.data.customerName);
    setCustomerCode(response.data.data.customerCode);
@@ -80,7 +82,7 @@ function CallDetails({callNumber}) {
         <div>
           <h3 id='call-details-h3'>Call Details</h3>
          <div className='details call-details-card'>
-         <div className='call-update-left'>
+         <div className='call-update-left2 call-update-left'>
          <label className='update-label call-detail-label'>Call Number: </label> {callNumber} <br/><br/>
          <label className='update-label call-detail-label'>Serial Number: </label> {serialNumber}<br/><br/>
          <label className='update-label call-detail-label'>Customer Name: </label> {customerName}<br/><br/>
@@ -88,17 +90,20 @@ function CallDetails({callNumber}) {
          <label className='update-label call-detail-label'>Contact: </label> {contact}<br/><br/>
          <label className='update-label call-detail-label'>Email: </label> {email}<br/><br/>
          <label className='update-label call-detail-label'>Call Status: </label> {status}<br/><br/>
+         <label className='update-label call-detail-label'>Customer Remarks: </label> {obj.customerRemark}<br/><br/>
+         <label className='update-label call-detail-label'>Engineer Remarks: </label> {obj.engineerRemark}<br/><br/>
          
            
          </div>
-         <div className='call-update-right'>
+         <div className='call-update-right2 call-update-right'>
          <label className='update-label call-detail-label'>Category: </label> {category}<br/><br/>
          <label className='update-label call-detail-label'>Problem: </label> {problem}<br/><br/>
          <label className='update-label call-detail-label'>Model Number: </label> {modelNumber}<br/><br/>
          <label className='update-label call-detail-label'>Item: </label> {item}<br/><br/>
          <label className='update-label call-detail-label'>Address: </label> {address}<br/><br/>
          <label className='update-label call-detail-label'>Engineer Assigned: </label> {engineer}<br/><br/>
-         <label className='update-label call-detail-label'>Call-log Date: </label> {date.slice(0,10)}
+         <label className='update-label call-detail-label'>Call-log Date: </label> {date.slice(0,10)}<br/><br/>
+         <label className='update-label call-detail-label'>Part Status: </label> {obj.itemStatus}
          </div>
          </div>
 

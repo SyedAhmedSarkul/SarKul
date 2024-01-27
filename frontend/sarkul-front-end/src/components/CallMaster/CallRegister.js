@@ -17,15 +17,15 @@ async function getData()
   try{
     let url = 'https://sarkul-v5cz.onrender.com/api/v1/call'
     let response = await axios.get(url);
-    console.log("response in all call");
-    console.log(response.data.data);
+    // console.log("response in all call");
+    // console.log(response.data.data);
     setArr(response.data.data);
     
     setIsLoading(false)
   }
   catch(error)
   {
-    console.log("error in closed call: "+error)
+    // console.log("error in closed call: "+error)
     alert("some error occured");
     setIsLoading(false)
   }
