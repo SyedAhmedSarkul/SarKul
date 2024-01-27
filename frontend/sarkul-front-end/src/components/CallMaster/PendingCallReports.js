@@ -4,6 +4,7 @@ import Image from '../../assets/Sarkul.png';
 import CallCard from '../Helper/CallCard/CallCard';
 import axios from 'axios';
 import Loader from '../Loader';
+import { Link } from 'react-router-dom';
 
 function PendingCallReports() {
   const [arr, setArr] = useState([]);
@@ -16,7 +17,9 @@ function PendingCallReports() {
   async function getData(){
     setIsLoading(true);
       try{
-        let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/pending'
+        const createdAt = new Date("2024-01-29"); 
+        // let url = `https://sarkul-v5cz.onrender.com/api/v1/call/pending?createdAt=${createdAt}`;
+        let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/pending';
         let response = await axios.get(url);
         console.log("response in pending");
         console.log(response.data.data);
@@ -41,7 +44,7 @@ function PendingCallReports() {
      
       <ol>
         {arr.map((item)=>{
-          return <li><CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt}/></li>
+          return <Link to={`/callmaster/call-details-specific/${item.callId}`}> <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt}/> </Link> 
         })}
       </ol>
      }
