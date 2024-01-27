@@ -64,7 +64,7 @@ export const createCall = async (req, res) => {
         call.callId = generateCallId();
         await call.save();
 
-        return res.status(201).json(new ApiResponse(201, null, "Call created successfully"));
+        return res.status(201).json(new ApiResponse(201, call.callId, "Call created successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message));
     }
