@@ -31,6 +31,7 @@ function Home() {
               <Route path='/callmaster/call-closed' element={<ClosedCall/>}/>
               <Route path='/callmaster/call-pending' element={<PendingCallReports/>}/>
               <Route path='/callmaster/call-details' element={<CallDetailsPage/>}/>
+              <Route path='/callmaster/call-details-specific/:callId' element={<CallDetails/>}/>
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/manpower'element={<ManPower/>}/>

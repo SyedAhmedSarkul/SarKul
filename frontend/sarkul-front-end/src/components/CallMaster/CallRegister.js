@@ -3,6 +3,7 @@ import SideBar from '../Sidebar/SideBar';
 import axios from 'axios';
 import CallCard from '../Helper/CallCard/CallCard';
 import Loader from '../Loader';
+import { Link } from 'react-router-dom';
 
 function CallRegister() {
   const [arr, setArr] = useState([]);
@@ -19,6 +20,7 @@ async function getData()
     console.log("response in all call");
     console.log(response.data.data);
     setArr(response.data.data);
+    
     setIsLoading(false)
   }
   catch(error)
@@ -36,7 +38,7 @@ async function getData()
      
       <ol>
         {arr.map((item)=>{
-          return <li><CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt}/></li>
+          return <Link to={`/callmaster/call-details-specific/${item.callId}`}> <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt}/> </Link>
         })}
       </ol>
      }

@@ -3,11 +3,18 @@ import './styles.css';
 import SideBar from '../../Sidebar/SideBar';
 import axios from 'axios';
 import Loader from '../../Loader';
+import { useParams } from 'react-router-dom';
+
 
 function CallDetails({callNumber}) {
+  const {callId} = useParams();
+  // console.log(callId);
+  if(callId)
+  {
+    callNumber = callId;
+  }
   
-  
-  useEffect(()=>{getData()},[callNumber]);
+  useEffect(()=>{getData()},[callNumber])
   const [isLoading, setIsLoading] = useState(false)
   const [problem, setProblem] = useState("")
   const [customerName, setCustomerName] = useState("")
@@ -30,10 +37,11 @@ function CallDetails({callNumber}) {
     try{
 
       let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumber}`;
+      // let url = `https://sarkul-v5cz.onrender.com/api/v1/call?`;
       
       let response = await axios.get(url);
-      // console.log("response.data");
-      // console.log(response.data.data);
+      console.log("response.data");
+      console.log(response.data.data);
       setSerialNumber(response.data.data.serialNumber);
    setCustomerName(response.data.data.customerName);
    setCustomerCode(response.data.data.customerCode);
@@ -44,26 +52,33 @@ function CallDetails({callNumber}) {
    setProblem(response.data.data.problemDescription);
    setModelNumber(response.data.data.itemModelNumber);
    setItem(response.data.data.itemName);
-   setEngineer(response.data.data.engineersAssigned[0]);
+   if(response.data.data.engineersAssigned[0]){
+   setEngineer(response.data.data.engineersAssigned[0].employeeName);
+   }
    setDate(response.data.data.createdAt);
    setStatus(response.data.data.status);
   //  console.log("problem")
   //  console.log(problem)
+  console.log(response.data.data);
    setIsLoading(false);
   }
     catch(error)
     {
       console.log("error found is: "+error);
       setIsLoading(false);
-      alert("some error occured");
+      alert(error.response.data.message);
     }
   }
 
 
 
   return (
-    <div>
+    <div className='call-details-wrapper'>
+      <SideBar/>
+      
        {isLoading? <Loader/>: (
+        <div>
+          <h3 id='call-details-h3'>Call Details</h3>
          <div className='details call-details-card'>
          <div className='call-update-left'>
          <label className='update-label call-detail-label'>Call Number: </label> {callNumber} <br/><br/>
@@ -84,6 +99,7 @@ function CallDetails({callNumber}) {
          <label className='update-label call-detail-label'>Address: </label> {address}<br/><br/>
          <label className='update-label call-detail-label'>Engineer Assigned: </label> {engineer}<br/><br/>
          <label className='update-label call-detail-label'>Call-log Date: </label> {date.slice(0,10)}
+         </div>
          </div>
 
  </div>

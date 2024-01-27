@@ -61,7 +61,7 @@ let callNumber=0;
     
     await postData(obj);
     setIsLoading(false);
-    alert("Call Created with call number: "+callNumber)
+    
   }
 
   async function postData(data) {
@@ -73,14 +73,14 @@ let callNumber=0;
         },
       };
       const response = await axios.post(url,data,config);
-      console.log('Response: response.data');
-      console.log(response.data);
-      // callNumber=response.data.data.callId;
-     
+      // console.log('Response: response.data');
+      // console.log(response.data);
+      callNumber=response.data.data;
+      alert("Call Created with call number: "+callNumber)
 
     } catch (error) {
       console.error('Error:', error);
-      console.log("some error occured");
+      alert(error.response.data.message);
     }
 
   }
@@ -94,7 +94,7 @@ let callNumber=0;
       <form className='form' onSubmit={handleSubmit}>
       <div className='form-left'>
         <div className='form-left-top'>
-        <label>Serial number:</label> <input type='text' className='form-input' required ref={serialNumberRef}/><br/>
+        <label>Serial number:</label> <input type='text' className='form-input' ref={serialNumberRef}/><br/>
     <label>Customer Name:</label> <input type='text' className='form-input' required ref={customerNameRef}/><br/>
     <label>Customer Code:</label> <input type='text' className='form-input' required ref={customerCodeRef}/><br/>
         </div>

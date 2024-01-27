@@ -3,36 +3,48 @@ import SideBar from '../Sidebar/SideBar';
 import Image from '../../assets/Sarkul.png';
 import './styles.css'
 import Loader from '../Loader';
+import axios from 'axios';
 
 
 function CallUpdate() {
   const [callNumber,setCallNumber] = useState("28342")
   const [flag,setFlag] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  let customerRemarks = "";
-  let engineerRemarks = "";
-  let partStatus = "";
+  const callNumberRef = useRef(null);
+  const [data,setData]= useState({});
+  const [engineer,setEngineer]= useState("");
   let engineerRef = useRef(null);
   let customerRef = useRef(null);
   let partRef = useRef(null);
-  let serialNumber="serial hai"
-let customerName='customer h'
-let customerCode='code h'
-let contact = 0;
-let email='email to hai'
-let address= 'bardaha'
-let category='hmmcategory'
-let problem='no problem'
-let modelNumber='what is model'
-let item='itemji';
-let engineer ="Minhaj"
+  let customerRemarks="";
+  let engineerRemarks="";
+  let partStatus="";
+ 
 
 async function getCall(e)
 {
   e.preventDefault();
   setIsLoading(true);
-   setTimeout(()=>{setIsLoading(false)},300);
-   setFlag(true)
+  setCallNumber(callNumberRef.current.value)
+  try{
+    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumberRef.current.value}`;
+    let response = await axios.get(url);
+    console.log("response dekhe")
+    console.log(response.data.data);
+    setData(response.data.data);
+    if(response.data.data.engineersAssigned[0]){
+      setEngineer(response.data.data.engineersAssigned[0].employeeName);
+      }
+    setFlag(true)
+    setIsLoading(false);
+  }
+  catch(error)
+  {
+    console.log("error in update get: "+callNumber)
+    alert(error.response.data.message)
+    setIsLoading(false);
+  }
+  
   
 }
 
@@ -72,7 +84,7 @@ function handleClose(){
       {isLoading? (<Loader/>) :  (!flag?(
           <form className='call-assign-form' onSubmit={getCall}> {/*call assign classname working here...*/}
           <h3>Update the Call here..</h3>
-            <label>Call Number: </label><input type='text' className='form-input'required/>
+            <label>Call Number: </label><input type='text' className='form-input'required ref={callNumberRef}/>
             <input type='submit' className='submit-btn' onSubmit={getCall}/>
           </form>
       ):(
@@ -80,20 +92,20 @@ function handleClose(){
             <div className='details'>
             <div className='call-update-left'>
             <label className='update-label'>Call Number: </label> {callNumber} <br/><br/>
-            <label className='update-label'>Serial Number: </label> {serialNumber}<br/><br/>
-            <label className='update-label'>Customer Name: </label> {customerName}<br/><br/>
-            <label className='update-label'>Customer Code: </label> {customerCode}<br/><br/>
-            <label className='update-label'>Contact: </label> {contact}<br/><br/>
-            <label className='update-label'>Email: </label> {email}<br/><br/>
+            <label className='update-label'>Serial Number: </label> {data.serialNumber}<br/><br/>
+            <label className='update-label'>Customer Name: </label> {data.customerName}<br/><br/>
+            <label className='update-label'>Customer Code: </label> {data.customerCode}<br/><br/>
+            <label className='update-label'>Contact: </label> {data.contactNumber}<br/><br/>
+            <label className='update-label'>Email: </label> {data.customerEmail}<br/><br/>
             
               
             </div>
             <div className='call-update-right'>
-            <label className='update-label'>Category: </label> {category}<br/><br/>
-            <label className='update-label'>Problem: </label> {problem}<br/><br/>
-            <label className='update-label'>Model Number: </label> {modelNumber}<br/><br/>
-            <label className='update-label'>Item: </label> {item}<br/><br/>
-            <label className='update-label'>Address: </label> {address}<br/><br/>
+            <label className='update-label'>Category: </label> {data.category}<br/><br/>
+            <label className='update-label'>Problem: </label> {data.problemDescription}<br/><br/>
+            <label className='update-label'>Model Number: </label> {data.itemModelNumber}<br/><br/>
+            <label className='update-label'>Item: </label> {data.itemName}<br/><br/>
+            <label className='update-label'>Address: </label> {data.customerAddress}<br/><br/>
             <label className='update-label'>Engineer Assigned: </label> {engineer}
 
             </div>

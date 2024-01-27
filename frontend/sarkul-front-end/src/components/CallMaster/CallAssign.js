@@ -17,7 +17,8 @@ function CallAssign() {
    
         let data={
           callId:callRef.current.value,
-          engineerName:nameRef.current.value
+          // engineerName:nameRef.current.value
+          engineerName:'Max Nepali'
         }
         await postData(data);
     setIsLoading(false);
@@ -34,14 +35,16 @@ function CallAssign() {
       }
     }
     let response = await axios.post(url,data,config);
-    console.log("response");
+    console.log("response in assign");
     console.log(response.data);
+    alert("call assigned successfully");
     
     }
     catch(error)
     {
-      console.log("error while assigning: "+error);
-      alert("some error occured");
+      console.log("error while assigning: ");
+      console.log(error);
+      alert(error.response.data.message);
     }
        
   }

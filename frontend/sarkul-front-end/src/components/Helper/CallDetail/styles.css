@@ -8,10 +8,21 @@
     /* background-color: black; */
     border-radius: 20px;
     font-size: larger;
-    transform: translate(30%,-130%);
+    transform: translate(30%,-120%);
     color: black;
+}
+#call-details-h3
+{
+    transform: translate(0,-1110%);
+    /* background-color: black; */
 }
 .call-detail-label
 {
     color: black;
+}
+.call-details-wrapper
+{
+    position: absolute;
+    top: 60%;
+    width: 100%;
 }
