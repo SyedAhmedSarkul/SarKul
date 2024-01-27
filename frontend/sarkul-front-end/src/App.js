@@ -13,7 +13,7 @@ function App() {
      
 
      
-    {!isUser? ( <Login setIsUser={setIsUser}/>):(<Home/>)}
+    {isUser? ( <Login setIsUser={setIsUser}/>):(<Home/>)}
    
     </div>
   );

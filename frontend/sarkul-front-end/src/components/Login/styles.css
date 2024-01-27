@@ -25,7 +25,7 @@
     border-radius: 20px;
     transform: translate(2.5rem,2rem);
 }
-button{
+.button-login{
     width: 6rem;
     background-color: var(--darkblue);
     color: var(--white);
@@ -33,7 +33,7 @@ button{
     font-size:medium;
     transform: translate(0,4rem);
 }
-button:hover
+.button-login:hover
 {
     cursor: pointer;
 }

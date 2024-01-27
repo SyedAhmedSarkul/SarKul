@@ -25,12 +25,13 @@ let category='hmmcategory'
 let problem='no problem'
 let modelNumber='what is model'
 let item='itemji';
+let engineer ="Minhaj"
 
 async function getCall(e)
 {
   e.preventDefault();
   setIsLoading(true);
-   setTimeout(()=>{setIsLoading(false)},4000);
+   setTimeout(()=>{setIsLoading(false)},300);
    setFlag(true)
   
 }
@@ -92,7 +93,8 @@ function handleClose(){
             <label className='update-label'>Problem: </label> {problem}<br/><br/>
             <label className='update-label'>Model Number: </label> {modelNumber}<br/><br/>
             <label className='update-label'>Item: </label> {item}<br/><br/>
-            <label className='update-label'>Address: </label> {address}
+            <label className='update-label'>Address: </label> {address}<br/><br/>
+            <label className='update-label'>Engineer Assigned: </label> {engineer}
 
             </div>
             </div>
@@ -114,14 +116,20 @@ function handleClose(){
         <option value="partPending">Part Pending</option>
       </select>
       
-           <input type='submit' value='Update' className='submit-btn update-btn' onSubmit={handleSubmit}/>
+          <div className='form-buttons'>
+          <input type='submit' value='Update' className='submit-btn update-btn' onSubmit={handleSubmit}/>
+            <button id='close-call' onClick={handleClose}>Call Close</button>
+            </div>
+      
+           
+          
+         
               </div>
              
            
       
-            </form>
 
-            <button id='close-call' onClick={handleClose}>Call Close</button>
+            </form>
            
            
           </div>

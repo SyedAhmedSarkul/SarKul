@@ -1,0 +1,17 @@
+.call-details-card
+{
+    display: flex;
+    border: 2px solid var(--grey);
+    width: 70%;
+    height:55dvh;
+    margin-top: 30dvh;
+    /* background-color: black; */
+    border-radius: 20px;
+    font-size: larger;
+    transform: translate(30%,-130%);
+    color: black;
+}
+.call-detail-label
+{
+    color: black;
+}
