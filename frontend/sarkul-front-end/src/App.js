@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
      
-    {isUser? ( <Login setIsUser={setIsUser}/>):(
+    {!isUser? ( <Login setIsUser={setIsUser}/>):(
     
     <div>
       <Home/>
