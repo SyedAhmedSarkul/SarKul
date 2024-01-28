@@ -7,7 +7,7 @@ export const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers.authorization?.split(' ')[1] || req.headers["x-access-token"];
         if (!token) {
-            throw new ApiError(403, "No token provided. Please provide a valid token");
+            throw new ApiError(403, "Please login first to access this resource");
         }
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         const user = await User.findById(decoded._id);
@@ -17,11 +17,11 @@ export const verifyToken = async (req, res, next) => {
         next();
     } catch (error) {
         if (error.name === "TokenExpiredError") {
-            error.message = "The token is expired. Please provide a valid token";
+            error.message = "Your session has expired. Please login again";
         }
         if (error.name === "JsonWebTokenError") {
-            error.message = "Invalid token. Please provide a valid token";
+            error.message = "You are not authorized to access this resource";
         }
-        return res.status(error.statusCode || 401).json(new ApiResponse(error.statusCode, null, error.message || "Invlaid token provided or the token is expired. Please provide a valid token"));
+        return res.status(error.statusCode || 401).json(new ApiResponse(error.statusCode, null, error.message || "Invlaid token provided or the token is expired. Please login again"));
     }
 };
