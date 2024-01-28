@@ -61,10 +61,11 @@ export const verifyOtp = async (req, res) => {
         const accessToken = user.generateAccessToken();
         const options = {
             httpOnly: true,
-            secure: true
+            secure: true,
+            maxAge: 2 * 24 * 60 * 60 * 1000
         };
 
-        return res.status(200).cookie("accessToken", accessToken, options).json(new ApiResponse(200, null, "OTP verified successfully"));
+        return res.status(200).cookie("accessToken", accessToken, options).json(new ApiResponse(200, accessToken, "OTP verified successfully"));
     } catch (error) {
         if (error.message === "jwt must be provided") {
             return res.status(400).json(new ApiResponse(400, null, "OTP already consumed"));

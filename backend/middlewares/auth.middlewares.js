@@ -5,7 +5,9 @@ import {ApiError} from "../utils/ApiError.js";
 
 export const verifyToken = async (req, res, next) => {
     try {
-        const token = req.headers.authorization?.split(' ')[1] || req.headers["x-access-token"];
+        // console.log(req.cookies?.accessToken);
+        const token = req.cookies?.accessToken || req.headers.authorization?.split(' ')[1] || req.headers["x-access-token"];
+        // console.log(token);
         if (!token) {
             throw new ApiError(403, "Please login first to access this resource");
         }
