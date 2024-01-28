@@ -22,20 +22,7 @@ function Home() {
     <div>
        <NavBar/>
       
-         <Routes>
-         <Route path='/callmaster' element={<CallMasterPage/>}/>
-              <Route path='/callmaster/call-logs' element={<CallLogs/>}/>
-              <Route path='/callmaster/call-assign' element={<CallAssign/>}/>
-              <Route path='/callmaster/call-register' element={<CallRegister/>}/>
-              <Route path='/callmaster/call-update' element={<CallUpdate/>}/>
-              <Route path='/callmaster/call-closed' element={<ClosedCall/>}/>
-              <Route path='/callmaster/call-pending' element={<PendingCallReports/>}/>
-              <Route path='/callmaster/call-details' element={<CallDetailsPage/>}/>
-              <Route path='/callmaster/call-details-specific/:callId' element={<CallDetails/>}/>
-         <Route path='/stockmanagement' element={<StockManagementPage/>}/>
-        <Route path='/parttransaction' element={<PartTransaction/>}/>
-        <Route path='/manpower'element={<ManPower/>}/>
-      </Routes>
+         
      
       {/* <img className='image' src={Image} alt='Image here'/> */}
     </div>

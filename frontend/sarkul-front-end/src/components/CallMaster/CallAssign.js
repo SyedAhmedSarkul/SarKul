@@ -78,10 +78,10 @@ function CallAssign() {
 
             {successMsg && (
               <ToastContainer
-                position="bottom-center"
+                position="top-center"
                 closeOnClick
                 pauseOnFocusLoss
-                theme='dark'
+                theme='light'
               >
                 {toast.success(successMsg)}
               </ToastContainer>
@@ -92,7 +92,7 @@ function CallAssign() {
                 position="top-center"
                 closeOnClick
                 pauseOnFocusLoss
-                theme='dark'>
+                theme='light'>
                 {toast.error(errorMsg)}
               </ToastContainer>
             )}

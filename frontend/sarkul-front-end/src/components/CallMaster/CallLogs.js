@@ -73,8 +73,7 @@ let callNumber=0;
         },
       };
       const response = await axios.post(url,data,config);
-      // console.log('Response: response.data');
-      // console.log(response.data);
+    
       callNumber=response.data.data;
       alert("Call Created with call number: "+callNumber)
 

@@ -10,13 +10,11 @@
 }
 .call-card:hover
 {
-    /* background-color: var(--darkblue); */
-    /* color: var(--white); */
+    
     box-shadow: 5px 5px 15px var(--blue);
 }
 .call-card-h3
 {
-    /* background-color: aqua; */
     margin-left: 70px;
     margin-right: 70px;
 }
