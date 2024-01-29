@@ -35,13 +35,15 @@ const createFilter = (query) => {
     }
     if (query.amcStartDate) {
         filter.amcStartDate = {
-            $eq: new Date(query.amcStartDate)
+            $gte: new Date(new Date(query.amcStartDate).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.amcStartDate).setUTCHours(23, 59, 59, 999))
         };
     }
 
     if (query.amcEndDate) {
         filter.amcEndDate = {
-            $eq: new Date(query.amcEndDate)
+            $gte: new Date(new Date(query.amcEndDate).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.amcEndDate).setUTCHours(23, 59, 59, 999))
         };
     }
 
@@ -170,7 +172,7 @@ export const getAllStocks = async (req, res) => {
     try {
         const {filter, sort} = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
-            sort.itemName = 1;
+            sort.createdAt = -1;
         }
         const stocks = await Stock.aggregate([
             {

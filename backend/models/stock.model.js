@@ -28,11 +28,9 @@ const stockSchema = new Schema({
     },
     amcStartDate: {
         type: Date,
-        required: [true, "AMC start date is required"],
     },
     amcEndDate: {
         type: Date,
-        required: [true, "AMC end date is required"],
     },
     price: {
         type: Number,
@@ -41,7 +39,7 @@ const stockSchema = new Schema({
     condition: {
         type: String,
         enum: {
-            values: ["faulty", "working"],
+            values: ["faulty", "working", "damaged"],
             message: "{VALUE} is not supported",
         },
         default: "working"

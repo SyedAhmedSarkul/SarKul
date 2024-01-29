@@ -14,9 +14,9 @@
 - Call Assign ✔️
 - Engineer Create, getById, Update, getAll with filters ✔️
 - Stock Create, Update, getById, getAll with filters, Delete ✔️
-- Transaction Create, Update, getById, getAll with filters, Delete
-- Upload Engineer Qualification and IdProof
-- Store token for authorisation
+- Generate token for authorisation ✔️
+- Upload Engineer Certification and IdProof ✔️
+- Transaction Create, getById, getAll with filters ✔️
 
 
 ##################################FRONTEND#######################################

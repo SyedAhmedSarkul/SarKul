@@ -8,7 +8,7 @@ const createFilter = (query) => {
     let filter = {};
     let sort = {};
     if (query.callId) {
-        filter.callId = parseInt(query.callId);
+        filter.callId = query.callId;
     }
     if (query.serialNumber) {
         filter.serialNumber = query.serialNumber;
@@ -41,14 +41,14 @@ const createFilter = (query) => {
     }
     else if (query.createdAt) {
         filter.createdAt = {
-            $gte: new Date(query.createdAt).setUTCHours(0, 0, 0, 0),
-            $lt: new Date(query.createdAt).setUTCHours(23, 59, 59, 999)
+            $gte: new Date(new Date(query.createdAt).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.createdAt).setUTCHours(23, 59, 59, 999))
         };
     }
     else if (query.updatedAt) {
         filter.updatedAt = {
-            $gte: new Date(query.updatedAt).setUTCHours(0, 0, 0, 0),
-            $lt: new Date(query.updatedAt).setUTCHours(23, 59, 59, 999)
+            $gte: new Date(new Date(query.updatedAt).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.updatedAt).setUTCHours(23, 59, 59, 999))
         };
     }
 
@@ -74,7 +74,7 @@ export const getAllCalls = async (req, res) => {
     try {
         const {filter, sort} = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
-            sort.callId = 1;
+            sort.createdAt = -1;
         }
         const calls = await Call.aggregate([
             {
