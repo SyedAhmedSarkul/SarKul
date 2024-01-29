@@ -2,6 +2,7 @@ import {Engineer} from "../models/engineer.model.js";
 import {ApiError} from "../utils/ApiError.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import {generateEngineerId} from "../utils/idGenerator.js";
+import {uploadOnCloudinary} from "../utils/cloudinary.js";
 
 const createFilter = (query) => {
     let filter = {};
@@ -49,12 +50,40 @@ const createFilter = (query) => {
 
 export const createEngineer = async (req, res) => {
     try {
-        const {employeeName, employeeDOB, employeeAddress, employeeDesignation, employeeContact, joinDate, idProof, qualification, certificate, reference, salary} = req.body;
+        const {employeeName, employeeDOB, employeeAddress, employeeDesignation, employeeContact, joinDate, qualification, reference, salary} = req.body;
         if (employeeDOB > joinDate) {
             throw new ApiError(400, "Employee DOB cannot be greater than Join date");
         }
+        const idProofLocalPath = req.files?.idProof?.[0]?.path;
+        const certificateLocalPath = req.files?.certificate?.[0]?.path;
+
+        if (!idProofLocalPath) {
+            throw new ApiError(400, "Id Proof is required");
+        }
+        if (!certificateLocalPath) {
+            throw new ApiError(400, "Qualification is required");
+        }
+        const idProofUrl = await uploadOnCloudinary(idProofLocalPath);
+        const certificateUrl = await uploadOnCloudinary(certificateLocalPath);
+        if (!idProofUrl) {
+            throw new ApiError(500, "Failed to upload id proof");
+        }
+        if (!certificateUrl) {
+            throw new ApiError(500, "Failed to upload qualification");
+        }
+        // console.log(idProofUrl, certificateUrl);
         const engineer = await Engineer.create({
-            employeeName, employeeDOB, employeeAddress, employeeDesignation, employeeContact, joinDate, idProof, qualification, certificate, reference, salary
+            employeeName,
+            employeeDOB,
+            employeeAddress,
+            employeeDesignation,
+            employeeContact,
+            joinDate,
+            qualification,
+            reference,
+            salary,
+            idProof: idProofUrl,
+            certificate: certificateUrl
         });
         if (!engineer) {
             throw new ApiError(500, "Failed to create engineer");
