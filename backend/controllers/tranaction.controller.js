@@ -55,19 +55,21 @@ export const createTransaction = async (req, res) => {
         if (!engineer) {
             throw new ApiError(404, `Engineer with name ${engineerName} not found`);
         }
-        const stock = await Stock.findOne({stockId});
-        if (!stock) {
-            throw new ApiError(404, `Stock with id ${stockId} not found`);
-        }
-        if (stock.itemName !== itemName) {
-            throw new ApiError(400, "Item name does not match with stock item name");
-        }
-        if (stock.modelNumber !== modelNumber) {
-            throw new ApiError(400, "Model number does not match with stock model number");
-        }
-        if (serialNumber) {
-            if (stock.serialNumber !== serialNumber) {
-                throw new ApiError(400, "Serial number does not match with stock serial number");
+        if (category === "b2e") {
+            const stock = await Stock.findOne({stockId});
+            if (!stock) {
+                throw new ApiError(404, `Stock with id ${stockId} not found`);
+            }
+            if (stock.itemName !== itemName) {
+                throw new ApiError(400, "Item name does not match with stock item name");
+            }
+            if (stock.modelNumber !== modelNumber) {
+                throw new ApiError(400, "Model number does not match with stock model number");
+            }
+            if (serialNumber) {
+                if (stock.serialNumber !== serialNumber) {
+                    throw new ApiError(400, "Serial number does not match with stock serial number");
+                }
             }
         }
         const transaction = await Transaction.create({callId, engineerName, itemName, modelNumber, serialNumber, stockId, category});
@@ -76,7 +78,7 @@ export const createTransaction = async (req, res) => {
             throw new ApiError(500, "Something went wrong while creating transaction");
         }
 
-        if (transaction.category === "e2b") {
+        if (transaction.category === "b2e") {
             await Stock.findOneAndDelete({stockId: stockId});
         }
         return res.status(201).json(new ApiResponse(201, transaction, "Transaction created successfully"));
@@ -108,7 +110,7 @@ export const getTransactions = async (req, res) => {
 
 export const getTransaction = async (req, res) => {
     try {
-        const transaction = await Transaction.findOne({callId: req.params.callId});
+        const transaction = await Transaction.find({callId: req.params.callId});
         if (!transaction) {
             throw new ApiError(404, "Transaction not found");
         }

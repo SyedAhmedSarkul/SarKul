@@ -7,7 +7,7 @@ const transactionSchema = new Schema({
             values: ["e2b", "b2e"],
             message: "{VALUE} is not supported",
         },
-        default: "e2b"
+        default: "b2e"
     },
     callId: {
         type: String,
