@@ -20,11 +20,14 @@ import ManPower from './components/Pages/ManPower';
 
 function App() {
   const [isUser,setIsUser] = useState(false);
+  // localStorage.removeItem("accessToken");
+  let token= localStorage.getItem("accessToken");
  
   return (
     <div className="App">
      
-    {isUser? ( <Login setIsUser={setIsUser}/>):(
+    {/* {!isUser? ( <Login setIsUser={setIsUser}/>):( */}
+    {!token? ( <Login setIsUser={setIsUser}/>):(
     
     <div>
       <Home/>

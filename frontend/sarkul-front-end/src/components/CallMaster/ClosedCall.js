@@ -17,9 +17,18 @@ function ClosedCall() {
   }, []);
   async function getData() {
     setIsLoading(true);
+    let token= localStorage.getItem("accessToken");
+    let config={
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+    }
+    // console.log("token")
+    // console.log(token);
     try {
       let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/closed';
-      let response = await axios.get(url);
+      let response = await axios.get(url,config);
       // console.log("response in closed");
       // console.log(response.data.data);
       setArr(response.data.data);

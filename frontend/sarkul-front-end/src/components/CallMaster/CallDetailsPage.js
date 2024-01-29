@@ -23,7 +23,7 @@ function CallDetailsPage() {
         <label className='call-details-page-label'>Search: </label> <input type='text' className='form-input' placeholder='search by call number...' ref={callNumberRef} required/>
         <input type='submit' value='Search' className='submit-btn' onSubmit={handleSubmit}/>
         </form>
-       {flag?( <div><CallDetails callNumber={callNumber}/></div>):
+       {flag?( <div><CallDetails callNumber={callNumber} setFlag={setFlag}/></div>):
        (<h3 className='call-details-text'>You can now get here the call details by searching the call number</h3>)
        }
        

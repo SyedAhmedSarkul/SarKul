@@ -29,9 +29,11 @@ function CallAssign() {
 
   async function postData(data) {
     try {
+      let token= localStorage.getItem("accessToken");
       let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/assign';
       const config = {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       };

@@ -19,22 +19,27 @@ function PendingCallReports() {
   }, []);
 
   async function getData() {
+    
     setIsLoading(true);
     try {
       const createdAt = new Date("2024-01-29");
       // let url = `https://sarkul-v5cz.onrender.com/api/v1/call/pending?createdAt=${createdAt}`;
+      let token= localStorage.getItem("accessToken");
+      let config={
+          headers:{
+            'Authorization': `Bearer ${token}`,
+            
+            'Content-Type': 'application/json'
+          }
+      }
       let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/pending';
-      let response = await axios.get(url);
-      // console.log("response in pending");
-      // console.log(response.data.data);
-      setArr(response.data.data);
-      setSuccessMsg(response.data.message);
+      let response = await axios.get(url,config);
+      setArr(response?.data.data);
+      setSuccessMsg(response?.data.message);
       setIsLoading(false);
     }
     catch (error) {
-      // console.log("Error of pending call: "+error)
-      // alert("some error occured");
-      setErrorMsg(error.response.data.message);
+      setErrorMsg(error.response?.data.message);
       setIsLoading(false);
     }
   }

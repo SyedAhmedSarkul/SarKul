@@ -15,8 +15,15 @@ async function getData()
 {
   setIsLoading(true)
   try{
+    let token= localStorage.getItem("accessToken");
+    let config={
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+    }
     let url = 'https://sarkul-v5cz.onrender.com/api/v1/call'
-    let response = await axios.get(url);
+    let response = await axios.get(url,config);
     // console.log("response in all call");
     // console.log(response.data.data);
     setArr(response.data.data);
