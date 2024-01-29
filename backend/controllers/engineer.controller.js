@@ -19,6 +19,16 @@ const createFilter = (query) => {
     if (query.status) {
         filter.status = query.status;
     }
+    if (query.resignedAt) {
+        filter.resignedAt = {
+            $gte: new Date(new Date(query.resignedAt).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.resignedAt).setUTCHours(23, 59, 59, 999))
+        };
+    }
+
+    if (query.salary) {
+        filter.salary = parseInt(query.salary);
+    }
 
     if (query.sort) {
         let sortBy = query.sort.split(",");
@@ -35,14 +45,14 @@ const createFilter = (query) => {
 
     if (query.joinDate) {
         filter.joinDate = {
-            $gte: new Date(query.joinDate).setUTCHours(0, 0, 0, 0),
-            $lt: new Date(query.joinDate).setUTCHours(23, 59, 59, 999)
+            $gte: new Date(new Date(query.joinDate).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.joinDate).setUTCHours(23, 59, 59, 999))
         };
     }
     if (query.employeeDOB) {
         filter.employeeDOB = {
-            $gte: new Date(query.employeeDOB).setUTCHours(0, 0, 0, 0),
-            $lt: new Date(query.employeeDOB).setUTCHours(23, 59, 59, 999)
+            $gte: new Date(new Date(query.employeeDOB).setUTCHours(0, 0, 0, 0)),
+            $lt: new Date(new Date(query.employeeDOB).setUTCHours(23, 59, 59, 999))
         };
     }
     return {filter, sort};
@@ -90,7 +100,7 @@ export const createEngineer = async (req, res) => {
         }
         engineer.employeeCode = generateEngineerId();
         await engineer.save();
-        return res.status(200).json(new ApiResponse(200, engineer, "Engineer created successfully"));
+        return res.status(200).json(new ApiResponse(201, engineer, "Engineer created successfully"));
     } catch (error) {
         return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while creating engineer"));
     }
@@ -141,7 +151,7 @@ export const getAllEngineers = async (req, res) => {
     try {
         const {filter, sort} = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
-            sort.employeeName = 1;
+            sort.createdAt = -1;
         }
         const engineers = await Engineer.aggregate([
             {

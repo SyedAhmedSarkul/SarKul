@@ -35,7 +35,13 @@ const transactionSchema = new Schema({
     },
     serialNumber: {
         type: String,
-        required: [true, "Serial number is required"],
+    },
+    partStatus: {
+        type: String,
+        enum: {
+            values: ["working", "faulty", "damaged"],
+            message: "{VALUE} is not supported",
+        }
     }
 }, {timestamps: true});
 
