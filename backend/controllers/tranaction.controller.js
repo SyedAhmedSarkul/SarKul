@@ -76,7 +76,9 @@ export const createTransaction = async (req, res) => {
             throw new ApiError(500, "Something went wrong while creating transaction");
         }
 
-        await Stock.findOneAndDelete({stockId: stockId});
+        if (transaction.category === "e2b") {
+            await Stock.findOneAndDelete({stockId: stockId});
+        }
         return res.status(201).json(new ApiResponse(201, transaction, "Transaction created successfully"));
 
     } catch (error) {
