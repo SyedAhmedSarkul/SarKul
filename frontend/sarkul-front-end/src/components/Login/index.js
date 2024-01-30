@@ -51,7 +51,7 @@ function Login({setIsUser}) {
                 localStorage.setItem("accessToken",response.data.data);
                 setTimeout(() => {
                     localStorage.removeItem("accessToken");
-                }, 60000*60*24*2);
+                }, Date.now()+(60000*60*24*2));
                 console.log(response.data.data);
                 setIsUser(true);
                 setIsVerifying(false);
