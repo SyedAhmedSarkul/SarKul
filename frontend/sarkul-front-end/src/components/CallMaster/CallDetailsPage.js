@@ -19,7 +19,7 @@ function CallDetailsPage() {
     <div>
         <SideBar/>
         <img className='image' src={Image} alt='Image here'/>
-        <form onSubmit={handleSubmit} className='call-details-div'>
+        <form onSubmit={handleSubmit} className='call-details-div'> 
         <label className='call-details-page-label'>Search: </label> <input type='text' className='form-input' placeholder='search by call number...' ref={callNumberRef} required/>
         <input type='submit' value='Search' className='submit-btn' onSubmit={handleSubmit}/>
         </form>

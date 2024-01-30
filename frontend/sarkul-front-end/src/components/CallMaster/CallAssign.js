@@ -41,7 +41,6 @@ function CallAssign() {
       console.log("response in assign");
       console.log(response.data);
       setSuccessMsg(response?.data?.message);
-      // alert("call assigned successfully");
 
     }
     catch (error) {

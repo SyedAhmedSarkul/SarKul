@@ -1,8 +1,11 @@
 import React from 'react'
+import SideBarMp from '../Sidebar/SideBarMp'
 
 function ManPower() {
   return (
-    <div>ManPower</div>
+    <div>
+      <SideBarMp/>
+    </div>
   )
 }
 
