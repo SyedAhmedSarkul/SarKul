@@ -27,8 +27,15 @@ async function getCall(e)
   setIsLoading(true);
   setCallNumber(callNumberRef.current.value)
   try{
+    let token= localStorage.getItem("accessToken");
+    let config={
+        headers:{
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+    }
     let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumberRef.current.value}`;
-    let response = await axios.get(url);
+    let response = await axios.get(url,config);
     // console.log("response dekhe")
     // console.log(response.data.data);
     setData(response.data.data);
@@ -65,8 +72,11 @@ async function handleSubmit(e)
         engineerRemark:engineerRemarks,
         partStatus:partStatus
       }
+      let token= localStorage.getItem("accessToken");
+
       const config = {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'Application/json'
         },
       };
@@ -90,9 +100,11 @@ async function handleSubmit(e)
 async function handleClose(){
   setIsLoading(true);
   try{
+    let token= localStorage.getItem("accessToken");
     let url = `https://sarkul-v5cz.onrender.com/api/v1/call/close/${callNumber}`;
     const config = {
       headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'Application/json'
       },
     };

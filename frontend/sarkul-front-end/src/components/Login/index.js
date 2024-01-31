@@ -47,6 +47,12 @@ function Login({setIsUser}) {
                   };
                 let response = await axios.post(url,data,config);
                 
+                console.log("response of otp");
+                localStorage.setItem("accessToken",response.data.data);
+                setTimeout(() => {
+                    localStorage.removeItem("accessToken");
+                }, Date.now()+(60000*60*24*2));
+                console.log(response.data.data);
                 setIsUser(true);
                 setIsVerifying(false);
                 

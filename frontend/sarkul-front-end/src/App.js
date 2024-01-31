@@ -16,15 +16,20 @@ import CallDetails from './components/Helper/CallDetail';
 import StockManagementPage from './components/Pages/StockManagementPage';
 import PartTransaction from './components/Pages/PartTransaction';
 import ManPower from './components/Pages/ManPower';
+import ManpowerEntry from './ManPower/ManpowerEntry';
+import ManpowerInfo from './ManPower/ManpowerInfo';
 
 
 function App() {
   const [isUser,setIsUser] = useState(false);
+  // localStorage.removeItem("accessToken");
+  let token= localStorage.getItem("accessToken");
  
   return (
     <div className="App">
      
-    {isUser? ( <Login setIsUser={setIsUser}/>):(
+    {/* {!isUser? ( <Login setIsUser={setIsUser}/>):( */}
+    {!token? ( <Login setIsUser={setIsUser}/>):(
     
     <div>
       <Home/>
@@ -41,6 +46,8 @@ function App() {
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/manpower'element={<ManPower/>}/>
+              <Route path='/manpower/manpower-entry'element={<ManpowerEntry/>}/>
+              <Route path='/manpower/manpower-info'element={<ManpowerInfo/>}/>
       </Routes>
     </div>
     

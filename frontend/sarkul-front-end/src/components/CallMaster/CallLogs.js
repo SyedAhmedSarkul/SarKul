@@ -69,10 +69,12 @@ function CallLogs() {
 
   async function postData(data) {
     try {
+      let token= localStorage.getItem("accessToken");
       let url = 'https://sarkul-v5cz.onrender.com/api/v1/call';
       const config = {
         headers: {
-          'Content-Type': 'Application/json'
+       'Authorization': `Bearer ${token}`,
+        'Content-Type': 'Application/json'
         },
       };
       const response = await axios.post(url, data, config);

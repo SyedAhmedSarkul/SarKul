@@ -6,7 +6,7 @@ import Loader from '../../Loader';
 import { useParams } from 'react-router-dom';
 
 
-function CallDetails({callNumber}) {
+function CallDetails({callNumber,setFlag}) {
   const {callId} = useParams();
   // console.log(callId);
   if(callId)
@@ -36,11 +36,18 @@ function CallDetails({callNumber}) {
   {
     setIsLoading(true);
     try{
+      let token= localStorage.getItem("accessToken");
+      let config={
+          headers:{
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+      }
 
       let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumber}`;
       // let url = `https://sarkul-v5cz.onrender.com/api/v1/call?`;
       
-      let response = await axios.get(url);
+      let response = await axios.get(url,config);
       console.log("response.data");
       console.log(response.data.data);
       setObj(response.data.data);
@@ -69,6 +76,7 @@ function CallDetails({callNumber}) {
       console.log("error found is: "+error);
       setIsLoading(false);
       alert(error.response.data.message);
+      setFlag(false);
     }
   }
 
