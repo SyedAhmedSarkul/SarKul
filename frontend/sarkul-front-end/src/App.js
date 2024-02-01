@@ -18,6 +18,8 @@ import PartTransaction from './components/Pages/PartTransaction';
 import ManPower from './components/Pages/ManPower';
 import ManpowerEntry from './ManPower/ManpowerEntry';
 import ManpowerInfo from './ManPower/ManpowerInfo';
+import AllEmployee from './ManPower/AllEmployee';
+import EmployeeDetail from './components/Helper/EmployeeDetail';
 
 
 function App() {
@@ -48,6 +50,8 @@ function App() {
         <Route path='/manpower'element={<ManPower/>}/>
               <Route path='/manpower/manpower-entry'element={<ManpowerEntry/>}/>
               <Route path='/manpower/manpower-info'element={<ManpowerInfo/>}/>
+              <Route path='/manpower/manpower-all'element={<AllEmployee/>}/>
+              <Route path='/manpower/manpower-specific/:empId' element={<EmployeeDetail/>}/>
       </Routes>
     </div>
     

@@ -5,7 +5,19 @@ transform: translate(-7%,0);
 }
 .form-right
 {
-    /* background-color: black;
-    padding-left: 0; */
 
+}
+
+.emp-details-text
+{
+    transform: translate(0,-200px);
+    
+}
+.emp-detail-container
+{
+    /* background-color:blue ; */
+    /* transform: translate(0,-60%); */
+    position: relative;
+    /* background-color: black; */
+    top: -280px;
 }
