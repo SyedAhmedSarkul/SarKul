@@ -21,3 +21,8 @@ transform: translate(-7%,0);
     /* background-color: black; */
     top: -280px;
 }
+.emp-submit-btn
+{
+    position: fixed;
+    bottom: 10px;
+}

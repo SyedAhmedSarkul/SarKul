@@ -10,7 +10,8 @@
     flex-direction: column;
     height: 100%;
     width: 50%;
-    /* background-color:rgba(247, 231, 200, 0.66); */
+    background-color:#a5ddcf;
+    /* background-color:rgb(213, 210, 210); */
     justify-content: space-between;
     align-items: center;
     margin: auto;

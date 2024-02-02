@@ -176,8 +176,8 @@ async function handleClose(){
               <label id='part-label'>Part Status:</label>
            <select id="dropdown"  ref={partRef} required >
         <option value="">-- Select --</option>
-        <option value="partRequired">Part Required</option>
-        <option value="partPending">Part Pending</option>
+        <option value="required">Part Required</option>
+        <option value="pending">Part Pending</option>
       </select>
       
           <div className='form-buttons'>

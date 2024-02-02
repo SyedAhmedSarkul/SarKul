@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import SideBar from '../Sidebar/SideBar';
 import Image from '../../assets/Sarkul.png';
 import './styles.css';
@@ -11,21 +11,48 @@ function CallAssign() {
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [arr, setArr] = useState([]);
   const callRef = useRef(null);
   const nameRef = useRef(null);
+
+useEffect(()=>{
+  getEngineerName();
+},[])
+async function getEngineerName()
+ {
+   try{
+    let token= localStorage.getItem("accessToken");
+    let url = 'https://sarkul-v5cz.onrender.com/api/v1/engineer?status=active';
+    const config = {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    };
+    let response = await axios.get(url,config);
+    // console.log(response);
+    setArr(response.data.data);
+   }
+   catch(error)
+   {
+    // setErrorMsg(error.response.data.message);
+    console.log(error);
+   }
+ }
+
   async function handleSubmit(event) {
     setIsLoading(true);
     event.preventDefault();
 
     let data = {
       callId: callRef.current.value,
-      // engineerName:nameRef.current.value
-      engineerName: 'Max Nepali'
+      engineerName:nameRef.current.value
+      // engineerName: 'Albedo'
     };
     await postData(data);
     setIsLoading(false);
   }
-
+ 
 
   async function postData(data) {
     try {
@@ -71,7 +98,16 @@ function CallAssign() {
               </div>
               <div className='call-assign-input'>
                 <label>Engineer Name: </label>
-                <input type='text' className='form-input' ref={nameRef} required />
+                <select id="dropdown" required ref={nameRef}>
+              <option value="">-- Select --</option>
+              {
+                
+                  arr.map((item)=>{
+                    return <option value={item.employeeName}>{item.employeeName}</option>
+                  })
+                
+              }
+              </select>
               </div>
             </div>
 

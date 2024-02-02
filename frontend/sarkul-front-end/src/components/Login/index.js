@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import './styles.css';
 import { useState } from 'react';
 import axios from 'axios';
+import Image from '../../assets/LoginPage.png';
 
 function Login({setIsUser}) {
     const email = 'cheemstech01@gmail.com';
@@ -73,6 +74,8 @@ function Login({setIsUser}) {
     
     <div className='login-page'>
     <div className='header'><h2>Welcome to Sarkul Technology Private Limited</h2></div>
+    <div className='login-centre'>
+    <img className='image-login' src={Image} alt='Image here'/>
     <div className='login-slot'>
         <h1>Login Here</h1>
         <h3>Email: {email}</h3>
@@ -84,6 +87,8 @@ function Login({setIsUser}) {
        
         
     </div>
+    </div>
+    
     <div className='footer'>
         <h3>All rights reserved. Only the person having authentication can login here and access the portal to manage changes...</h3>
     </div>

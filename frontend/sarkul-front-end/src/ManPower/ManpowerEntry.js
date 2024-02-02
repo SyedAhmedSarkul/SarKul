@@ -81,6 +81,7 @@ function ManpowerEntry() {
       
       {isLoading? (<Loader/>): 
       (
+        <div>
         <form className='form' onSubmit={handleSubmit}>
         <div className='form-left '>
           <div className='form-left-top'>
@@ -110,11 +111,13 @@ function ManpowerEntry() {
           <label>Contact:</label> <input type='number' className='form-input' required ref={contactRef}/><br/>
           <label>Reference:</label> <input type='text' className='form-input' required ref={referenceRef}/><br/>
 
-          <input type='submit' value='Submit' className='submit-btn' onSubmit={handleSubmit} />
 
         </div>
 
       </form>
+        {/* <input type='submit' value='Submit' className='submit-btn emp-submit-btn' onSubmit={handleSubmit} /> */}
+        <button className='submit-btn emp-submit-btn' onClick={handleSubmit}>Submit</button>
+        </div>
       )
       }
 

@@ -69,11 +69,12 @@ function EmployeeDetail({ id ,setFlagg}) {
         }
     }
     let url = `https://sarkul-v5cz.onrender.com/api/v1/engineer/${id}`;
+   
     let data= {
       status:statusRef.current.value,
-      resignDate:resignRef.current.value,
-     increementDue: increementRef.current.value,
-     remarks:remarksRef.current.value
+      resignedAt:resignRef.current.value,
+      incrementDueDate: increementRef.current.value,
+      remarks:remarksRef.current.value
     }
     let response = await axios.patch(url,data,config);
     console.log("updated...")
@@ -173,11 +174,15 @@ function EmployeeDetail({ id ,setFlagg}) {
                 <label className="update-label call-detail-label">
                   Certificate:{" "}
                 </label>{" "}
-                {obj.certificate}
+                <a href={obj.certificate} download>Download</a>
+                {}
               </li>
               <li className="item">
-                <label className="update-label call-detail-label">Id: </label>{" "}
-                {obj.idProof}
+                <label className="update-label call-detail-label">
+                  Id Proof:{" "}
+                </label>{" "}
+                <a href={obj.idProof} download>Download</a>
+                {}
               </li>
             </div>
           </div>
