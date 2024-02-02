@@ -20,6 +20,8 @@ import ManpowerEntry from './ManPower/ManpowerEntry';
 import ManpowerInfo from './ManPower/ManpowerInfo';
 import AllEmployee from './ManPower/AllEmployee';
 import EmployeeDetail from './components/Helper/EmployeeDetail';
+import InvoicePage from './components/Pages/InvoicePage';
+import Logout from './components/Logout';
 
 
 function App() {
@@ -47,11 +49,13 @@ function App() {
               <Route path='/callmaster/call-details-specific/:callId' element={<CallDetails/>}/>
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
+        <Route path='/invoice' element={<InvoicePage/>}/>
         <Route path='/manpower'element={<ManPower/>}/>
               <Route path='/manpower/manpower-entry'element={<ManpowerEntry/>}/>
               <Route path='/manpower/manpower-info'element={<ManpowerInfo/>}/>
               <Route path='/manpower/manpower-all'element={<AllEmployee/>}/>
               <Route path='/manpower/manpower-specific/:empId' element={<EmployeeDetail/>}/>
+              <Route path='/logout' element={<Logout/>}/>
       </Routes>
     </div>
     

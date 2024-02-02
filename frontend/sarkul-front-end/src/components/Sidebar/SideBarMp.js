@@ -22,6 +22,7 @@ function SideBarMp() {
                 <Button text={"Check Info"}  outlined={true}/>
              </Link>
         </div>
+       
 
         </div> 
     </div>
