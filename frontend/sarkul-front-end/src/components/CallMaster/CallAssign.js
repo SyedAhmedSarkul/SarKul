@@ -22,7 +22,7 @@ async function getEngineerName()
  {
    try{
     let token= localStorage.getItem("accessToken");
-    let url = 'https://sarkul-v5cz.onrender.com/api/v1/engineer';
+    let url = 'https://sarkul-v5cz.onrender.com/api/v1/engineer?status=active';
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`,
