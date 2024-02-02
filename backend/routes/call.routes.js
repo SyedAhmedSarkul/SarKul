@@ -20,7 +20,6 @@ import { verifyToken } from "../middlewares/auth.middlewares.js";
 const router = express.Router();
 
 router.get("/closed", verifyToken, getCompletedCalls);
-application.use(express.json());
 router.get("/pending", verifyToken, getPendingCalls);
 router.post("/close/:callId", verifyToken, callIdValidation, closeCall);
 router

@@ -5,9 +5,9 @@ import { ApiError } from "../utils/ApiError.js";
 import jwt from "jsonwebtoken";
 
 export const createUser = async (req, res) => {
-    const { email, role } = req.body;
+    const { email, role, password } = req.body;
     try {
-        const user = await User.create({ email, role });
+        const user = await User.create({ email, role, password });
         return res
             .status(200)
             .json(new ApiResponse(200, user, "User created successfully"));
@@ -94,6 +94,42 @@ export const verifyOtp = async (req, res) => {
                     new ApiResponse(400, null, "OTP expired. Please resend OTP")
                 );
         }
+        return res
+            .status(error.statusCode || 500)
+            .json(new ApiResponse(error.statusCode, null, error.message));
+    }
+};
+
+export const signIn = async (req, res) => {
+    const { email, password } = req.body;
+    if ([email, password].some((field) => field?.trim() === "")) {
+        throw new ApiError(400, "All fields are required");
+    }
+
+    try {
+        const validUser = await User.findOne({ email });
+        if (!validUser) {
+            throw new ApiError(404, `User with email ${email} not found`);
+        }
+
+        const validPassword = await validUser.isPasswordCorrect(password);
+        if (!validPassword) {
+            throw new ApiError(401, "Invalid credentials");
+        }
+        const { password: _, ...rest } = validUser._doc;
+        const accessToken = validUser.generateAccessToken();
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            secure: true,
+            maxAge: 2 * 24 * 60 * 60 * 1000,
+        });
+
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, accessToken, "User logged in successfully")
+            );
+    } catch (error) {
         return res
             .status(error.statusCode || 500)
             .json(new ApiResponse(error.statusCode, null, error.message));
