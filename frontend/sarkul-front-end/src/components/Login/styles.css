@@ -15,6 +15,7 @@
    /* margin-right: 19rem; */
    box-shadow: 10px 10px 10px 10px var(--grey);
    background: linear-gradient(to right, var(--blue) 50%, transparent 50%);
+   /* background-color: var(--green); */
 }
 .input
 {
@@ -41,12 +42,14 @@
 .validate-btn
 {
     transform: translate(-4.6rem,6rem);
+    cursor: pointer;
+    width: 6rem;
+    background-color: var(--darkblue);
+    color: var(--white);
+    border-radius: 20px;
+    font-size:medium;
 }
-.validate-btn-grey
-{
-  background-color: var(--grey);
-  
-}
+
 
 .verify
 {
@@ -62,7 +65,7 @@
     margin: 0;
     padding: 0px;
     padding-top: 10px;
-    animation: moveHeader 4s linear infinite;
+    /* animation: moveHeader 4s linear infinite; */
   }
   
   @keyframes moveHeader {
@@ -78,25 +81,36 @@
   }
   
   
-
-
+.login-centre
+{
+  display: flex;
+}
+.image-login
+{
+  /* opacity: 0.3; */
+    width: 21rem;
+  /* display: block; */
+  /* position: relative; */
+  /* background-color: var(--blue); */
+}
 
 
 
   .footer {
     overflow: hidden; 
+    display: flex;
     height: 40px; 
     background-color: var(--blue);
     text-align: center;
     justify-content: center;
     color: var(--black);
-    transform: translate(0px,4em);
+    transform: translate(0px,-0.7em);
   }
   
   .footer h3 {
     position: absolute; 
     white-space: nowrap; 
-    animation: scroll-text 15s linear infinite; /* Animate the text */
+    animation: scroll-text 15s linear infinite;
   }
   
   @keyframes scroll-text {
