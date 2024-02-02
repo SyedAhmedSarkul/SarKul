@@ -80,11 +80,11 @@ function CallLogs() {
       const response = await axios.post(url, data, config);
 
       const callNumber = response.data.data;
-      // alert("Call Created with call number: " + callNumber);
-      setSuccessMsg(`${response.data.message} with id ${callNumber}`);
-
+      alert("Call Created with call number: " + callNumber);
+      // setSuccessMsg(`${response.data.message} with id ${callNumber}`);
+       
     } catch (error) {
-      console.error('Error:', error);
+      // console.error('Error:', error);
       // alert(error.response.data.message);
       setErrorMsg(error.response.data.message);
     }

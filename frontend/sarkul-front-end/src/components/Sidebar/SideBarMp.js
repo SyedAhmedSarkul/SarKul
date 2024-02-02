@@ -13,10 +13,16 @@ function SideBarMp() {
         </div>
        
         <div className='link-sb link-sb-mp'>
+            <Link to ='/manpower/manpower-all' className='link-sb link-sb-mp'>
+                <Button text={"All Employee"}  outlined={true}/>
+             </Link>
+        </div>
+        <div className='link-sb link-sb-mp'>
             <Link to ='/manpower/manpower-info' className='link-sb link-sb-mp'>
                 <Button text={"Check Info"}  outlined={true}/>
              </Link>
         </div>
+       
 
         </div> 
     </div>

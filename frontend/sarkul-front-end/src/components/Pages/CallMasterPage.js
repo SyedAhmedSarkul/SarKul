@@ -16,4 +16,4 @@ function CallMasterPage() {
   )
 }
 
-export default CallMasterPage
+export default CallMasterPage;
