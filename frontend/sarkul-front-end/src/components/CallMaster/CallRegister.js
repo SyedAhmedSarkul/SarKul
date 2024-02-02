@@ -4,6 +4,7 @@ import axios from 'axios';
 import CallCard from '../Helper/CallCard/CallCard';
 import Loader from '../Loader';
 import { Link } from 'react-router-dom';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function CallRegister() {
   const [arr, setArr] = useState([]);
@@ -39,6 +40,7 @@ async function getData()
 }
   return (
     <div>
+      <SideBarMain/>
       <SideBar/>
       <h2> Call Register</h2>
       {isLoading? <Loader/>: 

@@ -4,6 +4,7 @@ import Image from '../../assets/Sarkul.png';
 import './styles.css'
 import Loader from '../Loader';
 import axios from 'axios';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 
 function CallUpdate() {
@@ -129,9 +130,10 @@ async function handleClose(){
   return (
     <div>
       
+      <SideBarMain/>
       <SideBar/>
      <h2>Call Update</h2>
-     <img className='image' src={Image} alt='Image here'/>
+     {/* <img className='image' src={Image} alt='Image here'/> */}
       
       {isLoading? (<Loader/>) :  (!flag?(
           <form className='call-assign-form' onSubmit={getCall}> {/*call assign classname working here...*/}

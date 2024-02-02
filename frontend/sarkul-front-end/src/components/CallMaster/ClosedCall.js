@@ -6,6 +6,7 @@ import Loader from '../Loader';
 import {Link} from 'react-router-dom';
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function ClosedCall() {
   const [arr, setArr] = useState([]);
@@ -49,7 +50,8 @@ function ClosedCall() {
 
   return (
     <div>
-      <SideBar />
+      <SideBarMain/>
+      <SideBar/>
       <h2> Closed Calls</h2>
       {isLoading ? <Loader /> :
 

@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import SideBarMp from '../components/Sidebar/SideBarMp'
 import Image from '../assets/Sarkul.png'
 import EmployeeDetail from '../components/Helper/EmployeeDetail';
+import SideBarMain from '../components/Sidebar/SideBarMain';
 
 function ManpowerInfo() {
   const [flag, setFlagg] = useState(false);
@@ -15,6 +16,7 @@ function ManpowerInfo() {
   }
   return (
     <div>
+      <SideBarMain/>
         <SideBarMp/>
        <h2>Manpower Info</h2>
        <img className='image' src={Image} alt='Image here'/>

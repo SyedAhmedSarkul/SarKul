@@ -4,6 +4,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import EmployeeCard from '../components/Helper/EmployeeCard';
+import SideBarMain from '../components/Sidebar/SideBarMain'
 function AllEmployee() {
     const [arr, setArr] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -40,6 +41,7 @@ function AllEmployee() {
 
   return (
     <div>
+      <SideBarMain/>
         <SideBarMp/>
         <h2>All Employee</h2>
 

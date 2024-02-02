@@ -5,6 +5,7 @@ import axios from 'axios';
 import Loader from '../components/Loader';
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SideBarMain from '../components/Sidebar/SideBarMain';
 
 
 function ManpowerEntry() {
@@ -76,6 +77,7 @@ function ManpowerEntry() {
 
   return (
     <div>
+      <SideBarMain/>
         <SideBarMp/>
         <h2>Manpower Entry</h2>
       

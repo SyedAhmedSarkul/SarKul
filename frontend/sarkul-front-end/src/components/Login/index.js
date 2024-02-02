@@ -11,13 +11,15 @@ function Login({setIsUser}) {
     const [isSent, setIsSent] = useState(true);
     const [isVerifying, setIsVerifying] = useState(false);
     const input = useRef(null);
+    const emailRef = useRef(null);
 
     async function generateOtp()
     {
         setIsSent(false)
         const url = "https://sarkul-v5cz.onrender.com/api/v1/user/send-otp";
         const data = {
-            email:`${email}`
+            // email:email
+            email:emailRef.current.value
         }
         await axios.post(url,data);
         setIsSent(true);
@@ -38,7 +40,7 @@ function Login({setIsUser}) {
                 
                 const url ="https://sarkul-v5cz.onrender.com/api/v1/user/verify-otp";
                 const data = {
-                    email:email,
+                    email:emailRef.current.value,
                     otp:parseInt(otp)
                 }
                 const config = {
@@ -54,6 +56,7 @@ function Login({setIsUser}) {
                     localStorage.removeItem("accessToken");
                 }, Date.now()+(60000*60*24*2));
                 console.log(response.data.data);
+                alert("true")
                 setIsUser(true);
                 setIsVerifying(false);
                 
@@ -78,7 +81,7 @@ function Login({setIsUser}) {
     <img className='image-login' src={Image} alt='Image here'/>
     <div className='login-slot'>
         <h1>Login Here</h1>
-        <h3>Email: {email}</h3>
+        <input type='text'placeholder='Enter the email here...'  className='form-input' required ref={emailRef}/>
         {otp?( isVerifying?(<button className='validate-btn verify'>Verifying... </button>):(<div><input type='number' placeholder='Enter OTP..' ref={input} className='input'/> <button className='validate-btn' onClick={validate}>Validate </button> </div>)):
         ( isSent?(<button className='button-login' onClick={generateOtp}>Generate OTP</button>)
         :(<button className='button-login'>Sending...</button>))

@@ -32,7 +32,7 @@
     color: var(--white);
     border-radius: 20px;
     font-size:medium;
-    transform: translate(0,4rem);
+    transform: translate(-10rem,5rem);
 }
 .button-login:hover
 {
@@ -53,7 +53,7 @@
 
 .verify
 {
-  transform: translate(0,6rem);
+  transform: translate(-10rem,7rem);
 }
 
 .header {

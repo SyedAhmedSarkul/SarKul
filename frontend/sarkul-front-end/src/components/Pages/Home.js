@@ -1,30 +1,40 @@
-import React from 'react'
-import { Link,Route,Routes } from 'react-router-dom'
-import CallMasterPage from './CallMasterPage';
-import StockManagementPage from './StockManagementPage';
-import PartTransaction from './PartTransaction';
-import ManPower from './ManPower';
+import React, { useState,useEffect} from 'react'
 import NavBar from '../Navbar';
-import CallLogs from '../CallMaster/CallLogs';
-import CallAssign from '../CallMaster/CallAssign';
-import CallRegister from '../CallMaster/CallRegister';
-import CallUpdate from '../CallMaster/CallUpdate';
-import PendingCallReports from '../CallMaster/PendingCallReports';
-import ClosedCall from '../CallMaster/ClosedCall';
-import Image from '../../assets/Sarkul.png';
-import CallDetails from '../Helper/CallDetail';
-import CallDetailsPage from '../CallMaster/CallDetailsPage';
+import Image from '../../assets/Corporate.jpeg';
+import SideBarMain from '../Sidebar/SideBarMain';
+import './pages.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 function Home() {
-   
+   let nav = useNavigate();
+   const location = useLocation();
+const currentRoute = location.pathname;
+const [flag, setFlag] = useState(false);
+
+
+useEffect(() => {
+  if (currentRoute === '/') {
+    setFlag(true);
+  } else {
+    setFlag(false);
+  }
+  console.log(currentRoute)
+}, [currentRoute]);
+
+
   return (
-    <div>
+    <div >
        <NavBar/>
+       <div className={flag?'home-page':'non'}>
+
+       <SideBarMain/>
+       </div>
+       {/* <h1> Welcome to Sarkul Technology Private Limited</h1> */}
+      {/* <img className='image-home' style={{display:flag?'block':'none'}} src={Image} alt='Image here'/> */}
       
          
      
-      {/* <img className='image' src={Image} alt='Image here'/> */}
     </div>
   )
 }
