@@ -19,7 +19,7 @@ function Logout() {
 
   return (
     <div>
-        <img className='image logout-image' src={Image} alt='Image here' />
+        {/* <img className='image logout-image' src={Image} alt='Image here' /> */}
       <div className="logout-div">
         <div>
         <h2>Are you sure ,you want to Logout?</h2>

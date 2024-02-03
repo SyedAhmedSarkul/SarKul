@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Image from '../../assets/LoginPage.png';
 
-function Login({setIsUser}) {
+function Login() {
     const email = 'cheemstech01@gmail.com';
     const [otp, setOtp] = useState(false);
     const [val, setVal] = useState(true);
@@ -12,6 +12,7 @@ function Login({setIsUser}) {
     const [isVerifying, setIsVerifying] = useState(false);
     const input = useRef(null);
     const emailRef = useRef(null);
+    const passRef = useRef(null);
 
     async function generateOtp()
     {
@@ -25,24 +26,21 @@ function Login({setIsUser}) {
         setIsSent(true);
         setOtp(true);
     }
-    async function validate()
+    async function validate(e)
     {
-        const otp = input.current.value;
+        e.preventDefault();
         
-        if(otp=="")
-        {
-            alert("OTP must be entered");
-        }
-        else{
             setIsVerifying(true);
             try
             {
                 
-                const url ="https://sarkul-v5cz.onrender.com/api/v1/user/verify-otp";
+                const url ="https://sarkul-v5cz.onrender.com/api/v1/user/signin";
                 const data = {
                     email:emailRef.current.value,
-                    otp:parseInt(otp)
+                    password:passRef.current.value
                 }
+                console.log(emailRef.current.value)
+                console.log(passRef.current.value)
                 const config = {
                     headers: {
                       'Content-Type': 'application/json',
@@ -50,26 +48,27 @@ function Login({setIsUser}) {
                   };
                 let response = await axios.post(url,data,config);
                 
-                console.log("response of otp");
+                console.log("response of login");
                 localStorage.setItem("accessToken",response.data.data);
                 setTimeout(() => {
                     localStorage.removeItem("accessToken");
                 }, Date.now()+(60000*60*24*2));
                 console.log(response.data.data);
-                alert("true")
-                setIsUser(true);
+                
+              
                 setIsVerifying(false);
+                window.location.reload(true);
                 
             }
             catch(error)
                 {
                     console.log("************")
-                    console.log(error.response.data.message);
-                    alert("Wrong OTP: OTP Mismatch");
+                    console.log(error);
+                    alert("Wrong Credentials");
                     setIsVerifying(false);
                 }
               
-        }
+        
         
     }
 
@@ -81,11 +80,18 @@ function Login({setIsUser}) {
     <img className='image-login' src={Image} alt='Image here'/>
     <div className='login-slot'>
         <h1>Login Here</h1>
-        <input type='text'placeholder='Enter the email here...'  className='form-input' required ref={emailRef}/>
-        {otp?( isVerifying?(<button className='validate-btn verify'>Verifying... </button>):(<div><input type='number' placeholder='Enter OTP..' ref={input} className='input'/> <button className='validate-btn' onClick={validate}>Validate </button> </div>)):
+        <form onSubmit={validate}>
+
+        <input type='text'placeholder='Enter the email here...'  className='form-input' required ref={emailRef}/><br/>
+        <input type='text'placeholder='Enter the password here...'  className='form-input' required ref={passRef}/><br/><br/>
+        {isVerifying?<button className='button-login'>Loading...</button>:<input type='submit' className='button-login'  value={'Login'} onSubmit={validate}/>}
+        
+        </form>
+        
+        {/* {otp?( isVerifying?(<button className='validate-btn verify'>Verifying... </button>):(<div><input type='number' placeholder='Enter OTP..' ref={input} className='input'/> <button className='validate-btn' onClick={validate}>Validate </button> </div>)):
         ( isSent?(<button className='button-login' onClick={generateOtp}>Generate OTP</button>)
-        :(<button className='button-login'>Sending...</button>))
-        }
+        :(<button className='button-login'>Sending...</button>)) 
+        } */}
        
        
         

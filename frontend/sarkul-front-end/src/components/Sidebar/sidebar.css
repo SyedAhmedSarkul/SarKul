@@ -86,5 +86,9 @@
 {
     background-color: var(--darkblue);
     color: var(--white);
+} 
+.sb-btn:hover{
+    box-shadow: 5px 5px 10px var(--blue);
+    transition: all 0.3s;
 }
 

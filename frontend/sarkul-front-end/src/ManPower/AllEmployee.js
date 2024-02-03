@@ -5,6 +5,8 @@ import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import EmployeeCard from '../components/Helper/EmployeeCard';
 import SideBarMain from '../components/Sidebar/SideBarMain'
+import {toast, ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function AllEmployee() {
     const [arr, setArr] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +34,7 @@ function AllEmployee() {
             setIsLoading(false);
             }
             catch(error)
-            {
+            { 
                 setErrorMsg(error.response.data.message);
                 setIsLoading(false);
             }
@@ -60,6 +62,16 @@ function AllEmployee() {
 
         )
     }
+    {
+        errorMsg && <ToastContainer
+          position="top-center"
+          closeOnClick
+          pauseOnFocusLoss
+          pauseOnHover
+        >
+          {toast.error(errorMsg)}
+        </ToastContainer>
+      }
         
     </div>
   )

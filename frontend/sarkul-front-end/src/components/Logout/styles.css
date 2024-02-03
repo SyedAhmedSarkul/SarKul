@@ -15,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     margin: auto;
-    margin-top: -20%;
+    margin-top: 10%;
     border: 2px solid var(--grey);
     box-shadow: 5px 5px 10px var(--grey);
     border-radius: 20px;
@@ -54,5 +54,5 @@
 }
 .logout-image
 {
-    transform: translate(33rem, 15rem);
+    /* transform: translate(33rem, 15rem); */
 }
