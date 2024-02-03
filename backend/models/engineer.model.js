@@ -73,9 +73,11 @@ const engineerSchema = new Schema(
         remarks: {
             type: String,
         },
-        assignedTo: {
-            type: String,
-        },
+        assignedTo: [
+            {
+                type: String,
+            },
+        ],
     },
     { timestamps: true }
 );
