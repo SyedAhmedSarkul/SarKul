@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBarMain from '../Sidebar/SideBarMain'
 
 function PartTransaction() {
   return (
-    <div>PartTransaction</div>
+    <div>
+      <SideBarMain/>
+      PartTransaction
+      </div>
   )
 }
 

@@ -73,7 +73,7 @@
 .image
 {
     opacity: 0.3;
-    width: 20rem;
+    width: 10px;
   height: auto;
   display: block;
 
@@ -87,7 +87,7 @@
 }
 .call-assign-form
 {
-    transform: translate(0,-20rem);
+    /* transform: translate(0,-20rem); */
     
 }
 .call-assign-input

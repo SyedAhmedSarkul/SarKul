@@ -1,8 +1,12 @@
 import React from 'react'
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function StockManagementPage() {
   return (
-    <div>StockManagementPage</div>
+    <div>
+      <SideBarMain/>
+      StockManagementPage
+      </div>
   )
 }
 

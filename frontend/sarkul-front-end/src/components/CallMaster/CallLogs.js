@@ -1,11 +1,11 @@
 import React, {useRef, useState} from 'react';
-import SideBar from '../Sidebar/SideBar';
 import './styles.css';
 import axios from 'axios';
-import Image from '../../assets/Sarkul.png';
 import Loader from '../Loader';
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SideBarMain from '../Sidebar/SideBarMain'
+import SideBar from '../Sidebar/SideBar'
 
 function CallLogs() {
   const [isLoading, setIsLoading] = useState(false);
@@ -94,7 +94,8 @@ function CallLogs() {
   return (
     <div>
       {/* <img className='image' src={Image} alt='Image here'/> */}
-      <SideBar />
+      <SideBarMain/>
+      <SideBar/>
       <h2>Call Log</h2>
       {isLoading ? (<Loader />) : (
         <form className='form' onSubmit={handleSubmit}>

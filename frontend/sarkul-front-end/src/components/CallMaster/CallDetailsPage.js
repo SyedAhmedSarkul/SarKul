@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import CallDetails from '../Helper/CallDetail'
 import SideBar from '../Sidebar/SideBar';
 import Image from '../../assets/Sarkul.png';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function CallDetailsPage() {
     let callNumberRef = useRef(null);
@@ -17,9 +18,10 @@ function CallDetailsPage() {
     }
   return (
     <div>
+        <SideBarMain/>
         <SideBar/>
-        <img className='image' src={Image} alt='Image here'/>
-        <form onSubmit={handleSubmit} className='call-details-div'> 
+        {/* <img className='image' src={Image} alt='Image here'/> */}
+        <form onSubmit={handleSubmit} className='call-details-divn'> 
         <label className='call-details-page-label'>Search: </label> <input type='text' className='form-input' placeholder='search by call number...' ref={callNumberRef} required/>
         <input type='submit' value='Search' className='submit-btn' onSubmit={handleSubmit}/>
         </form>

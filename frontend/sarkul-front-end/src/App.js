@@ -33,7 +33,7 @@ function App() {
     <div className="App">
      
     {/* {!isUser? ( <Login setIsUser={setIsUser}/>):( */}
-    {!token? ( <Login setIsUser={setIsUser}/>):(
+    {!token? ( <Login />):(
     
     <div>
       <Home/>

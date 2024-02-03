@@ -6,6 +6,7 @@ import axios from 'axios';
 import Loader from '../Loader';
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function CallAssign() {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,12 +31,10 @@ async function getEngineerName()
       }
     };
     let response = await axios.get(url,config);
-    // console.log(response);
     setArr(response.data.data);
    }
    catch(error)
    {
-    // setErrorMsg(error.response.data.message);
     console.log(error);
    }
  }
@@ -84,9 +83,10 @@ async function getEngineerName()
 
   return (
     <div className='call-assign-parent'>
-      <SideBar />
+      <SideBarMain/>
+      <SideBar/>
       <h2>Call Assign</h2>
-      <img className='image' src={Image} alt='Image here' />
+      {/* <img className='image' src={Image} alt='Image here' /> */}
       {isLoading ? (<Loader />) :
         (
           <form className='call-assign-form' onSubmit={handleSubmit}>

@@ -1,0 +1,52 @@
+.image-home
+{
+    /* height: 100%; */
+    position: fixed;
+    right: 0;
+    width: 98dvw;
+    /* height: auto;
+    display: block; */
+    opacity: 0.5;
+}
+.image-call
+{
+   
+    position: relative;
+    right: 0;
+    top: 60px;
+    width: 98dvw;
+    z-index: 0;
+   
+    /* opacity: 0.7; */
+}
+.call-master-page
+{
+    background-image: url('../../assets/CallMaster.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.manpower-page
+{
+    background-image: url('../../assets/Manpower.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.home-page
+{
+    background-image: url('../../assets/Corporate.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}

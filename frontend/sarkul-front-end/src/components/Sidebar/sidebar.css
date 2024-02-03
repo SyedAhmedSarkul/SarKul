@@ -1,12 +1,24 @@
 .sidebar
 {
     height: 100%; 
-    width: 9rem; 
+    width: 10.6%; 
     position: fixed; 
-    z-index: 1; 
+    z-index: 100; 
     top: 0; 
     left: 0;
-    background-color: var(--darkblue); 
+    /* background-color: var(--darkblue);  */
+    overflow-x: hidden; 
+    padding-top: 2rem;
+}
+.sidebar-right
+{
+    height: 100%; 
+    width: 10.6%; 
+    position: fixed; 
+    z-index: 100; 
+    top: 5; 
+    right: 0px;
+    /* background-color: var(--darkblue);  */
     overflow-x: hidden; 
     padding-top: 2rem;
 }
@@ -14,7 +26,7 @@
 {
   
     position: fixed;
-    top:8rem;
+    top:8rem; 
 }
 .link-sb
 {
@@ -24,3 +36,59 @@
 {
     margin-top:3rem; 
 }
+.links-sidebar
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: fixed;
+    top: 14%;
+}
+.sb-btn
+{
+
+    background-color: var(--darkblue);
+    color: var(--white);
+    padding: 0.5rem 0.5rem;
+    border:2px solid;
+    border-color: var(--blue);
+    border-radius: 3rem;
+    font-weight: 100;
+    cursor: pointer;
+    text-align: center;
+}
+.link{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    /* width: 200px; */
+    /* display: none; */
+}
+.insider-div
+{
+    /* background-color: var(--grey); */
+    position: relative;
+    left: 1rem;
+    align-items: flex-end;
+}
+.insider
+{
+    color: var(--black);
+    border: 2px solid var(--white);
+    background-color: var(--grey);
+    border-radius: 1rem;
+    margin-top: 10px;
+    height: 1.3rem;
+    text-align: center;
+    padding: 0.4rem ;
+}
+.insider:hover
+{
+    background-color: var(--darkblue);
+    color: var(--white);
+} 
+.sb-btn:hover{
+    box-shadow: 5px 5px 10px var(--blue);
+    transition: all 0.3s;
+}
+
