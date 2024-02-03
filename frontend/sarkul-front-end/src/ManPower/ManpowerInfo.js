@@ -17,15 +17,15 @@ function ManpowerInfo() {
   return (
     <div>
       <SideBarMain/>
-        <SideBarMp/>
+      <SideBarMp/>
        <h2>Manpower Info</h2>
-       <img className='image' src={Image} alt='Image here'/>
-        <form onSubmit={handleSubmit} className='call-details-div'>
+       {/* <img className='image' src={Image} alt='Image here'/> */}
+        <form onSubmit={handleSubmit} className='call-details-divv'>
         <label className='call-details-page-label'>Search: </label> <input type='text' className='form-input' placeholder='search by employee id...' ref={empRef} required/>
         <input type='submit' value='Search' className='submit-btn' onSubmit={handleSubmit}/> 
         </form>
 
-        {flag?( <div className='emp-detail-container'><EmployeeDetail id={id} setFlag={setFlagg}/></div>):
+        {flag?( <div className='emp-detail-containerr'><EmployeeDetail id={id} setFlag={setFlagg}/></div>):
        (<h3 className='emp-details-text'>You can now get here the call details by searching the call number</h3>)
        }
        

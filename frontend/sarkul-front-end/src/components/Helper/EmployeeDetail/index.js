@@ -95,7 +95,7 @@ function EmployeeDetail({ id ,setFlagg}) {
   return (
     <div>
       <div>
-        <SideBarMp />
+        {/* <SideBarMp /> */}
         <h3 id="employee-detail-h3">Employee Details {id}</h3>
         {isLoading ? (
           <Loader />
