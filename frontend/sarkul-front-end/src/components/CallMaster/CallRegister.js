@@ -33,8 +33,8 @@ async function getData()
   }
   catch(error)
   {
-    // console.log("error in closed call: "+error)
-    alert("some error occured");
+    alert(error.response?.data.message);
+    // console.log(error)
     setIsLoading(false)
   }
 }
