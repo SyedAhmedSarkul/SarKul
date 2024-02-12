@@ -64,16 +64,17 @@ async function getEngineerName()
         }
       };
       let response = await axios.post(url, data, config);
-      console.log("response in assign");
-      console.log(response.data);
-      setSuccessMsg(response?.data?.message);
+      // console.log("response in assign");
+      // console.log(response.data);
+      // setSuccessMsg(response?.data?.message);
+      alert(response?.data?.message)
 
     }
     catch (error) {
       console.log("error while assigning: ");
       console.log(error);
-      // alert(error.response.data.message);
-      setErrorMsg(error.response.data.message);
+      alert(error.response.data.message);
+      // setErrorMsg(error.response.data.message);
     }
 
   }
@@ -113,9 +114,9 @@ async function getEngineerName()
 
             <input type='submit' value='Submit' className='submit-btn call-assign-btn' onSubmit={handleSubmit} />
 
-            {successMsg && (
+            {/* {successMsg && (
               <ToastContainer
-                position="top-center"
+                position="center"
                 closeOnClick
                 pauseOnFocusLoss
                 theme='light'
@@ -126,13 +127,13 @@ async function getEngineerName()
 
             {errorMsg && (
               <ToastContainer
-                position="top-center"
+                position="right-center"
                 closeOnClick
                 pauseOnFocusLoss
                 theme='light'>
                 {toast.error(errorMsg)}
               </ToastContainer>
-            )}
+            )} */}
 
           </form>
         )}

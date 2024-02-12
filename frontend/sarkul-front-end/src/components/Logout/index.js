@@ -10,7 +10,7 @@ function Logout() {
   
   function handleLogout() {
     localStorage.removeItem("accessToken");
-    navigate('/callmaster');
+    navigate('/');
     window.location.reload(true);
   }
   function handleNo() {
