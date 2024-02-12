@@ -8,3 +8,8 @@ export const generateEngineerId = () => {
     const randomBytes = crypto.randomBytes(3);
     return parseInt(randomBytes.toString("hex"), 16) % 1000000;
 };
+
+export const generateStockId = () => {
+    const randomBytes = crypto.randomBytes(3);
+    return parseInt(randomBytes.toString("hex"), 16) % 1000000000;
+};

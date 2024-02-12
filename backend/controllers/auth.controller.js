@@ -7,7 +7,12 @@ import jwt from "jsonwebtoken";
 export const createUser = async (req, res) => {
     const { email, role, password } = req.body;
     try {
-        const user = await User.create({ email, role, password });
+        const userExists = await User.findOne({ email });
+        if (userExists) {
+            throw new ApiError(400, `User with email ${email} already exists`);
+        }
+        const response = await User.create({ email, role, password });
+        const { password: _, ...user } = response._doc;
         return res
             .status(200)
             .json(new ApiResponse(200, user, "User created successfully"));
@@ -18,13 +23,27 @@ export const createUser = async (req, res) => {
     }
 };
 
-export const sendOtp = async (req, res) => {
+export const deleteUser = async (req, res) => {
     const { email } = req.body;
+    try {
+        const user = await User.findOneAndDelete({ email });
+        if (!user) {
+            throw new ApiError(404, `User with email ${email} not found`);
+        }
+        return res
+            .status(200)
+            .json(new ApiResponse(200, null, "User deleted successfully"));
+    } catch (error) {
+        return res
+            .status(error.statusCode || 500)
+            .json(new ApiResponse(error.statusCode, null, error.message));
+    }
+};
+
+export const sendOtp = async (req, res) => {
+    const email = process.env.ADMIN_EMAIL;
 
     try {
-        if (!email) {
-            throw new ApiError(400, "Email is required");
-        }
         const user = await User.findOne({ email });
         if (!user) {
             throw new ApiError(404, "User not found");
@@ -35,10 +54,10 @@ export const sendOtp = async (req, res) => {
         });
         user.otp = otpToken;
         await user.save();
-
         return res
             .status(200)
             .json(new ApiResponse(200, null, "OTP sent successfully"));
+        // next();
     } catch (error) {
         return res
             .status(error.statusCode || 500)
@@ -46,13 +65,11 @@ export const sendOtp = async (req, res) => {
     }
 };
 
-export const verifyOtp = async (req, res) => {
-    const { email, otp } = req.body;
+export const verifyOtp = async (req, res, next) => {
+    const { otp } = req.body;
+    const email = process.env.ADMIN_EMAIL;
 
     try {
-        if (!email) {
-            throw new ApiError(400, "Email is required");
-        }
         if (!otp) {
             throw new ApiError(400, "OTP is required");
         }
@@ -75,12 +92,12 @@ export const verifyOtp = async (req, res) => {
             maxAge: 2 * 24 * 60 * 60 * 1000,
         };
 
-        return res
-            .status(200)
-            .cookie("accessToken", accessToken, options)
-            .json(
-                new ApiResponse(200, accessToken, "OTP verified successfully")
-            );
+        // res.status(200)
+        //     .cookie("accessToken", accessToken, options)
+        //     .json(
+        //         new ApiResponse(200, accessToken, "OTP verified successfully")
+        //     );
+        next();
     } catch (error) {
         if (error.message === "jwt must be provided") {
             return res

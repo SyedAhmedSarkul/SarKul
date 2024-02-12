@@ -1,29 +1,30 @@
-import {Stock} from "../models/stock.model.js";
-import {ApiError} from "../utils/ApiError.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
+import { Stock } from "../models/stock.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { generateStockId } from "../utils/idGenerator.js";
 
 const createFilter = (query) => {
     let filter = {};
     let sort = {};
 
     if (query.itemName) {
-        filter.itemName = {$regex: query.itemName, $options: "i"};
+        filter.itemName = { $regex: query.itemName, $options: "i" };
     }
 
     if (query.itemPart) {
-        filter.itemPart = {$regex: query.itemPart, $options: "i"};
+        filter.itemPart = { $regex: query.itemPart, $options: "i" };
     }
 
     if (query.serialNumber) {
-        filter.serialNumber = {$regex: query.serialNumber, $options: "i"};
+        filter.serialNumber = { $regex: query.serialNumber, $options: "i" };
     }
 
     if (query.configuration) {
-        filter.configuration = {$regex: query.configuration, $options: "i"};
+        filter.configuration = { $regex: query.configuration, $options: "i" };
     }
 
     if (query.modelNumber) {
-        filter.modelNumber = {$regex: query.modelNumber, $options: "i"};
+        filter.modelNumber = { $regex: query.modelNumber, $options: "i" };
     }
 
     if (query.condition) {
@@ -31,88 +32,134 @@ const createFilter = (query) => {
     }
 
     if (query.stockId) {
-        filter.stockId = {$regex: query.stockId, $options: "i"};
+        filter.stockId = { $regex: query.stockId, $options: "i" };
     }
     if (query.amcStartDate) {
         filter.amcStartDate = {
-            $gte: new Date(new Date(query.amcStartDate).setUTCHours(0, 0, 0, 0)),
-            $lt: new Date(new Date(query.amcStartDate).setUTCHours(23, 59, 59, 999))
+            $gte: new Date(
+                new Date(query.amcStartDate).setUTCHours(0, 0, 0, 0)
+            ),
+            $lt: new Date(
+                new Date(query.amcStartDate).setUTCHours(23, 59, 59, 999)
+            ),
         };
     }
 
     if (query.amcEndDate) {
         filter.amcEndDate = {
             $gte: new Date(new Date(query.amcEndDate).setUTCHours(0, 0, 0, 0)),
-            $lt: new Date(new Date(query.amcEndDate).setUTCHours(23, 59, 59, 999))
+            $lt: new Date(
+                new Date(query.amcEndDate).setUTCHours(23, 59, 59, 999)
+            ),
         };
     }
 
     if (query.minPrice && query.maxPrice) {
         filter.price = {
             $gte: parseInt(query.minPrice),
-            $lte: parseInt(query.maxPrice)
+            $lte: parseInt(query.maxPrice),
         };
-    }
-
-    else if (query.minPrice) {
+    } else if (query.minPrice) {
         filter.price = {
-            $gte: parseInt(query.minPrice)
+            $gte: parseInt(query.minPrice),
         };
-    }
-
-    else if (query.maxPrice) {
+    } else if (query.maxPrice) {
         filter.price = {
-            $lte: parseInt(query.maxPrice)
+            $lte: parseInt(query.maxPrice),
         };
-    }
-    else if (query.price) {
+    } else if (query.price) {
         filter.price = {
-            $eq: parseInt(query.price)
+            $eq: parseInt(query.price),
         };
     }
 
     if (query.sort) {
         let sortBy = query.sort.split(",");
         sortBy.map((item) => {
-            if (item[0] === '-') {
+            if (item[0] === "-") {
                 sort[item.slice(1)] = -1;
-            }
-            else {
+            } else {
                 sort[item] = 1;
             }
         });
         // console.log(sort);
     }
 
-    return {filter, sort};
+    return { filter, sort };
 };
 
 export const createStock = async (req, res) => {
     try {
-        const {itemName, quantity, itemPart, serialNumber, configuration, modelNumber, amcStartDate, amcEndDate, price, stockId, condition} = req.body;
+        const {
+            itemName,
+            quantity,
+            itemPart,
+            serialNumber,
+            configuration,
+            modelNumber,
+            amcStartDate,
+            amcEndDate,
+            price,
+            condition,
+        } = req.body;
         if (amcStartDate > amcEndDate) {
-            throw new ApiError(400, "AMC start date cannot be greater than AMC end date");
+            throw new ApiError(
+                400,
+                "AMC start date cannot be greater than AMC end date"
+            );
         }
-        const existingStock = await Stock.findOne({stockId});
+        const stockId = generateStockId();
+        const existingStock = await Stock.findOne({ stockId });
         if (existingStock) {
             throw new ApiError(400, `Stock with id ${stockId} already exists`);
         }
         const stock = await Stock.create({
-            itemName, quantity, itemPart, serialNumber, configuration, modelNumber, amcStartDate, amcEndDate, price, stockId, condition
+            itemName,
+            quantity,
+            itemPart,
+            serialNumber,
+            configuration,
+            modelNumber,
+            amcStartDate,
+            amcEndDate,
+            price,
+            stockId,
+            condition,
         });
         if (!stock) {
             throw new ApiError(500, "Failed to create stock");
         }
-        return res.status(201).json(new ApiResponse(201, stock, "Stock created successfully"));
+        return res
+            .status(201)
+            .json(new ApiResponse(201, stock, "Stock created successfully"));
     } catch (error) {
-        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while creating stock"));
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiResponse(
+                    error.statusCode,
+                    null,
+                    error.message || "Something went wrong while creating stock"
+                )
+            );
     }
 };
 
 export const updateStock = async (req, res) => {
     try {
-        const {itemName, quantity, itemPart, serialNumber, configuration, modelNumber, amcStartDate, amcEndDate, price, condition} = req.body;
-        const stock = await Stock.findOne({stockId: req.params.stockId});
+        const {
+            itemName,
+            quantity,
+            itemPart,
+            serialNumber,
+            configuration,
+            modelNumber,
+            amcStartDate,
+            amcEndDate,
+            price,
+            condition,
+        } = req.body;
+        const stock = await Stock.findOne({ stockId: req.params.stockId });
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
@@ -141,7 +188,10 @@ export const updateStock = async (req, res) => {
             stock.amcEndDate = amcEndDate;
         }
         if (amcStartDate > amcEndDate) {
-            throw new ApiError(400, "AMC start date cannot be greater than AMC end date");
+            throw new ApiError(
+                400,
+                "AMC start date cannot be greater than AMC end date"
+            );
         }
         if (price) {
             stock.price = price;
@@ -150,36 +200,57 @@ export const updateStock = async (req, res) => {
             stock.condition = condition;
         }
         await stock.save();
-        return res.status(200).json(new ApiResponse(200, stock, "Stock updated successfully"));
+        return res
+            .status(200)
+            .json(new ApiResponse(200, stock, "Stock updated successfully"));
     } catch (error) {
-        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while updating stock"));
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiResponse(
+                    error.statusCode,
+                    null,
+                    error.message || "Something went wrong while updating stock"
+                )
+            );
     }
 };
 
 export const getStock = async (req, res) => {
     try {
-        const stock = await Stock.findOne({stockId: req.params.stockId});
+        const stock = await Stock.findOne({ stockId: req.params.stockId });
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
-        return res.status(200).json(new ApiResponse(200, stock, "Stock retrieved successfully"));
+        return res
+            .status(200)
+            .json(new ApiResponse(200, stock, "Stock retrieved successfully"));
     } catch (error) {
-        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while retrieving stock"));
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiResponse(
+                    error.statusCode,
+                    null,
+                    error.message ||
+                        "Something went wrong while retrieving stock"
+                )
+            );
     }
 };
 
 export const getAllStocks = async (req, res) => {
     try {
-        const {filter, sort} = createFilter(req.query);
+        const { filter, sort } = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
             sort.createdAt = -1;
         }
         const stocks = await Stock.aggregate([
             {
-                $match: filter
+                $match: filter,
             },
             {
-                $sort: sort
+                $sort: sort,
             },
             {
                 $project: {
@@ -194,34 +265,62 @@ export const getAllStocks = async (req, res) => {
                     amcEndDate: 1,
                     price: 1,
                     condition: 1,
-                }
+                },
             },
             {
                 $group: {
                     _id: null,
-                    totalStocks: {$sum: 1},
-                    totalPrice: {$sum: '$price'},
-                    data: {$push: '$$ROOT'}
-                }
-            }
+                    totalStocks: { $sum: 1 },
+                    totalPrice: { $sum: "$price" },
+                    data: { $push: "$$ROOT" },
+                },
+            },
         ]);
         if (!stocks) {
-            throw new ApiError(404, "Something went wrong while retrieving stocks");
+            throw new ApiError(
+                404,
+                "Something went wrong while retrieving stocks"
+            );
         }
-        return res.status(200).json(new ApiResponse(200, stocks, "Stocks retrieved successfully"));
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, stocks, "Stocks retrieved successfully")
+            );
     } catch (error) {
-        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while retrieving stocks"));
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiResponse(
+                    error.statusCode,
+                    null,
+                    error.message ||
+                        "Something went wrong while retrieving stocks"
+                )
+            );
     }
 };
 
 export const deleteStock = async (req, res) => {
     try {
-        const stock = await Stock.findOneAndDelete({stockId: req.params.stockId});
+        const stock = await Stock.findOneAndDelete({
+            stockId: req.params.stockId,
+        });
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
-        return res.status(200).json(new ApiResponse(200, null, "Stock deleted successfully"));
+        return res
+            .status(200)
+            .json(new ApiResponse(200, null, "Stock deleted successfully"));
     } catch (error) {
-        return res.status(error.statusCode || 500).json(new ApiResponse(error.statusCode, null, error.message || "Something went wrong while deleting stock"));
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiResponse(
+                    error.statusCode,
+                    null,
+                    error.message || "Something went wrong while deleting stock"
+                )
+            );
     }
 };
