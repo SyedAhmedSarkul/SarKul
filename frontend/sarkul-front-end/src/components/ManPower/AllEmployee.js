@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import SideBarMp from '../components/Sidebar/SideBarMp';
+import SideBarMp from '../Sidebar/SideBarMp';
 import axios from 'axios';
-import Loader from '../components/Loader';
+import Loader from '../Loader';
 import { Link } from 'react-router-dom';
-import EmployeeCard from '../components/Helper/EmployeeCard';
-import SideBarMain from '../components/Sidebar/SideBarMain'
+import EmployeeCard from '../Helper/EmployeeCard';
+import SideBarMain from '../Sidebar/SideBarMain'
 import {toast, ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 function AllEmployee() {

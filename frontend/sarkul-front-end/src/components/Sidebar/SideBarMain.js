@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
+// sidebar for call
 function SideBarMain() {
-    // const [cflag, setcFlag] = useState(true);
-    // const [mflag, setmFlag] = useState(true);
-
 
 
   return <div className="sidebar"> 
