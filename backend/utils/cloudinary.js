@@ -1,6 +1,6 @@
-import {v2 as cloudinary} from "cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
-import {ApiError} from "./ApiError.js";
+import { ApiError } from "./ApiError.js";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -15,7 +15,7 @@ export const uploadOnCloudinary = async (localFilePath) => {
         if (!localFilePath) return new ApiError(500, "Couldn't find the file");
 
         const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type: "auto"
+            resource_type: "raw",
         });
         fs.unlinkSync(localFilePath);
         // console.log(response.url);
@@ -29,7 +29,11 @@ export const uploadOnCloudinary = async (localFilePath) => {
 
 export const deleteFromCloudinary = async (imagePath) => {
     if (!imagePath) return null;
-    if (!(imagePath.startsWith("http://res.cloudinary.com/dwu4qlxsw/image/upload"))) {
+    if (
+        !imagePath.startsWith(
+            "http://res.cloudinary.com/dwu4qlxsw/image/upload"
+        )
+    ) {
         return null;
     }
     const publicId = imagePath.split("/").pop().split(".")[0];
