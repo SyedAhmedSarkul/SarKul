@@ -24,6 +24,7 @@ import InvoicePage from './components/Pages/InvoicePage';
 import Logout from './components/Logout';
 import StockEntry from './components/StockManagement/StockEntry';
 import CurrentStock from './components/StockManagement/CurrentStock';
+import StockDetail from './components/Helper/StockDetail/StockDetail';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
                 <Route path='/stockmanagement/stock-entry' element={<StockEntry/>}/>
                 <Route path='/stockmanagement/current-stock' element={<CurrentStock/>}/>
+                <Route path='/stockmanagement/current-stock-specific/:stockId' element={<StockDetail/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/invoice' element={<InvoicePage/>}/>
         <Route path='/manpower'element={<ManPower/>}/>

@@ -60,11 +60,7 @@ function PendingCallReports() {
           })}
         </ol>
       }
-      {/* <CallCard callNumber={674612} customerName={"Cinthol Bank"} date={'26/01/2024'} />
-      <CallCard callNumber={674612} customerName={"Cinthol Bank"} date={'26/01/2024'} />
-      <CallCard callNumber={674612} customerName={"Cinthol Bank"} date={'26/01/2024'} />
-      <CallCard callNumber={674612} customerName={"Cinthol Bank"} date={'26/01/2024'} />
-      <CallCard callNumber={674612} customerName={"Cinthol Bank"} date={'26/01/2024'} /> */}
+      
 
       {
         errorMsg && <ToastContainer
