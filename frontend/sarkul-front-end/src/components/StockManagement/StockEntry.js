@@ -71,7 +71,7 @@ const [isLoading, setIsLoading] = useState(false)
 
           <Stack direction={'row'} justifyContent={'space-evenly'} >
             <Stack gap={5}>
-              <FormControl>
+              <FormControl required >
                 <InputLabel id="demo-simple-select-label">Item Name</InputLabel>
                 <Select
                   sx={{ width: '130px' }}
@@ -128,8 +128,27 @@ const [isLoading, setIsLoading] = useState(false)
                 />
               </Stack>
 
-              <TextField id="outlined-basic" name="price" onChange={formik.handleChange} label="Price (₹)" variant="outlined" />
-              <TextField id="outlined-basic" name="condition" onChange={formik.handleChange} label="Condition" variant="outlined" />
+              <TextField id="outlined-basic" required name="price" onChange={formik.handleChange} label="Price (₹)" variant="outlined" />
+              <FormControl required>
+                <InputLabel id="demo-simple-select-label">Condition</InputLabel>
+                <Select
+                  sx={{ width: '230px' }}
+                 
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  label="Condition"
+                  name="condition"
+                  value={formik.values.condition}
+                  onChange={formik.handleChange}
+                >
+
+                  <MenuItem value={"working"}>Working</MenuItem>
+                  <MenuItem value={"faulty"}>Faulty</MenuItem>
+                 
+
+                </Select>
+
+              </FormControl>
               <TextField sx={{
                 '&:hover': {
 
