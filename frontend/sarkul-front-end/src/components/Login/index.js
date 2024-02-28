@@ -83,7 +83,7 @@ function Login() {
         <form onSubmit={validate}>
 
         <input type='text'placeholder='Enter the email here...'  className='form-input' required ref={emailRef}/><br/>
-        <input type='text'placeholder='Enter the password here...'  className='form-input' required ref={passRef}/><br/><br/>
+        <input type='password'placeholder='Enter the password here...'  className='form-input' required ref={passRef}/><br/><br/>
         {isVerifying?<button className='button-login'>Loading...</button>:<input type='submit' className='button-login'  value={'Login'} onSubmit={validate}/>}
         
         </form>
