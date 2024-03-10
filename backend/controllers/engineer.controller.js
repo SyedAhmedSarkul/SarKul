@@ -79,6 +79,8 @@ export const createEngineer = async (req, res) => {
             qualification,
             reference,
             salary,
+            skills,
+            experience,
         } = req.body;
         if (employeeDOB > joinDate) {
             throw new ApiError(
@@ -115,6 +117,8 @@ export const createEngineer = async (req, res) => {
             qualification,
             reference,
             salary,
+            skills,
+            experience,
             idProof: idProofUrl,
             certificate: certificateUrl,
         });

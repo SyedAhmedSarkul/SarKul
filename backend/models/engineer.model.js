@@ -78,6 +78,10 @@ const engineerSchema = new Schema(
                 type: String,
             },
         ],
+        experience: {
+            type: String,
+        },
+        skills: [String],
     },
     { timestamps: true }
 );

@@ -15,6 +15,9 @@ const callSchema = new Schema(
             type: String,
             required: [true, "Customer name is required"],
         },
+        userName: {
+            type: String,
+        },
         customerCode: {
             type: String,
             required: [true, "Customer code is required"],
@@ -53,6 +56,7 @@ const callSchema = new Schema(
                     "plotter",
                     "scanner",
                     "server",
+                    "activity",
                 ],
                 message: "Invalid category",
             },
