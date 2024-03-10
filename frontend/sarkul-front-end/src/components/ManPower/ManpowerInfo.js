@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react'
-import SideBarMp from '../components/Sidebar/SideBarMp'
-import Image from '../assets/Sarkul.png'
-import EmployeeDetail from '../components/Helper/EmployeeDetail';
-import SideBarMain from '../components/Sidebar/SideBarMain';
+import SideBarMp from '../Sidebar/SideBarMp'
+// import Image from '../../assets/Sarkul.png'
+import EmployeeDetail from '../Helper/EmployeeDetail';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 function ManpowerInfo() {
   const [flag, setFlagg] = useState(false);

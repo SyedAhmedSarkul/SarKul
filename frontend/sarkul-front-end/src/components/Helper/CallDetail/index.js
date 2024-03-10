@@ -62,7 +62,7 @@ function CallDetails({callNumber,setFlag}) {
    setModelNumber(response.data.data.itemModelNumber);
    setItem(response.data.data.itemName);
    if(response.data.data.engineersAssigned[0]){
-   setEngineer(response.data.data.engineersAssigned[0].employeeName);
+   setEngineer(response.data.data.engineersAssigned[response.data.data.engineersAssigned.length-1].employeeName);
    }
    setDate(response.data.data.createdAt);
    setStatus(response.data.data.status);

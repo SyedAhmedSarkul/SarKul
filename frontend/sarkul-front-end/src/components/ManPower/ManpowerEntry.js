@@ -1,16 +1,14 @@
 import React, { useRef, useState } from 'react'
-import SideBarMp from '../components/Sidebar/SideBarMp';
+import SideBarMp from '../Sidebar/SideBarMp';
 import './manpower.css';
 import axios from 'axios';
-import Loader from '../components/Loader';
-import {toast, ToastContainer} from "react-toastify";
+import Loader from '../Loader';
 import 'react-toastify/dist/ReactToastify.css';
-import SideBarMain from '../components/Sidebar/SideBarMain';
+import SideBarMain from '../Sidebar/SideBarMain';
 
 
 function ManpowerEntry() {
   const [isLoading, setIsLoading] = useState(false)
-  const [errorMsg, setErrorMsg] = useState("");
 
     let nameRef = useRef(null);
     let addressRef = useRef(null);
@@ -67,7 +65,7 @@ function ManpowerEntry() {
           }
           catch(error)
           {
-            setErrorMsg(error.response.data.message);
+            alert(error.response.data.message);
           }
     }
 
@@ -117,25 +115,12 @@ function ManpowerEntry() {
         </div>
 
       </form>
-        {/* <input type='submit' value='Submit' className='submit-btn emp-submit-btn' onSubmit={handleSubmit} /> */}
         <button className='submit-btn emp-submit-btn' onClick={handleSubmit}>Submit</button>
         </div>
       )
       }
 
-       
-
-
-        {
-        errorMsg && <ToastContainer
-          position="top-center"
-          closeOnClick
-          pauseOnFocusLoss
-          pauseOnHover
-        >
-          {toast.error(errorMsg)}
-        </ToastContainer>
-      }
+      
      
 
     </div>

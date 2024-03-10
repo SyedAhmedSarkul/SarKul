@@ -16,12 +16,15 @@ import CallDetails from './components/Helper/CallDetail';
 import StockManagementPage from './components/Pages/StockManagementPage';
 import PartTransaction from './components/Pages/PartTransaction';
 import ManPower from './components/Pages/ManPower';
-import ManpowerEntry from './ManPower/ManpowerEntry';
-import ManpowerInfo from './ManPower/ManpowerInfo';
-import AllEmployee from './ManPower/AllEmployee';
+import ManpowerEntry from './components/ManPower/ManpowerEntry';
+import ManpowerInfo from './components/ManPower/ManpowerInfo';
+import AllEmployee from './components/ManPower/AllEmployee';
 import EmployeeDetail from './components/Helper/EmployeeDetail';
 import InvoicePage from './components/Pages/InvoicePage';
 import Logout from './components/Logout';
+import StockEntry from './components/StockManagement/StockEntry';
+import CurrentStock from './components/StockManagement/CurrentStock';
+import StockDetail from './components/Helper/StockDetail/StockDetail';
 
 
 function App() {
@@ -48,6 +51,9 @@ function App() {
               <Route path='/callmaster/call-details' element={<CallDetailsPage/>}/>
               <Route path='/callmaster/call-details-specific/:callId' element={<CallDetails/>}/>
          <Route path='/stockmanagement' element={<StockManagementPage/>}/>
+                <Route path='/stockmanagement/stock-entry' element={<StockEntry/>}/>
+                <Route path='/stockmanagement/current-stock' element={<CurrentStock/>}/>
+                <Route path='/stockmanagement/current-stock-specific/:stockId' element={<StockDetail/>}/>
         <Route path='/parttransaction' element={<PartTransaction/>}/>
         <Route path='/invoice' element={<InvoicePage/>}/>
         <Route path='/manpower'element={<ManPower/>}/>
