@@ -23,7 +23,7 @@ async function getData()
           'Content-Type': 'application/json'
         }
     }
-    let url = 'https://sarkul-v5cz.onrender.com/api/v1/call'
+    let url = 'https://sarkultechapi.onrender.com/api/v1/call'
     let response = await axios.get(url,config);
     // console.log("response in all call");
     // console.log(response.data.data);

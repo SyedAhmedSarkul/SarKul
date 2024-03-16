@@ -35,7 +35,7 @@ async function getCall(e)
           'Content-Type': 'application/json'
         }
     }
-    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumberRef.current.value}`;
+    let url = `https://sarkultechapi.onrender.com/api/v1/call/${callNumberRef.current.value}`;
     let response = await axios.get(url,config);
     // console.log("response dekhe")
     // console.log(response.data.data);
@@ -67,7 +67,7 @@ async function handleSubmit(e)
   engineerRemarks=engineerRef.current.value;
   partStatus = partRef.current.value;
   try{
-    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/${callNumber}`;
+    let url = `https://sarkultechapi.onrender.com/api/v1/call/${callNumber}`;
       let data = {
         customerRemark:customerRemarks,
         engineerRemark:engineerRemarks,
@@ -102,7 +102,7 @@ async function handleClose(){
   setIsLoading(true);
   try{
     let token= localStorage.getItem("accessToken");
-    let url = `https://sarkul-v5cz.onrender.com/api/v1/call/close/${callNumber}`;
+    let url = `https://sarkultechapi.onrender.com/api/v1/call/close/${callNumber}`;
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`,

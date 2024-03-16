@@ -17,7 +17,7 @@ function Login() {
     async function generateOtp()
     {
         setIsSent(false)
-        const url = "https://sarkul-v5cz.onrender.com/api/v1/user/send-otp";
+        const url = "https://sarkultechapi.onrender.com/api/v1/user/send-otp";
         const data = {
             // email:email
             email:emailRef.current.value
@@ -34,7 +34,7 @@ function Login() {
             try
             {
                 
-                const url ="https://sarkul-v5cz.onrender.com/api/v1/user/signin";
+                const url ="https://sarkultechapi.onrender.com/api/v1/user/signin";
                 const data = {
                     email:emailRef.current.value,
                     password:passRef.current.value

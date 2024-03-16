@@ -18,7 +18,7 @@ function CurrentStock() {
     setIsLoading(true);
     try {
       let token = localStorage.getItem("accessToken");
-      let url = 'https://sarkul-v5cz.onrender.com/api/v1/stock';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/stock';
       const config = {
         headers: {
           'Authorization': `Bearer ${token}`,

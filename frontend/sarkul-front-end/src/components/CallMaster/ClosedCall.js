@@ -28,7 +28,7 @@ function ClosedCall() {
     // console.log("token")
     // console.log(token);
     try {
-      let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/closed';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/call/closed';
       let response = await axios.get(url,config);
       // console.log("response in closed");
       // console.log(response.data.data);

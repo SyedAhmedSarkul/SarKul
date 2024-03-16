@@ -23,7 +23,7 @@ async function getEngineerName()
  {
    try{
     let token= localStorage.getItem("accessToken");
-    let url = 'https://sarkul-v5cz.onrender.com/api/v1/engineer?status=active';
+    let url = 'https://sarkultechapi.onrender.com/api/v1/engineer?status=active';
     const config = {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -56,7 +56,7 @@ async function getEngineerName()
   async function postData(data) {
     try {
       let token= localStorage.getItem("accessToken");
-      let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/assign';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/call/assign';
       const config = {
         headers: {
           'Authorization': `Bearer ${token}`,
