@@ -1,8 +1,8 @@
 import { ApiResponse } from "../utils/ApiResponse.js";
 
 export const createTransactionMiddleware = async (req, res, next) => {
-    const { callId, engineerName, itemName, modelNumber, stockId } = req.body;
-    if (!callId || !engineerName || !stockId) {
+    const { callId, engineerName } = req.body;
+    if (!callId || !engineerName) {
         return res
             .status(400)
             .json(new ApiResponse(400, null, "All fields are required"));
