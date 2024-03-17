@@ -70,7 +70,7 @@ export const createCall = async (req, res) => {
             category,
             itemName,
             itemModelNumber,
-            username,
+            userName,
         } = req.body;
 
         const call = await Call.create({
@@ -85,7 +85,7 @@ export const createCall = async (req, res) => {
             category,
             itemName,
             itemModelNumber,
-            username,
+            userName,
         });
         call.callId = generateCallId();
         await call.save();
