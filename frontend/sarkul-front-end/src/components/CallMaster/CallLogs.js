@@ -70,7 +70,7 @@ function CallLogs() {
   async function postData(data) {
     try {
       let token= localStorage.getItem("accessToken");
-      let url = 'https://sarkul-v5cz.onrender.com/api/v1/call';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/call';
       const config = {
         headers: {
        'Authorization': `Bearer ${token}`,
@@ -120,6 +120,7 @@ function CallLogs() {
               <option value="plotter">Plotter</option>
               <option value="scanner">Scanner</option>
               <option value="server">Server</option>
+              <option value="activity">Activity</option>
             </select><br />
             <label>Problem:</label> <input type='text' className='form-input' required ref={problemRef} /><br />
             <div className='model-number'>

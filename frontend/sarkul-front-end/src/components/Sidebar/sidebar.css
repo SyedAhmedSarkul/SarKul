@@ -77,8 +77,8 @@
     border: 2px solid var(--white);
     background-color: var(--grey);
     border-radius: 1rem;
-    margin-top: 10px;
-    height: 1.3rem;
+    margin-top: 5px;
+    /* height: 1.3rem; */
     text-align: center;
     padding: 0.4rem ;
 }

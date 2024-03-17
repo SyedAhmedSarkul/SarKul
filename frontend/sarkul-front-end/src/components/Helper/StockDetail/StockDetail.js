@@ -30,7 +30,7 @@ function StockDetail() {
                 },
             };
 
-            let url = `https://sarkul-v5cz.onrender.com/api/v1/stock/${stockId}`;
+            let url = `https://sarkultechapi.onrender.com/api/v1/stock/${stockId}`;
 
             let response = await axios.get(url, config);
 
@@ -60,7 +60,7 @@ function StockDetail() {
                 },
             };
 
-            let url = `https://sarkul-v5cz.onrender.com/api/v1/stock/${stockId}`;
+            let url = `https://sarkultechapi.onrender.com/api/v1/stock/${stockId}`;
             let response = await axios.delete(url, config);
             setIsLoading(false);
             nav(-1);
@@ -125,12 +125,12 @@ function StockDetail() {
                         </Stack>
                         <Stack direction={'column'} gap={3}>
                             <Stack direction={'row'} gap={1}>
-                                <Typography variant='h5' >AMC Start Date: </Typography>
+                                <Typography variant='h5' >Warranty Start Date: </Typography>
                                 <Typography variant='h5' color={'black'}>{formatDate(startDate)}</Typography>
 
                             </Stack>
                             <Stack direction={'row'} gap={1}>
-                                <Typography variant='h5' >AMC End Date: </Typography>
+                                <Typography variant='h5' >Warranty End Date: </Typography>
                                 <Typography variant='h5' color={'black'}>{formatDate(endDate)}</Typography>
                                 {/* <Typography variant='h5' color={'black'}>{formatDate(obj.amcEndD.slice(0,10))}</Typography> */}
 

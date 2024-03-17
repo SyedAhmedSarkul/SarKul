@@ -24,7 +24,7 @@ function PendingCallReports() {
     setIsLoading(true);
     try {
       const createdAt = new Date("2024-01-29");
-      // let url = `https://sarkul-v5cz.onrender.com/api/v1/call/pending?createdAt=${createdAt}`;
+      // let url = `https://sarkultechapi.onrender.com/api/v1/call/pending?createdAt=${createdAt}`;
       let token= localStorage.getItem("accessToken");
       let config={
           headers:{
@@ -33,7 +33,7 @@ function PendingCallReports() {
             'Content-Type': 'application/json'
           }
       }
-      let url = 'https://sarkul-v5cz.onrender.com/api/v1/call/pending';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/call/pending';
       let response = await axios.get(url,config);
       setArr(response?.data.data);
       setSuccessMsg(response?.data.message);

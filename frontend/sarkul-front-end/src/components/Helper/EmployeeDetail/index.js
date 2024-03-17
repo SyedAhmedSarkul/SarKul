@@ -35,7 +35,7 @@ function EmployeeDetail({ id, setFlagg }) {
         },
       };
 
-      let url = `https://sarkul-v5cz.onrender.com/api/v1/engineer/${id}`;
+      let url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
 
       let response = await axios.get(url, config);
       console.log("response.data.data");
@@ -66,7 +66,7 @@ function EmployeeDetail({ id, setFlagg }) {
           'Content-Type': 'application/json'
         }
       }
-      let url = `https://sarkul-v5cz.onrender.com/api/v1/engineer/${id}`;
+      let url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
 
       let data = {
         status: statusRef.current.value,
@@ -135,6 +135,12 @@ function EmployeeDetail({ id, setFlagg }) {
                   </label>{" "}
                   {obj.salary}
                 </li>
+                <li className="item">
+                  <label className="update-label call-detail-label">
+                    Experience:{" "}
+                  </label>{" "}
+                  {obj.experience} Yrs
+                </li>
               </div>
               <div className="manpower-right">
                 <li className="item">
@@ -179,6 +185,14 @@ function EmployeeDetail({ id, setFlagg }) {
                     Id Proof:{" "}
                   </label>{" "}
                   <a target="_blank" href={obj.idProof} download>View</a>
+                  { }
+                </li>
+                <li className="item">
+                  <label className="update-label call-detail-label">
+                    Skills:{" "}
+                  </label>{" "}
+                 {obj.skills}
+              
                   { }
                 </li>
               </div>
