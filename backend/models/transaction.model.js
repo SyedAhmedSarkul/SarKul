@@ -24,23 +24,25 @@ const transactionSchema = new Schema(
                     "laptop",
                     "plotter",
                     "server",
+                    "activity",
                 ],
                 message: "{VALUE} is not supported",
             },
         },
         modelNumber: {
             type: String,
-            required: [true, "Model number is required"],
         },
         stockId: {
             type: String,
-            required: [true, "Stock id is required"],
         },
         engineerName: {
             type: String,
             required: [true, "Engineer name is required"],
         },
         serialNumber: {
+            type: String,
+        },
+        partName: {
             type: String,
         },
         partStatus: {

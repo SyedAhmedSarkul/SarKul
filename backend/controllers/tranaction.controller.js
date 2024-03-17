@@ -57,6 +57,7 @@ export const createTransaction = async (req, res) => {
             stockId,
             category,
             partStatus,
+            partName,
         } = req.body;
         const call = await Call.findOne({ callId });
         if (!call) {
@@ -103,6 +104,8 @@ export const createTransaction = async (req, res) => {
             serialNumber,
             stockId,
             category,
+            partStatus,
+            partName,
         });
 
         if (!transaction) {
