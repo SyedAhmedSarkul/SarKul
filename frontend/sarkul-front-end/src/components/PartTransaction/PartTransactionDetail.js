@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from '../Loader';
 import SideBarPart from '../Sidebar/SideBarPart';
+import PartDetail from '../Helper/PartDetail/PartDetail';
+import { Stack } from '@mui/material';
 
 function PartTransactionDetail() {
     const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +26,7 @@ function PartTransactionDetail() {
             }
             let url = 'https://sarkultechapi.onrender.com/api/v1/transaction'
             let response = await axios.get(url, config);
-          
+
             console.log(response.data.data, 'part');
             setArr(response.data.data);
 
@@ -40,7 +42,12 @@ function PartTransactionDetail() {
 
     return (
         <div>
-            <SideBarPart/>
+            <SideBarPart />
+            {arr.map((item) => {
+                return <Stack alignItems={'center'}> <PartDetail item={item} /> </Stack>
+
+            })}
+
         </div>
     )
 }
