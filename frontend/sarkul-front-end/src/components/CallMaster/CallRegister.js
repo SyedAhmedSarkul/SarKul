@@ -155,7 +155,7 @@ function CallRegister() {
     <div>
       <SideBarMain />
       <SideBar />
-      <Stack direction={'row'} p={1} bgcolor={'white'} gap={6} >
+      <Stack direction={'row'} p={1} bgcolor={'white'} gap={2} >
         <Stack pl={'20%'}>
           {state.date.disabled ? (
             <Button onClick={() => { setState({ ...state, date: { ...state.date, disabled: false } }) }}>Filter By Date</Button>
@@ -166,20 +166,20 @@ function CallRegister() {
         </Stack>
         <Typography variant='body1'>| |</Typography>
         <Stack direction={'row'} gap={7}>
-          <Stack direction={'row'} gap={1.7}>
+          <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>From: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '' }}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '',padding:'0px' }}
               value={state.date.from}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, from: e.target.value } }) }}
 
             />
           </Stack>
-          <Stack direction={'row'} gap={1.7}>
+          <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>To: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '' }}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '' ,padding:'0px'}}
               value={state.date.to}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, to: e.target.value } }) }}
@@ -197,7 +197,7 @@ function CallRegister() {
           </Button>
         </Stack>
         <Typography variant='body1'>| |</Typography>
-        <Stack pl={'10%'} >
+        <Stack  >
           <IconButton title={'Download Report'} aria-label="download"
             disabled={arr.length == 0}
             onClick={downloadExcel}
