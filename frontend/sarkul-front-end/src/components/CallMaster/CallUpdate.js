@@ -180,6 +180,8 @@ async function handleClose(){
         <option value="">-- Select --</option>
         <option value="required">Part Required</option>
         <option value="pending">Part Pending</option>
+        <option value="replace">Part Replace</option>
+        <option value="chargeable">Chargeable</option>
       </select>
       
           <div className='form-buttons'>

@@ -111,7 +111,7 @@ function CallLogs() {
             </div>
 
             <label>Contact:</label> <input type='number' className='form-input' required ref={contactRef} /><br />
-            <label>Email id:</label> <input type='email' className='form-input' required ref={emailRef} /><br />
+            <label>Email id:</label> <input type='email' className='form-input' ref={emailRef} /><br />
           </div>
           <div className='form-right'>
             <label>Category:</label>
@@ -123,6 +123,8 @@ function CallLogs() {
               <option value="plotter">Plotter</option>
               <option value="scanner">Scanner</option>
               <option value="server">Server</option>
+              <option value="UPS">UPS</option>
+              <option value="cctv">CCTV</option>
               <option value="activity">Activity</option>
             </select><br />
             <label>Address:</label> <input type='text' className='form-input' required ref={addressRef} /><br />

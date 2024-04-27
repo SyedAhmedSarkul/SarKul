@@ -48,7 +48,7 @@ const stockSchema = new Schema(
         condition: {
             type: String,
             enum: {
-                values: ["faulty", "working", "damaged"],
+                values: ["faulty", "working", "damaged",'new'],
                 message: "{VALUE} is not supported",
             },
             default: "working",

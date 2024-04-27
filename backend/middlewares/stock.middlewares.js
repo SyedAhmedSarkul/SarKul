@@ -41,7 +41,7 @@ export const getStockValidation = async (req, res, next) => {
     if (!req.params.stockId) {
         return res
             .status(400)
-            .json(new ApiResponse(400, null, "Stock idis required"));
+            .json(new ApiResponse(400, null, "Stock id is required"));
     }
     next();
 };
