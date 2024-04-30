@@ -36,7 +36,7 @@ function CallDetails({callNumber,setFlag}) {
   {
     setIsLoading(true);
     try{
-      let token= localStorage.getItem("accessToken");
+      let token= sessionStorage.getItem("accessToken");
       let config={
           headers:{
             'Authorization': `Bearer ${token}`,

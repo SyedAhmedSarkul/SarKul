@@ -33,7 +33,7 @@ import PartTransactionDetail from './components/PartTransaction/PartTransactionD
 function App() {
   const [isUser, setIsUser] = useState(false);
   // localStorage.removeItem("accessToken");
-  let token = localStorage.getItem("accessToken");
+  let token = sessionStorage.getItem("accessToken");
 
   return (
     <div className="App">

@@ -22,7 +22,7 @@ function ClosedCall() {
   }, []);
   async function getData() {
     setIsLoading(true);
-    let token = localStorage.getItem("accessToken");
+    let token = sessionStorage.getItem("accessToken");
     let config = {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -52,7 +52,7 @@ function ClosedCall() {
     setIsLoading(true)
     try {
       console.log(startDate, '........', endDate);
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           'Authorization': `Bearer ${token}`,

@@ -21,7 +21,7 @@ function CallRegister() {
   async function getData() {
     setIsLoading(true)
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -48,7 +48,7 @@ function CallRegister() {
     setIsLoading(true)
     try {
       console.log(startDate, '........', endDate);
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           'Authorization': `Bearer ${token}`,

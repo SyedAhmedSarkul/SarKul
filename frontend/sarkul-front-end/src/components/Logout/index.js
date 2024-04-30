@@ -9,7 +9,7 @@ function Logout() {
 
   
   function handleLogout() {
-    localStorage.removeItem("accessToken");
+    sessionStorage.removeItem("accessToken");
     navigate('/');
     window.location.reload(true);
   }

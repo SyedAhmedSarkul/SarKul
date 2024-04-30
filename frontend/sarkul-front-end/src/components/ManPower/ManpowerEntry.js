@@ -56,7 +56,7 @@ function ManpowerEntry() {
   async function setData(data) {
     console.log("loading...")
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let url = 'https://sarkultechapi.onrender.com/api/v1/engineer'
       const config = {
         headers: {

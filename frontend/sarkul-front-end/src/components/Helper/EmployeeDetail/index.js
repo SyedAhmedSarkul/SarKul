@@ -27,7 +27,7 @@ function EmployeeDetail({ id, setFlagg }) {
   async function getData() {
     setIsLoading(true);
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ function EmployeeDetail({ id, setFlagg }) {
     setIsLoading(true);
     e.preventDefault();
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           'Authorization': `Bearer ${token}`,

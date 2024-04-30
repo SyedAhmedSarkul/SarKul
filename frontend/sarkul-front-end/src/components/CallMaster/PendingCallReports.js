@@ -29,7 +29,7 @@ function PendingCallReports() {
     try {
       const createdAt = new Date("2024-01-29");
       // let url = `https://sarkultechapi.onrender.com/api/v1/call/pending?createdAt=${createdAt}`;
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ function PendingCallReports() {
     setIsLoading(true);
     try {
       console.log(startDate, "........", endDate);
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
