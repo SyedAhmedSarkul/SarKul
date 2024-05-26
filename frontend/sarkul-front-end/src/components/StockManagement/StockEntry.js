@@ -15,7 +15,7 @@ function StockEntry() {
 
     setIsLoading(true)
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let url = 'https://sarkultechapi.onrender.com/api/v1/stock';
       const config = {
         headers: {
@@ -89,6 +89,8 @@ function StockEntry() {
                     <MenuItem value={"desktop"}>Desktop</MenuItem>
                     <MenuItem value={"laptop"}>Laptop</MenuItem>
                     <MenuItem value={"server"}>Server</MenuItem>
+                    <MenuItem value={"UPS"}>UPS</MenuItem>
+                    <MenuItem value={"cctv"}>CCTV</MenuItem>
 
                   </Select>
 
@@ -144,6 +146,7 @@ function StockEntry() {
 
                     <MenuItem value={"working"}>Working</MenuItem>
                     <MenuItem value={"faulty"}>Faulty</MenuItem>
+                    <MenuItem value={"new"}>New</MenuItem>
 
 
                   </Select>

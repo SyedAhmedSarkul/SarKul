@@ -28,7 +28,7 @@ async function getCall(e)
   setIsLoading(true);
   setCallNumber(callNumberRef.current.value)
   try{
-    let token= localStorage.getItem("accessToken");
+    let token= sessionStorage.getItem("accessToken");
     let config={
         headers:{
           'Authorization': `Bearer ${token}`,
@@ -73,7 +73,7 @@ async function handleSubmit(e)
         engineerRemark:engineerRemarks,
         partStatus:partStatus
       }
-      let token= localStorage.getItem("accessToken");
+      let token= sessionStorage.getItem("accessToken");
 
       const config = {
         headers: {
@@ -101,7 +101,7 @@ async function handleSubmit(e)
 async function handleClose(){
   setIsLoading(true);
   try{
-    let token= localStorage.getItem("accessToken");
+    let token= sessionStorage.getItem("accessToken");
     let url = `https://sarkultechapi.onrender.com/api/v1/call/close/${callNumber}`;
     const config = {
       headers: {
@@ -180,6 +180,8 @@ async function handleClose(){
         <option value="">-- Select --</option>
         <option value="required">Part Required</option>
         <option value="pending">Part Pending</option>
+        <option value="replace">Part Replace</option>
+        <option value="chargeable">Chargeable</option>
       </select>
       
           <div className='form-buttons'>

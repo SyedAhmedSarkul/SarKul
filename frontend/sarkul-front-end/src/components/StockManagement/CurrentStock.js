@@ -17,7 +17,7 @@ function CurrentStock() {
   async function getData() {
     setIsLoading(true);
     try {
-      let token = localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let url = 'https://sarkultechapi.onrender.com/api/v1/stock';
       const config = {
         headers: {

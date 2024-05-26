@@ -13,7 +13,7 @@ function BranchToEngineer() {
     }, [])
     async function getEngineerName() {
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let url = 'https://sarkultechapi.onrender.com/api/v1/engineer?status=active';
             const config = {
                 headers: {
@@ -52,7 +52,7 @@ function BranchToEngineer() {
         setIsLoading(true);
         console.log('loading...prt')
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let url = 'https://sarkultechapi.onrender.com/api/v1/transaction';
             const config = {
                 headers: {

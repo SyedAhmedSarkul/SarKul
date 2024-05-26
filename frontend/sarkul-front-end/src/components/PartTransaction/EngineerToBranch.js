@@ -13,7 +13,7 @@ function EngineerToBranch() {
     }, [])
     async function getEngineerName() {
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let url = 'https://sarkultechapi.onrender.com/api/v1/engineer?status=active';
             const config = {
                 headers: {
@@ -32,6 +32,8 @@ function EngineerToBranch() {
         initialValues: {
             callId: '',
             partStatus: '',
+            itemName:"",
+            partName:'',
             stockId: '',
             engineerName: '',
             category: 'e2b'
@@ -50,7 +52,7 @@ function EngineerToBranch() {
         setIsLoading(true);
         console.log('loading...prte')
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let url = 'https://sarkultechapi.onrender.com/api/v1/transaction';
             const config = {
                 headers: {
@@ -81,8 +83,33 @@ function EngineerToBranch() {
                         <Stack direction={'row'} justifyContent={'space-evenly'} pt={3}>
                             <Stack direction={'column'} gap={6} >
                                 <TextField id="outlined-basic" required name="callId" onChange={formik.handleChange} label="Call Number" variant="outlined" />
-                                <TextField id="outlined-basic" required name="stockId" onChange={formik.handleChange} label="Stock Id" variant="outlined" />
+                                <TextField id="outlined-basic" name="stockId" onChange={formik.handleChange} label="Stock Id" variant="outlined" />
+                                <FormControl  >
+                                    <InputLabel id="demo-simple-select-label">Item Name</InputLabel>
+                                    <Select
+                                        sx={{ width: '230px' }}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        label="Item Name"
+                                        name="itemName"
+                                        value={formik.values.itemName}
+                                        onChange={formik.handleChange}
+                                    >
 
+                                        <MenuItem value={"printer"}>Printer</MenuItem>
+                                        <MenuItem value={"scanner"}>Scanner</MenuItem>
+                                        <MenuItem value={"plotter"}>Plotter</MenuItem>
+                                        <MenuItem value={"desktop"}>Desktop</MenuItem>
+                                        <MenuItem value={"laptop"}>Laptop</MenuItem>
+                                        <MenuItem value={"server"}>Server</MenuItem>
+
+                                    </Select>
+
+                                </FormControl>
+                                <TextField id="outlined-basic" name="partName" onChange={formik.handleChange} label="Part Name" variant="outlined" />
+
+                            </Stack>
+                            <Stack direction={'column'} gap={6}>
                                 <FormControl required >
                                     <InputLabel id="demo-simple-select-label">Part Status</InputLabel>
                                     <Select
@@ -101,9 +128,6 @@ function EngineerToBranch() {
                                     </Select>
 
                                 </FormControl>
-                            </Stack>
-                            <Stack direction={'column'} gap={6}>
-
                                 <FormControl required >
                                     <InputLabel id="demo-simple-select-label">Engineer Name</InputLabel>
                                     <Select

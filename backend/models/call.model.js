@@ -29,8 +29,8 @@ const callSchema = new Schema(
         },
         customerEmail: {
             type: String,
-            required: [true, "Customer email is required"],
-            validate: [validator.isEmail, "Invalid email"],
+            // required: [true, "Customer email is required"],
+            // validate: [validator.isEmail, "Invalid email"],
         },
         customerAddress: {
             type: String,
@@ -56,6 +56,8 @@ const callSchema = new Schema(
                     "plotter",
                     "scanner",
                     "server",
+                    'UPS',
+                    'cctv',
                     "activity",
                 ],
                 message: "Invalid category",
@@ -88,7 +90,7 @@ const callSchema = new Schema(
         },
         itemStatus: {
             type: String,
-            enum: ["required", "pending"],
+            enum: ["required", "pending",'replace','chargeable'],
         },
     },
     { timestamps: true }

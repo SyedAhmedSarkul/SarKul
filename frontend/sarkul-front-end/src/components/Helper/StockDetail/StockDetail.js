@@ -22,7 +22,7 @@ function StockDetail() {
     async function getData() {
         setIsLoading(true);
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ function StockDetail() {
     async function handleDelete() {
         setIsLoading(true);
         try {
-            let token = localStorage.getItem("accessToken");
+            let token = sessionStorage.getItem("accessToken");
             let config = {
                 headers: {
                     Authorization: `Bearer ${token}`,

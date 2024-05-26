@@ -1,8 +1,8 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import './styles.css';
 import axios from 'axios';
 import Loader from '../Loader';
-import {toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import SideBarMain from '../Sidebar/SideBarMain'
 import SideBar from '../Sidebar/SideBar'
@@ -21,6 +21,7 @@ function CallLogs() {
   let problem = '';
   let modelNumber = '';
   let item = '';
+  let userName = '';
   let serialNumberRef = useRef(null);
   let customerNameRef = useRef(null);
   let customerCodeRef = useRef(null);
@@ -31,6 +32,7 @@ function CallLogs() {
   let problemRef = useRef(null);
   let modelNumberRef = useRef(null);
   let itemRef = useRef(null);
+  let userNameRef = useRef(null);
   let callNumber = 0;
 
 
@@ -38,7 +40,7 @@ function CallLogs() {
     setIsLoading(true);
     event.preventDefault();
     serialNumber = serialNumberRef.current.value;
-
+    userName = userNameRef.current.value;
     customerName = customerNameRef.current.value;
     customerCode = customerCodeRef.current.value;
     contact = contactRef.current.value;
@@ -55,13 +57,14 @@ function CallLogs() {
       customerCode: customerCode,
       contactNumber: contact,
       customerEmail: email,
+      userName:userName,
       customerAddress: address,
       problemDescription: problem,
       category: category,
       itemName: item,
       itemModelNumber: modelNumber
     };
-
+    console.log(obj,'obj');
     await postData(obj);
     setIsLoading(false);
 
@@ -69,12 +72,12 @@ function CallLogs() {
 
   async function postData(data) {
     try {
-      let token= localStorage.getItem("accessToken");
+      let token = sessionStorage.getItem("accessToken");
       let url = 'https://sarkultechapi.onrender.com/api/v1/call';
       const config = {
         headers: {
-       'Authorization': `Bearer ${token}`,
-        'Content-Type': 'Application/json'
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'Application/json'
         },
       };
       const response = await axios.post(url, data, config);
@@ -82,7 +85,7 @@ function CallLogs() {
       const callNumber = response.data.data;
       alert("Call Created with call number: " + callNumber);
       // setSuccessMsg(`${response.data.message} with id ${callNumber}`);
-       
+
     } catch (error) {
       // console.error('Error:', error);
       // alert(error.response.data.message);
@@ -94,8 +97,8 @@ function CallLogs() {
   return (
     <div>
       {/* <img className='image' src={Image} alt='Image here'/> */}
-      <SideBarMain/>
-      <SideBar/>
+      <SideBarMain />
+      <SideBar />
       <h2>Call Log</h2>
       {isLoading ? (<Loader />) : (
         <form className='form' onSubmit={handleSubmit}>
@@ -104,11 +107,11 @@ function CallLogs() {
               <label>Serial number:</label> <input type='text' className='form-input' ref={serialNumberRef} /><br />
               <label>Customer Name:</label> <input type='text' className='form-input' required ref={customerNameRef} /><br />
               <label>Customer Code:</label> <input type='text' className='form-input' required ref={customerCodeRef} /><br />
+              <label>User Name:</label> <input type='text' className='form-input' required ref={userNameRef} /><br />
             </div>
 
             <label>Contact:</label> <input type='number' className='form-input' required ref={contactRef} /><br />
-            <label>Email id:</label> <input type='email' className='form-input' required ref={emailRef} /><br />
-            <label>Address:</label> <input type='text' className='form-input' required ref={addressRef} /><br />
+            <label>Email id:</label> <input type='email' className='form-input' ref={emailRef} /><br />
           </div>
           <div className='form-right'>
             <label>Category:</label>
@@ -120,8 +123,11 @@ function CallLogs() {
               <option value="plotter">Plotter</option>
               <option value="scanner">Scanner</option>
               <option value="server">Server</option>
+              <option value="UPS">UPS</option>
+              <option value="cctv">CCTV</option>
               <option value="activity">Activity</option>
             </select><br />
+            <label>Address:</label> <input type='text' className='form-input' required ref={addressRef} /><br />
             <label>Problem:</label> <input type='text' className='form-input' required ref={problemRef} /><br />
             <div className='model-number'>
               <label>Model Number:</label> <input type='text' className='form-input' required ref={modelNumberRef} /><br />

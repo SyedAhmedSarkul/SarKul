@@ -36,7 +36,7 @@ function CallDetails({callNumber,setFlag}) {
   {
     setIsLoading(true);
     try{
-      let token= localStorage.getItem("accessToken");
+      let token= sessionStorage.getItem("accessToken");
       let config={
           headers:{
             'Authorization': `Bearer ${token}`,
@@ -48,8 +48,7 @@ function CallDetails({callNumber,setFlag}) {
       // let url = `https://sarkultechapi.onrender.com/api/v1/call?`;
       
       let response = await axios.get(url,config);
-      console.log("response.data");
-      console.log(response.data.data);
+      console.log(response,'response here');
       setObj(response.data.data);
       setSerialNumber(response.data.data.serialNumber);
    setCustomerName(response.data.data.customerName);
@@ -95,11 +94,12 @@ function CallDetails({callNumber,setFlag}) {
          <label className='update-label call-detail-label'>Serial Number: </label> {serialNumber}<br/><br/>
          <label className='update-label call-detail-label'>Customer Name: </label> {customerName}<br/><br/>
          <label className='update-label call-detail-label'>Customer Code: </label> {customerCode}<br/><br/>
+         <label className='update-label call-detail-label'>User Name: </label> {obj?.userName}<br/><br/>
          <label className='update-label call-detail-label'>Contact: </label> {contact}<br/><br/>
          <label className='update-label call-detail-label'>Email: </label> {email}<br/><br/>
          <label className='update-label call-detail-label'>Call Status: </label> {status}<br/><br/>
-         <label className='update-label call-detail-label'>Customer Remarks: </label> {obj.customerRemark}<br/><br/>
-         <label className='update-label call-detail-label'>Engineer Remarks: </label> {obj.engineerRemark}<br/><br/>
+         <label className='update-label call-detail-label'>Customer Remarks: </label> {obj?.customerRemark}<br/><br/>
+         <label className='update-label call-detail-label'>Engineer Remarks: </label> {obj?.engineerRemark}<br/><br/>
          
            
          </div>
@@ -111,7 +111,7 @@ function CallDetails({callNumber,setFlag}) {
          <label className='update-label call-detail-label'>Address: </label> {address}<br/><br/>
          <label className='update-label call-detail-label'>Engineer Assigned: </label> {engineer}<br/><br/>
          <label className='update-label call-detail-label'>Call-log Date: </label> {date.slice(0,10)}<br/><br/>
-         <label className='update-label call-detail-label'>Part Status: </label> {obj.itemStatus}
+         <label className='update-label call-detail-label'>Part Status: </label> {obj?.itemStatus}
          </div>
          </div>
 
