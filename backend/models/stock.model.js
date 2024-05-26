@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 const stockSchema = new Schema(
     {
@@ -53,8 +53,16 @@ const stockSchema = new Schema(
             },
             default: "working",
         },
+        status: {
+            type: String,
+            enum: {
+                values: ['available', 'unavailable'],
+                default: 'available',
+                message: "{VALUE} is not supported",
+            }
+        }
     },
-    { timestamps: true }
+    {timestamps: true}
 );
 
 export const Stock = mongoose.model("Stock", stockSchema);
