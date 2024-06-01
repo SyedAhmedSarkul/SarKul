@@ -59,9 +59,9 @@ const stockSchema = new Schema(
             type: String,
             enum: {
                 values: ['available', 'unavailable'],
-                default: 'available',
                 message: "{VALUE} is not supported",
-            }
+            },
+            default: 'available',
         }
     },
     {timestamps: true}
