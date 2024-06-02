@@ -1,9 +1,9 @@
-import { Transaction } from "../models/transaction.model.js";
-import { Stock } from "../models/stock.model.js";
-import { Call } from "../models/call.model.js";
-import { Engineer } from "../models/engineer.model.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { ApiError } from "../utils/ApiError.js";
+import {Transaction} from "../models/transaction.model.js";
+import {Stock} from "../models/stock.model.js";
+import {Call} from "../models/call.model.js";
+import {Engineer} from "../models/engineer.model.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {ApiError} from "../utils/ApiError.js";
 
 const createFilter = (query) => {
     const filter = {};
@@ -43,7 +43,7 @@ const createFilter = (query) => {
             }
         });
     }
-    return { filter, sort };
+    return {filter, sort};
 };
 
 export const createTransaction = async (req, res) => {
@@ -59,11 +59,11 @@ export const createTransaction = async (req, res) => {
             partStatus,
             partName,
         } = req.body;
-        const call = await Call.findOne({ callId });
+        const call = await Call.findOne({callId});
         if (!call) {
             throw new ApiError(404, `Call with id ${callId} not found`);
         }
-        const engineer = await Engineer.findOne({ employeeName: engineerName });
+        const engineer = await Engineer.findOne({employeeName: engineerName});
         if (!engineer) {
             throw new ApiError(
                 404,
@@ -71,12 +71,12 @@ export const createTransaction = async (req, res) => {
             );
         }
         if (category === "b2e") {
-            const stock = await Stock.findOne({ stockId });
+            const stock = await Stock.findOne({stockId});
             if (!stock) {
                 throw new ApiError(404, `Stock with id ${stockId} not found`);
             }
-            
-            
+
+
             if (serialNumber) {
                 if (stock.serialNumber !== serialNumber) {
                     throw new ApiError(
@@ -106,7 +106,9 @@ export const createTransaction = async (req, res) => {
         }
 
         if (transaction.category === "b2e") {
-            await Stock.findOneAndDelete({ stockId: stockId });
+            const stock = await Stock.findOne({stockId});
+            stock.status = "unavailable";
+            await stock.save();
         }
         return res
             .status(201)
@@ -125,7 +127,7 @@ export const createTransaction = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while creating transaction"
+                    "Something went wrong while creating transaction"
                 )
             );
     }
@@ -133,7 +135,7 @@ export const createTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
     try {
-        const { filter, sort } = createFilter(req.query);
+        const {filter, sort} = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
             sort.createdAt = -1;
         }
@@ -162,7 +164,7 @@ export const getTransactions = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving transactions"
+                    "Something went wrong while retrieving transactions"
                 )
             );
     }
@@ -193,7 +195,7 @@ export const getTransaction = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving transaction"
+                    "Something went wrong while retrieving transaction"
                 )
             );
     }

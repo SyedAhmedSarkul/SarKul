@@ -25,6 +25,8 @@ const transactionSchema = new Schema(
                     "plotter",
                     "server",
                     "activity",
+                    "UPS",
+                    "cctv"
                 ],
                 message: "{VALUE} is not supported",
             },

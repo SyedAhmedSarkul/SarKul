@@ -28,6 +28,9 @@ import StockDetail from './components/Helper/StockDetail/StockDetail';
 import BranchToEngineer from './components/PartTransaction/BranchToEngineer';
 import EngineerToBranch from './components/PartTransaction/EngineerToBranch';
 import PartTransactionDetail from './components/PartTransaction/PartTransactionDetail';
+import AllStock from './components/StockManagement/AllStock';
+import BranchStockEntry from './components/StockManagement/BranchStockEntry';
+import BranchStockList from './components/StockManagement/BranchStockList';
 
 
 function App() {
@@ -55,12 +58,15 @@ function App() {
             <Route path='/callmaster/call-details-specific/:callId' element={<CallDetails />} />
             <Route path='/stockmanagement' element={<StockManagementPage />} />
             <Route path='/stockmanagement/stock-entry' element={<StockEntry />} />
+            <Route path='/stockmanagement/branch-stock-form' element={<BranchStockEntry/>} />
             <Route path='/stockmanagement/current-stock' element={<CurrentStock />} />
+            <Route path='/stockmanagement/all-stock' element={<AllStock />} />
+            <Route path='/stockmanagement/branch-stock-list' element={<BranchStockList/>} />
             <Route path='/stockmanagement/current-stock-specific/:stockId' element={<StockDetail />} />
             <Route path='/parttransaction' element={<PartTransaction />} />
             <Route path='/parttransaction/branch-to-engineer' element={<BranchToEngineer />} />
             <Route path='/parttransaction/engineer-to-branch' element={<EngineerToBranch />} />
-            <Route path='/parttransaction/part-transaction-detail' element={<PartTransactionDetail/>} />
+            <Route path='/parttransaction/part-transaction-detail' element={<PartTransactionDetail />} />
             <Route path='/invoice' element={<InvoicePage />} />
             <Route path='/manpower' element={<ManPower />} />
             <Route path='/manpower/manpower-entry' element={<ManpowerEntry />} />

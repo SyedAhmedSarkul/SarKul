@@ -50,7 +50,7 @@ function StockEntry() {
       amcStartDate: '',
       amcEndDate: '',
       price: '',
-      condition: ''
+      condition: '',
 
     },
 
@@ -96,7 +96,7 @@ function StockEntry() {
 
                 </FormControl>
 
-                <TextField id="outlined-basic" name="itemPart" onChange={formik.handleChange} label="Item Part" variant="outlined" />
+                <TextField id="outlined-basic" name="itemPart" onChange={formik.handleChange} label="Group" variant="outlined" />
                 <TextField id="outlined-basic" name="serialNumber" onChange={formik.handleChange} label="Serial Number" variant="outlined" />
                 <TextField id="outlined-basic" name="configuration" onChange={formik.handleChange} label="Configuration" variant="outlined" />
 

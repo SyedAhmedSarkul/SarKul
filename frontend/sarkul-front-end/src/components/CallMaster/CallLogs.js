@@ -133,7 +133,7 @@ function CallLogs() {
               <label>Model Number:</label> <input type='text' className='form-input' required ref={modelNumberRef} /><br />
             </div>
 
-            <label>Item:</label> <input type='text' className='form-input' required ref={itemRef} /><br /><br /><br />
+            <label>Group:</label> <input type='text' className='form-input' required ref={itemRef} /><br /><br /><br />
 
             <input type='submit' value='Submit' className='submit-btn' onSubmit={handleSubmit} />
 

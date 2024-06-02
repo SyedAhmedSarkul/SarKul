@@ -107,7 +107,7 @@ function CallDetails({callNumber,setFlag}) {
          <label className='update-label call-detail-label'>Category: </label> {category}<br/><br/>
          <label className='update-label call-detail-label'>Problem: </label> {problem}<br/><br/>
          <label className='update-label call-detail-label'>Model Number: </label> {modelNumber}<br/><br/>
-         <label className='update-label call-detail-label'>Item: </label> {item}<br/><br/>
+         <label className='update-label call-detail-label'>Group: </label> {item}<br/><br/>
          <label className='update-label call-detail-label'>Address: </label> {address}<br/><br/>
          <label className='update-label call-detail-label'>Engineer Assigned: </label> {engineer}<br/><br/>
          <label className='update-label call-detail-label'>Call-log Date: </label> {date.slice(0,10)}<br/><br/>

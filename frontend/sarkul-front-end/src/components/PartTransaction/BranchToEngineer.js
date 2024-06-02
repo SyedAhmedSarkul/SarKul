@@ -37,7 +37,8 @@ function BranchToEngineer() {
             stockId: '',
             serialNumber: '',
             engineerName: '',
-            category: 'b2e'
+            category: 'b2e',
+            status: 'unavailable'
 
 
         },
@@ -104,6 +105,8 @@ function BranchToEngineer() {
                                         <MenuItem value={"desktop"}>Desktop</MenuItem>
                                         <MenuItem value={"laptop"}>Laptop</MenuItem>
                                         <MenuItem value={"server"}>Server</MenuItem>
+                                        <MenuItem value={"UPS"}>UPS</MenuItem>
+                                        <MenuItem value={"cctv"}>CCTV</MenuItem>
 
                                     </Select>
 

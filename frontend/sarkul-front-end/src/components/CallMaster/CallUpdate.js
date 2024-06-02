@@ -158,7 +158,7 @@ async function handleClose(){
             <label className='update-label'>Category: </label> {data.category}<br/><br/>
             <label className='update-label'>Problem: </label> {data.problemDescription}<br/><br/>
             <label className='update-label'>Model Number: </label> {data.itemModelNumber}<br/><br/>
-            <label className='update-label'>Item: </label> {data.itemName}<br/><br/>
+            <label className='update-label'>Group: </label> {data.itemName}<br/><br/>
             <label className='update-label'>Address: </label> {data.customerAddress}<br/><br/>
             <label className='update-label'>Engineer Assigned: </label> {engineer}
 

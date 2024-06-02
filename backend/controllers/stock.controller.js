@@ -1,30 +1,30 @@
-import { Stock } from "../models/stock.model.js";
-import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-import { generateStockId } from "../utils/idGenerator.js";
+import {Stock} from "../models/stock.model.js";
+import {ApiError} from "../utils/ApiError.js";
+import {ApiResponse} from "../utils/ApiResponse.js";
+import {generateStockId} from "../utils/idGenerator.js";
 
 const createFilter = (query) => {
     let filter = {};
     let sort = {};
 
     if (query.itemName) {
-        filter.itemName = { $regex: query.itemName, $options: "i" };
+        filter.itemName = {$regex: query.itemName, $options: "i"};
     }
 
     if (query.itemPart) {
-        filter.itemPart = { $regex: query.itemPart, $options: "i" };
+        filter.itemPart = {$regex: query.itemPart, $options: "i"};
     }
 
     if (query.serialNumber) {
-        filter.serialNumber = { $regex: query.serialNumber, $options: "i" };
+        filter.serialNumber = {$regex: query.serialNumber, $options: "i"};
     }
 
     if (query.configuration) {
-        filter.configuration = { $regex: query.configuration, $options: "i" };
+        filter.configuration = {$regex: query.configuration, $options: "i"};
     }
 
     if (query.modelNumber) {
-        filter.modelNumber = { $regex: query.modelNumber, $options: "i" };
+        filter.modelNumber = {$regex: query.modelNumber, $options: "i"};
     }
 
     if (query.condition) {
@@ -32,7 +32,7 @@ const createFilter = (query) => {
     }
 
     if (query.stockId) {
-        filter.stockId = { $regex: query.stockId, $options: "i" };
+        filter.stockId = {$regex: query.stockId, $options: "i"};
     }
     if (query.amcStartDate) {
         filter.amcStartDate = {
@@ -45,6 +45,9 @@ const createFilter = (query) => {
         };
     }
 
+    if (query.status) {
+        filter.status = query.status;
+    }
     if (query.amcEndDate) {
         filter.amcEndDate = {
             $gte: new Date(new Date(query.amcEndDate).setUTCHours(0, 0, 0, 0)),
@@ -85,7 +88,7 @@ const createFilter = (query) => {
         // console.log(sort);
     }
 
-    return { filter, sort };
+    return {filter, sort};
 };
 
 export const createStock = async (req, res) => {
@@ -109,7 +112,7 @@ export const createStock = async (req, res) => {
             );
         }
         const stockId = generateStockId();
-        const existingStock = await Stock.findOne({ stockId });
+        const existingStock = await Stock.findOne({stockId});
         if (existingStock) {
             throw new ApiError(400, `Stock with id ${stockId} already exists`);
         }
@@ -159,7 +162,7 @@ export const updateStock = async (req, res) => {
             price,
             condition,
         } = req.body;
-        const stock = await Stock.findOne({ stockId: req.params.stockId });
+        const stock = await Stock.findOne({stockId: req.params.stockId});
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
@@ -218,7 +221,7 @@ export const updateStock = async (req, res) => {
 
 export const getStock = async (req, res) => {
     try {
-        const stock = await Stock.findOne({ stockId: req.params.stockId });
+        const stock = await Stock.findOne({stockId: req.params.stockId});
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
@@ -233,7 +236,7 @@ export const getStock = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving stock"
+                    "Something went wrong while retrieving stock"
                 )
             );
     }
@@ -241,7 +244,7 @@ export const getStock = async (req, res) => {
 
 export const getAllStocks = async (req, res) => {
     try {
-        const { filter, sort } = createFilter(req.query);
+        const {filter, sort} = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
             sort.createdAt = -1;
         }
@@ -270,9 +273,9 @@ export const getAllStocks = async (req, res) => {
             {
                 $group: {
                     _id: null,
-                    totalStocks: { $sum: 1 },
-                    totalPrice: { $sum: "$price" },
-                    data: { $push: "$$ROOT" },
+                    totalStocks: {$sum: 1},
+                    totalPrice: {$sum: "$price"},
+                    data: {$push: "$$ROOT"},
                 },
             },
         ]);
@@ -295,7 +298,7 @@ export const getAllStocks = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving stocks"
+                    "Something went wrong while retrieving stocks"
                 )
             );
     }

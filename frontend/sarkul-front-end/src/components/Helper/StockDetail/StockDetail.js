@@ -98,7 +98,7 @@ function StockDetail() {
 
                             </Stack>
                             <Stack direction={'row'} gap={1}>
-                                <Typography variant='h5' >Item Part: </Typography>
+                                <Typography variant='h5' >Group: </Typography>
                                 <Typography variant='h5' color={'black'}>{obj?.itemPart}</Typography>
 
                             </Stack>

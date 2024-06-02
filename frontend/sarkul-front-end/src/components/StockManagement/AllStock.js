@@ -7,7 +7,7 @@ import StockCard from '../Helper/StockCard';
 import { Link } from 'react-router-dom';
 import DownloadIcon from '@mui/icons-material/Download';
 import ExcelJS from 'exceljs';
-function CurrentStock() {
+function AllStock() {
 
 
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +26,7 @@ function CurrentStock() {
     setIsLoading(true);
     try {
       let token = sessionStorage.getItem("accessToken");
-      let url = 'https://sarkultechapi.onrender.com/api/v1/stock?status=available';
+      let url = 'https://sarkultechapi.onrender.com/api/v1/stock';
       const config = {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -143,7 +143,7 @@ function CurrentStock() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `current_stock_data_${formattedDate}.xlsx`;
+    a.download = `all_stock_data_${formattedDate}.xlsx`;
     a.click();
     window.URL.revokeObjectURL(url);
   };
@@ -253,4 +253,4 @@ function CurrentStock() {
   )
 }
 
-export default CurrentStock
+export default AllStock
