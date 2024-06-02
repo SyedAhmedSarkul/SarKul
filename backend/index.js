@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import {connectDB} from "./config/db.js";
 import {userRoutes, callRoutes, engineerRoutes, stockRoutes, transactionRoutes, mystocksRoutes} from "./routes/index.js";
+import {userRoutes, callRoutes, engineerRoutes, stockRoutes, transactionRoutes, mystocksRoutes} from "./routes/index.js";
 
 const app = express();
 dotenv.config();
