@@ -15,7 +15,16 @@ const stockSchema = new Schema(
                     "server",
                     "activity",
                     'cctv',
-                    'UPS'
+                    'UPS',
+                    'Mouse',
+                    'Keyboard',
+                    'PowerSupply',
+                    'Motherboard',
+                    'HardDisk',
+                    'Display',
+                    'RAM',
+                    'CPUFan',
+                    'Processor',
                 ],
                 message: "{VALUE} is not supported",
             },
@@ -68,3 +77,4 @@ const stockSchema = new Schema(
 );
 
 export const Stock = mongoose.model("Stock", stockSchema);
+
