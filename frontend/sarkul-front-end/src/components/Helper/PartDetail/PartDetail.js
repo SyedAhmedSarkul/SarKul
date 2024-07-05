@@ -20,7 +20,7 @@ function PartDetail({ item }) {
                         <Typography variant='h5'>Engineer Name: {item.engineerName} </Typography>
                     </Stack>
                 
-            </Stack>) : (<Stack border={'2px solid var(--green)'} mt={'15px'} textAlign={'start'} padding={'9px'} direction={'row'} gap={'90px'} borderRadius={'10px'}>Test..</Stack>)}
+            </Stack>) : (<Stack border={'2px solid var(--green)'} mt={'15px'} textAlign={'start'} padding={'9px'} direction={'row'} gap={'90px'} borderRadius={'10px'}>Work in progress</Stack>)}
 
         </div>
     )
