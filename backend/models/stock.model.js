@@ -26,7 +26,7 @@ const stockSchema = new Schema(
                     'CPUFan',
                     'Processor',
                 ],
-                message: "{VALUE} is not supported",
+                message: "{VALUE} is not supported..",
             },
         },
         stockId: {
