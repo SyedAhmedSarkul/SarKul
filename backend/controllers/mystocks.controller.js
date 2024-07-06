@@ -72,18 +72,3 @@ export const addMyStocks = async (req, res, next) => {
         );
     }
 };
-
-        });
-
-        if (!myStock) {
-            throw new ApiError(404, "Error while adding stock");
-        }
-        return res.status(200).json({
-            message: "Stocks added successfully",
-        });
-    } catch (error) {
-        return res.status(error.statusCode || 500).json(
-            new ApiResponse(error.statusCode, null, error.message)
-        );
-    }
-};
