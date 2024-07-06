@@ -4,12 +4,6 @@ import {Call} from "../models/call.model.js";
 import {Engineer} from "../models/engineer.model.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import {ApiError} from "../utils/ApiError.js";
-import {Transaction} from "../models/transaction.model.js";
-import {Stock} from "../models/stock.model.js";
-import {Call} from "../models/call.model.js";
-import {Engineer} from "../models/engineer.model.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
-import {ApiError} from "../utils/ApiError.js";
 
 const createFilter = (query) => {
     const filter = {};
