@@ -32,8 +32,8 @@ function EngineerToBranch() {
         initialValues: {
             callId: '',
             partStatus: '',
-            itemName:"",
-            partName:'',
+            itemName: "",
+            partName: '',
             stockId: '',
             engineerName: '',
             category: 'e2b'
@@ -102,6 +102,17 @@ function EngineerToBranch() {
                                         <MenuItem value={"desktop"}>Desktop</MenuItem>
                                         <MenuItem value={"laptop"}>Laptop</MenuItem>
                                         <MenuItem value={"server"}>Server</MenuItem>
+                                        <MenuItem value={"UPS"}>UPS</MenuItem>
+                                        <MenuItem value={"cctv"}>CCTV</MenuItem>
+                                        <MenuItem value={"Keyboard"}>Keyboard</MenuItem>
+                                        <MenuItem value={"Mouse"}>Mouse</MenuItem>
+                                        <MenuItem value={"PowerSupply"}>Power Supply</MenuItem>
+                                        <MenuItem value={"Motherboard"}>Motherboard</MenuItem>
+                                        <MenuItem value={"HardDisk"}>Hard Disk</MenuItem>
+                                        <MenuItem value={"Display"}>Display</MenuItem>
+                                        <MenuItem value={"RAM"}>RAM</MenuItem>
+                                        <MenuItem value={"CPUFan"}>CPU Fan</MenuItem>
+                                        <MenuItem value={"Processor"}>Processor</MenuItem>
 
                                     </Select>
 

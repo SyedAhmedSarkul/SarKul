@@ -90,6 +90,7 @@ function StockEntry() {
                     <MenuItem value={"laptop"}>Laptop</MenuItem>
                     <MenuItem value={"server"}>Server</MenuItem>
                     <MenuItem value={"UPS"}>UPS</MenuItem>
+                    <MenuItem value={"cctv"}>CCTV</MenuItem>
                     <MenuItem value={"Keyboard"}>Keyboard</MenuItem>
                     <MenuItem value={"Mouse"}>Mouse</MenuItem>
                     <MenuItem value={"PowerSupply"}>Power Supply</MenuItem>
