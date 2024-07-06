@@ -25,13 +25,24 @@ function ManpowerEntry() {
   let expRef = useRef(null);
   let skillsRef = useRef(null);
 
+  function formatName(sentence) {
+    // Split the sentence into words
+    let words = sentence.toLowerCase().split(' ');
 
+    // Capitalize the first letter of each word
+    for (let i = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+
+    // Join the words back into a sentence
+    return words.join(' ');
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData();
-    formData.append('employeeName', nameRef.current.value);
+    formData.append('employeeName', formatName(nameRef.current.value));
     formData.append('employeeAddress', addressRef.current.value);
     formData.append('employeeDesignation', designationRef.current.value);
     formData.append('joinDate', joiningRef.current.value);

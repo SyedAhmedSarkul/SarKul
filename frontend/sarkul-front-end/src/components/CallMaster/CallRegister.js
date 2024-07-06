@@ -100,8 +100,8 @@ function CallRegister() {
       'Serial Number':rest.serialNumber,
       'Customer Address':rest.customerAddress,
       'Status':rest.status,
-      'Category':rest.category,
-      'Item Name':rest.itemName,
+      'Category':rest.category, 
+      'Group':rest.itemName,
       'Item Model Number':rest.itemModelNumber
     }));
 

@@ -23,10 +23,10 @@ function SideBarStock() {
             <div className="insider" style={{ backgroundColor: path.includes('all-stock') && 'var(--darkblue)', color: path.includes('all-stock') && 'var(--white)' }}>All Stock</div>
           </Link>
           <Link to="/stockmanagement/branch-stock-form" className="link-sb link-sb-mp">
-            <div className="insider" style={{ backgroundColor: path.includes('branch-stock-form') ? 'purple':'#4c516d', color:  'var(--white)' }}>Branch Stock Entry</div>
+            <div className="insider" style={{ backgroundColor: path.includes('branch-stock-form') ? 'purple':'#4c516d', color:  'var(--white)' }}>Branch Capital Entry</div>
           </Link>
           <Link to="/stockmanagement/branch-stock-list" className="link-sb link-sb-mp">
-            <div className="insider" style={{ backgroundColor: path.includes('branch-stock-list')  ? 'purple':'#4c516d', color: 'var(--white)' }}>Branch Stock List</div>
+            <div className="insider" style={{ backgroundColor: path.includes('branch-stock-list')  ? 'purple':'#4c516d', color: 'var(--white)' }}>Branch Capital List</div>
           </Link>
 
         </div>

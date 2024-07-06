@@ -106,7 +106,7 @@ function ClosedCall() {
       'Customer Address': rest.customerAddress,
       'Status': rest.status,
       'Category': rest.category,
-      'Item Name': rest.itemName,
+      'Group': rest.itemName,
       'Item Model Number': rest.itemModelNumber
     }));
 
