@@ -2,10 +2,6 @@ import {Stock} from "../models/stock.model.js";
 import {ApiError} from "../utils/ApiError.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import {generateStockId} from "../utils/idGenerator.js";
-import {Stock} from "../models/stock.model.js";
-import {ApiError} from "../utils/ApiError.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
-import {generateStockId} from "../utils/idGenerator.js";
 
 const createFilter = (query) => {
     let filter = {};
