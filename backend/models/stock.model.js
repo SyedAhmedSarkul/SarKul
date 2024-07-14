@@ -71,7 +71,15 @@ const stockSchema = new Schema(
                 message: "{VALUE} is not supported",
             },
             default: 'available',
-        }
+        },
+          officeRepair: {
+            type: Boolean,
+            enum: {
+                values: [true, false],
+                message: "{VALUE} is not supported",
+            },
+            default: false,
+        },
     },
     {timestamps: true}
 );
