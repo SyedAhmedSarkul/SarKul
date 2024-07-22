@@ -241,8 +241,8 @@ function CurrentStock() {
         <Stack>
           <Stack>
             {/* <Typography>Item Name: {data.itemName}</Typography> */}
-            {data.map((item) => {
-              return <Stack mt={2}><Link to={`/stockmanagement/current-stock-specific/${item.stockId}`} > <StockCard stockId={item.stockId} partName={item.itemPart} condition={item.condition} serialNumber={item.serialNumber} /> </Link></Stack>
+            {data?.map((item) => {
+              return item.officeRepair !== 'yes' && item.scrap !== 'yes' && <Stack mt={2} alignItems={'center'}><Link to={`/stockmanagement/current-stock-specific/${item.stockId}`} > <StockCard stockId={item.stockId} partName={item.itemPart} condition={item.condition} serialNumber={item.serialNumber} /> </Link></Stack>
             })}
 
           </Stack>

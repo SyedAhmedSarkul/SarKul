@@ -35,8 +35,8 @@ function StockDetail() {
             let response = await axios.get(url, config);
 
             setObj(response?.data?.data);
-            let edate = response?.data?.data?.amcEndDate.slice(0, 10)
-            let sdate = response?.data?.data?.amcStartDate.slice(0, 10)
+            let edate = response?.data?.data?.amcEndDate?.slice(0, 10)
+            let sdate = response?.data?.data?.amcStartDate?.slice(0, 10)
             setStartDate(sdate);
             setEndDate(edate)
             setIsLoading(false);
@@ -92,6 +92,12 @@ function StockDetail() {
                     <Stack direction={'row'} justifyContent={'space-evenly'} pt={'7%'} >
 
                         <Stack direction={'column'} gap={3}>
+                            {obj?.scrap == 'yes' && <Stack direction={'row'} gap={1}>
+                                {/* <Typography variant='h5' >Stock Id: </Typography> */}
+                                <Typography variant='h4' color={'red'}>{'SCRAP Item'}</Typography>
+
+                            </Stack>
+                            }
                             <Stack direction={'row'} gap={1}>
                                 <Typography variant='h5' >Stock Id: </Typography>
                                 <Typography variant='h5' color={'black'}>{obj?.stockId}</Typography>
@@ -126,12 +132,12 @@ function StockDetail() {
                         <Stack direction={'column'} gap={3}>
                             <Stack direction={'row'} gap={1}>
                                 <Typography variant='h5' >Warranty Start Date: </Typography>
-                                <Typography variant='h5' color={'black'}>{formatDate(startDate)}</Typography>
+                                <Typography variant='h5' color={'black'}>{startDate ? formatDate(startDate) : 'NA'}</Typography>
 
                             </Stack>
                             <Stack direction={'row'} gap={1}>
                                 <Typography variant='h5' >Warranty End Date: </Typography>
-                                <Typography variant='h5' color={'black'}>{formatDate(endDate)}</Typography>
+                                <Typography variant='h5' color={'black'}>{endDate ? formatDate(endDate) : "NA"}</Typography>
                                 {/* <Typography variant='h5' color={'black'}>{formatDate(obj.amcEndD.slice(0,10))}</Typography> */}
 
                             </Stack>
@@ -165,10 +171,10 @@ function StockDetail() {
                         >
                             <h4>Are you sure you want to delete?</h4>
                             <Stack direction={'row'} justifyContent={'space-around'}>
-                                <Button variant="contained" color="primary" onClick={()=>{handleDelete()}}>
+                                <Button variant="contained" color="primary" onClick={() => { handleDelete() }}>
                                     Yes, Delete
                                 </Button>
-                                <Button variant="outlined"  onClick={()=>{setIsDeleting(false)}}>No</Button>
+                                <Button variant="outlined" onClick={() => { setIsDeleting(false) }}>No</Button>
                             </Stack>
                         </Stack>) : (<Stack borderRadius={'50%'} sx={{ cursor: 'pointer' }} onClick={() => { setIsDeleting(true) }}>
                             <Tooltip title="Delete the Item from stock">

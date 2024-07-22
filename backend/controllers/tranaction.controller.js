@@ -1,9 +1,9 @@
-import {Transaction} from "../models/transaction.model.js";
-import {Stock} from "../models/stock.model.js";
-import {Call} from "../models/call.model.js";
-import {Engineer} from "../models/engineer.model.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
-import {ApiError} from "../utils/ApiError.js";
+import { Transaction } from "../models/transaction.model.js";
+import { Stock } from "../models/stock.model.js";
+import { Call } from "../models/call.model.js";
+import { Engineer } from "../models/engineer.model.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 
 const createFilter = (query) => {
     const filter = {};
@@ -43,7 +43,7 @@ const createFilter = (query) => {
             }
         });
     }
-    return {filter, sort};
+    return { filter, sort };
 };
 
 export const createTransaction = async (req, res) => {
@@ -59,11 +59,11 @@ export const createTransaction = async (req, res) => {
             partStatus,
             partName,
         } = req.body;
-        const call = await Call.findOne({callId});
+        const call = await Call.findOne({ callId });
         if (!call) {
             throw new ApiError(404, `Call with id ${callId} not found`);
         }
-        const engineer = await Engineer.findOne({employeeName: engineerName});
+        const engineer = await Engineer.findOne({ employeeName: engineerName });
         if (!engineer) {
             throw new ApiError(
                 404,
@@ -71,7 +71,7 @@ export const createTransaction = async (req, res) => {
             );
         }
         if (category === "b2e") {
-            const stock = await Stock.findOne({stockId});
+            const stock = await Stock.findOne({ stockId });
             if (!stock) {
                 throw new ApiError(404, `Stock with id ${stockId} not found`);
             }
@@ -84,6 +84,19 @@ export const createTransaction = async (req, res) => {
                         "Serial number does not match with stock serial number"
                     );
                 }
+            }
+        }
+        if (category === "e2b") {
+            const stock = await Stock.findOne({ stockId });
+            if (stock) {
+
+                if (stock.status == 'available') {
+                    throw new ApiError(
+                        400,
+                        `Stock with id ${stockId} already available at your stock`
+                    );
+                }
+
             }
         }
         const transaction = await Transaction.create({
@@ -106,9 +119,31 @@ export const createTransaction = async (req, res) => {
         }
 
         if (transaction.category === "b2e") {
-            const stock = await Stock.findOne({stockId});
+            const stock = await Stock.findOne({ stockId });
             stock.status = "unavailable";
             await stock.save();
+        }
+
+        else if (transaction.category === "e2b") {
+
+            const stock = await Stock.findOne({ stockId });
+
+            if (stock) {
+                stock.officeRepair = 'yes';
+                await stock.save();
+            }
+            else {
+                return res
+                    .status(210)
+                    .json(
+                        new ApiResponse(
+                            210,
+                            transaction,
+                            "Field required"
+                        )
+                    )
+            }
+
         }
         return res
             .status(201)
@@ -135,7 +170,7 @@ export const createTransaction = async (req, res) => {
 
 export const getTransactions = async (req, res) => {
     try {
-        const {filter, sort} = createFilter(req.query);
+        const { filter, sort } = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
             sort.createdAt = -1;
         }

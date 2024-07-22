@@ -16,7 +16,8 @@ function AllStock() {
     dataArr: [],
     filterByConditionValue: '',
     filterByItem: '',
-    parentFilter: ''
+    parentFilter: '',
+    filterByScrap: false
   })
   useEffect(() => {
     getData();
@@ -67,7 +68,20 @@ function AllStock() {
     let tempArr = state.dataArr.filter((item) => item.itemName == e.target.value)
     setData(tempArr)
   }
+  function handleFilterByScrap(e) {
+    // setState((prev) => ({
+    //   ...prev,
+    //   filterByItem: e.target.value
+    // }))
+    let tempArr = state.dataArr.filter((item) => item.scrap == 'yes')
+    setData(tempArr)
+  }
+  useEffect(() => {
+    if (state.filterByScrap) {
 
+      handleFilterByScrap()
+    }
+  }, [state.filterByScrap])
 
 
   function formatDate(dateString) {
@@ -161,13 +175,27 @@ function AllStock() {
           label='Filter By:'
           value={state.parentFilter}
           onChange={(e) => {
-            setState((prev) => ({
-              ...prev,
-              filterByConditionValue: '',
-              filterByItem: '',
-              parentFilter: e.target.value
-            }))
-            setData(state.dataArr)
+            if (e.target.value == 'scrap') {
+              setState((prev) => ({
+                ...prev,
+                filterByConditionValue: '',
+                filterByItem: '',
+                parentFilter: 'scrap',
+                filterByScrap: true
+              }))
+
+            }
+            else {
+
+              setState((prev) => ({
+                ...prev,
+                filterByConditionValue: '',
+                filterByItem: '',
+                parentFilter: e.target.value,
+                filterByScrap: false
+              }))
+              setData(state.dataArr)
+            }
           }}
           sx={{
             width: '120px',
@@ -175,6 +203,7 @@ function AllStock() {
         >
           <MenuItem value='condition' >Condition</MenuItem>
           <MenuItem value='item' >Item</MenuItem>
+          <MenuItem value='scrap' >Scrap</MenuItem>
         </TextField>
         <Stack direction={'row'} justifyContent={'space-between'} gap={3}>
           {state.parentFilter == 'condition' &&
@@ -217,7 +246,8 @@ function AllStock() {
               dataArr: [],
               filterByConditionValue: '',
               filterByItem: '',
-              parentFilter: ''
+              parentFilter: '',
+              filterByScrap: false
             })
             getData();
           }}
@@ -242,7 +272,7 @@ function AllStock() {
           <Stack>
             {/* <Typography>Item Name: {data.itemName}</Typography> */}
             {data.map((item) => {
-              return <Stack mt={2}><Link to={`/stockmanagement/current-stock-specific/${item.stockId}`} > <StockCard stockId={item.stockId} partName={item.itemPart} condition={item.condition} serialNumber={item.serialNumber} /> </Link></Stack>
+              return item.officeRepair !== 'yes' && <Stack mt={2} alignItems={'center'}><Link to={`/stockmanagement/current-stock-specific/${item.stockId}`} > <StockCard stockId={item.stockId} partName={item.itemPart} condition={item.condition} serialNumber={item.serialNumber} scrap={item?.scrap} /> </Link></Stack>
             })}
 
           </Stack>

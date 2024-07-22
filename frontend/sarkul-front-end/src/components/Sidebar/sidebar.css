@@ -82,11 +82,11 @@
     text-align: center;
     padding: 0.4rem ;
 }
-.insider:hover
+/* .insider:hover
 {
     background-color: var(--darkblue);
     color: var(--white);
-} 
+}  */
 .sb-btn:hover{
     box-shadow: 5px 5px 10px var(--blue);
     transition: all 0.3s;

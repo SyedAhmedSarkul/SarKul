@@ -54,7 +54,7 @@ const stockSchema = new Schema(
         },
         price: {
             type: Number,
-            required: [true, "Price is required"],
+            // required: [true, "Price is required"],
         },
         condition: {
             type: String,
@@ -73,12 +73,20 @@ const stockSchema = new Schema(
             default: 'available',
         },
           officeRepair: {
-            type: Boolean,
+            type: String,
             enum: {
-                values: [true, false],
+                values: ['yes', 'no'],
                 message: "{VALUE} is not supported",
             },
-            default: false,
+            default: 'no',
+        },
+          scrap: {
+            type: String,
+            enum: {
+                values: ['yes', 'no'],
+                message: "{VALUE} is not supported",
+            },
+            default: 'no',
         },
     },
     {timestamps: true}

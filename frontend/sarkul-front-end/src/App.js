@@ -31,6 +31,7 @@ import PartTransactionDetail from './components/PartTransaction/PartTransactionD
 import AllStock from './components/StockManagement/AllStock';
 import BranchStockEntry from './components/StockManagement/BranchStockEntry';
 import BranchStockList from './components/StockManagement/BranchStockList';
+import OfficeRepair from './components/StockManagement/OfficeRepair';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
             <Route path='/stockmanagement/current-stock' element={<CurrentStock />} />
             <Route path='/stockmanagement/all-stock' element={<AllStock />} />
             <Route path='/stockmanagement/branch-stock-list' element={<BranchStockList/>} />
+            <Route path='/stockmanagement/office-repair' element={<OfficeRepair/>} />
             <Route path='/stockmanagement/current-stock-specific/:stockId' element={<StockDetail />} />
             <Route path='/parttransaction' element={<PartTransaction />} />
             <Route path='/parttransaction/branch-to-engineer' element={<BranchToEngineer />} />

@@ -1,30 +1,30 @@
-import {Stock} from "../models/stock.model.js";
-import {ApiError} from "../utils/ApiError.js";
-import {ApiResponse} from "../utils/ApiResponse.js";
-import {generateStockId} from "../utils/idGenerator.js";
+import { Stock } from "../models/stock.model.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { generateStockId } from "../utils/idGenerator.js";
 
 const createFilter = (query) => {
     let filter = {};
     let sort = {};
 
     if (query.itemName) {
-        filter.itemName = {$regex: query.itemName, $options: "i"};
+        filter.itemName = { $regex: query.itemName, $options: "i" };
     }
 
     if (query.itemPart) {
-        filter.itemPart = {$regex: query.itemPart, $options: "i"};
+        filter.itemPart = { $regex: query.itemPart, $options: "i" };
     }
 
     if (query.serialNumber) {
-        filter.serialNumber = {$regex: query.serialNumber, $options: "i"};
+        filter.serialNumber = { $regex: query.serialNumber, $options: "i" };
     }
 
     if (query.configuration) {
-        filter.configuration = {$regex: query.configuration, $options: "i"};
+        filter.configuration = { $regex: query.configuration, $options: "i" };
     }
 
     if (query.modelNumber) {
-        filter.modelNumber = {$regex: query.modelNumber, $options: "i"};
+        filter.modelNumber = { $regex: query.modelNumber, $options: "i" };
     }
 
     if (query.condition) {
@@ -32,7 +32,7 @@ const createFilter = (query) => {
     }
 
     if (query.stockId) {
-        filter.stockId = {$regex: query.stockId, $options: "i"};
+        filter.stockId = { $regex: query.stockId, $options: "i" };
     }
     if (query.amcStartDate) {
         filter.amcStartDate = {
@@ -47,6 +47,12 @@ const createFilter = (query) => {
 
     if (query.status) {
         filter.status = query.status;
+    }
+    if (query.officeRepair) {
+        filter.officeRepair = query.officeRepair;
+    }
+    if (query.scrap) {
+        filter.scrap = query.scrap;
     }
     if (query.amcEndDate) {
         filter.amcEndDate = {
@@ -88,7 +94,7 @@ const createFilter = (query) => {
         // console.log(sort);
     }
 
-    return {filter, sort};
+    return { filter, sort };
 };
 
 export const createStock = async (req, res) => {
@@ -104,6 +110,9 @@ export const createStock = async (req, res) => {
             amcEndDate,
             price,
             condition,
+            officeRepair,
+            status,
+            scrap
         } = req.body;
         if (amcStartDate > amcEndDate) {
             throw new ApiError(
@@ -112,7 +121,7 @@ export const createStock = async (req, res) => {
             );
         }
         const stockId = generateStockId();
-        const existingStock = await Stock.findOne({stockId});
+        const existingStock = await Stock.findOne({ stockId });
         if (existingStock) {
             throw new ApiError(400, `Stock with id ${stockId} already exists`);
         }
@@ -128,6 +137,9 @@ export const createStock = async (req, res) => {
             price,
             stockId,
             condition,
+            officeRepair,
+            status,
+            scrap
         });
         if (!stock) {
             throw new ApiError(500, "Failed to create stock");
@@ -161,8 +173,11 @@ export const updateStock = async (req, res) => {
             amcEndDate,
             price,
             condition,
+            officeRepair,
+            status,
+            scrap
         } = req.body;
-        const stock = await Stock.findOne({stockId: req.params.stockId});
+        const stock = await Stock.findOne({ stockId: req.params.stockId });
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
@@ -199,6 +214,15 @@ export const updateStock = async (req, res) => {
         if (price) {
             stock.price = price;
         }
+        if (officeRepair) {
+            stock.officeRepair = officeRepair;
+        }
+        if (status) {
+            stock.status = status;
+        }
+        if (scrap) {
+            stock.scrap = scrap;
+        }
         if (condition) {
             stock.condition = condition;
         }
@@ -221,7 +245,7 @@ export const updateStock = async (req, res) => {
 
 export const getStock = async (req, res) => {
     try {
-        const stock = await Stock.findOne({stockId: req.params.stockId});
+        const stock = await Stock.findOne({ stockId: req.params.stockId });
         if (!stock) {
             throw new ApiError(404, "Stock not found");
         }
@@ -244,7 +268,7 @@ export const getStock = async (req, res) => {
 
 export const getAllStocks = async (req, res) => {
     try {
-        const {filter, sort} = createFilter(req.query);
+        const { filter, sort } = createFilter(req.query);
         if (Object.keys(sort).length === 0) {
             sort.createdAt = -1;
         }
@@ -268,14 +292,17 @@ export const getAllStocks = async (req, res) => {
                     amcEndDate: 1,
                     price: 1,
                     condition: 1,
+                    status: 1,
+                    officeRepair: 1,
+                    scrap: 1
                 },
             },
             {
                 $group: {
                     _id: null,
-                    totalStocks: {$sum: 1},
-                    totalPrice: {$sum: "$price"},
-                    data: {$push: "$$ROOT"},
+                    totalStocks: { $sum: 1 },
+                    totalPrice: { $sum: "$price" },
+                    data: { $push: "$$ROOT" },
                 },
             },
         ]);

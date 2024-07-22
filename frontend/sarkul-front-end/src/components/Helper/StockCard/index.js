@@ -1,14 +1,19 @@
+import { Stack, Typography } from '@mui/material'
 import React from 'react'
 
-function StockCard({stockId,partName,condition,serialNumber}) {
+function StockCard({ stockId, partName, condition, serialNumber, scrap }) {
     return (
-        <div className='call-card'>
-            <h3 className='call-card-h3'>Stock Id: {stockId}</h3>
-            <h3 className='call-card-h3'>Part Name: {partName}</h3>
-            <h3 className='call-card-h3'>Condition: {condition}</h3>
-            <h3 className='call-card-h3'>Serial No.: {serialNumber}</h3>
+        <Stack border={'1px solid'} borderColor={scrap == 'yes' ? "red" : "var(--grey)"} direction={'row'} p={4} pl={6} pr={6} gap={4} 
+        borderRadius={'12px'} justifyContent={'space-between'}
+        width={'100%'}
+        >
+            <Typography>Stock Id: {stockId}</Typography>
+            {/* {scrap == 'yes' && <Typography>Scrap Item</Typography>} */}
+            <Typography>Part Name: {partName}</Typography>
+            <Typography>Condition: {condition}</Typography>
+            <Typography>Serial No: {serialNumber}</Typography>
 
-        </div>
+        </Stack>
     )
 }
 

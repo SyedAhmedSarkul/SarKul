@@ -3,7 +3,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 export const createStockValidation = async (req, res, next) => {
     const { stockId, itemName, modelNumber, price } = req.body;
 
-    if (!itemName || !modelNumber || !price) {
+    if (!itemName || !modelNumber ) {
         return res
             .status(400)
             .json(new ApiResponse(400, null, "All fields are required"));
@@ -27,6 +27,9 @@ export const updateStockValidation = async (req, res, next) => {
             req.body.amcStartDate ||
             req.body.amcEndDate ||
             req.body.price ||
+            req.body.status ||
+            req.body.officeRepair ||
+            req.body.scrap ||
             req.body.condition
         )
     ) {
