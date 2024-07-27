@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SideBarStock from '../Sidebar/SideBarStock'
 import axios from 'axios';
 import Loader from '../Loader';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import StockCard from '../Helper/StockCard';
 
@@ -13,7 +13,8 @@ function OfficeRepair() {
         {
             open: false,
             scrap: false,
-            stockId: ''
+            stockId: '',
+            repairAmount: ''
         }
     );
 
@@ -29,7 +30,8 @@ function OfficeRepair() {
             ...prev,
             open: false,
             scrap: false,
-            stockId: ''
+            stockId: '',
+            repairAmount: "",
         }))
         getData();
     }
@@ -38,7 +40,9 @@ function OfficeRepair() {
 
         let data = {
             status: 'available',
-            officeRepair: 'no'
+            officeRepair: 'no',
+            condition: 'repaired',
+            price: state.repairAmount
         }
         await handleSubmit(data);
 
@@ -46,12 +50,13 @@ function OfficeRepair() {
             ...prev,
             open: false,
             scrap: false,
-            stockId: ''
+            stockId: '',
+            repairAmount: "",
         }))
         getData()
 
     }
-
+    
     async function handleSubmit(data) {
 
 
@@ -127,7 +132,7 @@ function OfficeRepair() {
                                 <Stack gap={1.4}>
                                     <Typography variant='h6'>Serial Number: {item?.serialNumber} </Typography>
                                     <Typography variant='h6'>Model Number: {item?.modelNumber} </Typography>
-                                    <Typography variant='h6'>Price: Rs{item?.price}/- </Typography>
+                                    <Typography variant='h6'>Price: {item?.price ? "Rs" + item.price : 'Currently NA'}/- </Typography>
                                 </Stack>
                             </Stack>
                             <Stack direction={'row'} justifyContent={'end'}>
@@ -171,13 +176,28 @@ function OfficeRepair() {
                     },
                 }}
             >
-                <DialogTitle>Confirmation!!</DialogTitle>
+                <DialogTitle>{state.scrap ? 'Confirmation!!' : "Detail Required"}</DialogTitle>
                 <DialogContent>
                     <Stack border={'1px dashed grey'} p={2} borderRadius={'12px'} height={'150px'} justifyContent={'center'} >
 
-                        <Typography variant='h5'>
-                            Are You sure,you want to change it's state to {state.scrap ? "Scrap" : "Repair"}?
-                        </Typography>
+                        {state.scrap ? <Typography variant='h5'>
+                            Are You sure,you want to move it to scrap ?
+                        </Typography> :
+                            <TextField id="outlined-basic"
+                                label="Repair Amount(in Rs)"
+                                variant="outlined"
+                                type='number'
+                                value={state.repairAmount}
+                                onChange={(e) => {
+                                    setState((prev) => ({
+                                        ...prev,
+                                        repairAmount: e.target.value
+                                    }))
+                                }}
+                            />
+
+
+                        }
                     </Stack>
                 </DialogContent>
                 <DialogActions>
@@ -188,7 +208,8 @@ function OfficeRepair() {
                                 ...prev,
                                 open: false,
                                 scrap: false,
-                                stockId: ''
+                                stockId: '',
+                                repairAmount: "",
                             }))
                         }}
                     >
@@ -200,7 +221,7 @@ function OfficeRepair() {
                             state.scrap ? handleMoveToScrap() : handleRepair()
                         }}
                     >
-                        Yes
+                        {state.scrap ? 'Yes' : "Submit"}
                     </Button>
                 </DialogActions>
             </Dialog>

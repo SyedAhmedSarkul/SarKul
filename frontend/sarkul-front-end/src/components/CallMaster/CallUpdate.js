@@ -182,6 +182,7 @@ async function handleClose(){
         <option value="pending">Part Pending</option>
         <option value="replace">Part Replace</option>
         <option value="chargeable">Chargeable</option>
+        <option value="serviceAndClose">Service and Close</option>
       </select>
       
           <div className='form-buttons'>

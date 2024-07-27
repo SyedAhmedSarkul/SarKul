@@ -156,6 +156,7 @@ function StockEntry() {
                     <MenuItem value={"working"}>Working</MenuItem>
                     <MenuItem value={"faulty"}>Faulty</MenuItem>
                     <MenuItem value={"new"}>New</MenuItem>
+                    <MenuItem value={"repaired"}>Repaired</MenuItem>
 
 
                   </Select>

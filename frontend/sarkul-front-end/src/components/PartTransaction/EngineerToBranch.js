@@ -73,7 +73,6 @@ function EngineerToBranch() {
         },
         onSubmit: async (values) => {
             await handleSubmit2(values);
-            setState((prev) => ({ ...prev, open: false }))
             formik.resetForm();
         }
     })
@@ -94,7 +93,7 @@ function EngineerToBranch() {
             };
             const response = await axios.post(url, data, config);
             alert("Transaction created & New Stock moved to office repair with stock id" + response.data.data.stockId)
-
+            setState((prev) => ({ ...prev, open: false }))
             formik2.resetForm();
             setIsLoading(false)
 
@@ -259,14 +258,6 @@ function EngineerToBranch() {
                     <form>
                         <Stack gap={2} p={2}>
 
-                            <TextField
-                                name='price'
-                                id="outlined-basic"
-                                label='Price (in Rs)'
-                                placeholder='Price (in Rs)'
-                                value={formik2.values.price}
-                                onChange={formik2.handleChange}
-                            />
                             <TextField
                                 name='serialNumber'
                                 id="outlined-basic"
