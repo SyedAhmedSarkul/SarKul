@@ -40,6 +40,17 @@ const transactionSchema = new Schema(
                 message: "{VALUE} is not supported",
             },
         },
+        dispatchMode: {
+            type: String,
+            enum: {
+                values: [
+                    'RGP',
+                    'NRGP',
+                    'consumable',
+                ],
+                message: "{VALUE} is not supported",
+            },
+        },
         modelNumber: {
             type: String,
         },

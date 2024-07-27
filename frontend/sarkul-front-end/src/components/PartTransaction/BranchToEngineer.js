@@ -36,6 +36,7 @@ function BranchToEngineer() {
             modelNumber: '',
             stockId: '',
             serialNumber: '',
+            dispatchMode: '',
             engineerName: '',
             category: 'b2e',
             status: 'unavailable'
@@ -43,8 +44,6 @@ function BranchToEngineer() {
 
         },
         onSubmit: (values) => {
-            console.log('submit func')
-            console.log(values, 'b2e.....');
             handleSubmit(values);
         }
     })
@@ -127,6 +126,27 @@ function BranchToEngineer() {
                             </Stack>
                             <Stack direction={'column'} gap={6}>
                                 <TextField id="outlined-basic" name="serialNumber" onChange={formik.handleChange} label="Serial Number" variant="outlined" />
+
+                                <FormControl  >
+                                    <InputLabel id="demo-simple-select-label">Dispatch Mode</InputLabel>
+                                    <Select
+                                        sx={{ width: '230px' }}
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        label="Dispatch Mode"
+                                        name="dispatchMode"
+                                        value={formik.values.dispatchMode}
+                                        onChange={formik.handleChange}
+                                    >
+
+                                        <MenuItem value={"RGP"}>RGP</MenuItem>
+                                        <MenuItem value={"NRGP"}>NRGP</MenuItem>
+                                        <MenuItem value={"consumable"}>Consumable</MenuItem>
+
+                                    </Select>
+
+                                </FormControl>
+
                                 <FormControl required >
                                     <InputLabel id="demo-simple-select-label">Engineer Name</InputLabel>
                                     <Select

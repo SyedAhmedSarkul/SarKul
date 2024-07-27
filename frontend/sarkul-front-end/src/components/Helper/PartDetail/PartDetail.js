@@ -17,6 +17,7 @@ function PartDetail({ item }) {
                     <Typography variant='subtitle1'>Serial Number: {item?.serialNumber} </Typography>
                     <Typography variant='subtitle1'>Item Name: {item?.itemName} </Typography>
                     <Typography variant='subtitle1'>Part Name: {item?.partName} </Typography>
+                    <Typography variant='subtitle1'>Dispatch Mode: {item?.dispatchMode} </Typography>
                     <Typography variant='subtitle1'>Engineer Name: {item?.engineerName} </Typography>
                 </Stack>
 
