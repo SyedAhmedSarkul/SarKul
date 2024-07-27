@@ -164,7 +164,7 @@ function PartTransactionDetail() {
             {isLoading ? <Loader /> :
 
                 arr.map((item) => {
-                    return item?.callId != 'b441a0' && <Stack alignItems={'center'}> <PartDetail item={item} /> </Stack>
+                    return item?.callId != 'b441a0' && item?.callId != 'cb6fb7' && <Stack alignItems={'center'}> <PartDetail item={item} /> </Stack>
 
                 })
 
