@@ -58,7 +58,7 @@ function CallRegister() {
       let url = `https://sarkultechapi.onrender.com/api/v1/call?startDate=${startDate}&endDate=${endDate}`
       let response = await axios.get(url, config);
       setArr(response.data.data);
-     
+
 
       setIsLoading(false)
     }
@@ -97,12 +97,12 @@ function CallRegister() {
       'Customer Email': customerEmail,
       'Problem Description': problemDescription,
       'Engineers Assigned': engineersAssigned[0]?.engineerName,
-      'Serial Number':rest.serialNumber,
-      'Customer Address':rest.customerAddress,
-      'Status':rest.status,
-      'Category':rest.category, 
-      'Group':rest.itemName,
-      'Item Model Number':rest.itemModelNumber
+      'Serial Number': rest.serialNumber,
+      'Customer Address': rest.customerAddress,
+      'Status': rest.status,
+      'Category': rest.category,
+      'Group': rest.itemName,
+      'Item Model Number': rest.itemModelNumber
     }));
 
     const workbook = new ExcelJS.Workbook();
@@ -169,7 +169,7 @@ function CallRegister() {
           <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>From: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '',padding:'0px' }}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '', padding: '0px' }}
               value={state.date.from}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, from: e.target.value } }) }}
@@ -179,7 +179,7 @@ function CallRegister() {
           <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>To: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '' ,padding:'0px'}}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '', padding: '0px' }}
               value={state.date.to}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, to: e.target.value } }) }}
@@ -210,13 +210,15 @@ function CallRegister() {
       {isLoading ? <Loader /> :
 
 
-        arr.length > 0 ? <ol>
-          {
-            arr?.map((item) => {
-              return <Link to={`/callmaster/call-details-specific/${item.callId}`}> <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt} /> </Link>
-            })
-          }
-        </ol> : <Stack color={'var(--red)'}>No Results</Stack>
+        arr.length > 0 ?
+          <Stack alignItems={'center'}>
+            {
+              arr?.map((item) => {
+                return <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt} link={`/callmaster/call-details-specific/${item.callId}`} isPending={false} />
+              })
+            }
+          </Stack> :
+          <Stack color={'var(--red)'}>No Results</Stack>
 
       }
     </div >

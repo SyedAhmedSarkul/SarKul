@@ -24,6 +24,28 @@ function PendingCallReports() {
     getData();
   }, []);
 
+  const [engineers, setEngineers] = useState([]);
+  useEffect(() => {
+    getEngineerName();
+  }, [])
+  async function getEngineerName() {
+    try {
+      let token = sessionStorage.getItem("accessToken");
+      let url = 'https://sarkultechapi.onrender.com/api/v1/engineer?status=active';
+      const config = {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      };
+      let response = await axios.get(url, config);
+      setEngineers(response.data.data);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   async function getData() {
     setIsLoading(true);
     try {
@@ -268,23 +290,28 @@ function PendingCallReports() {
       {isLoading ? (
         <Loader />
       ) : arr.length > 0 ? (
-        <ol>
-          {arr.map((item) => {
-            return (
-              <Link
-                to={`/callmaster/call-details-specific/${item.callId}`}
-                key={item.callId}
-              >
-                {" "}
-                <CallCard
-                  callNumber={item.callId}
-                  customerName={item.customerName}
-                  date={item.createdAt}
-                />{" "}
-              </Link>
-            );
+        <Stack alignItems={'center'} >
+          {arr.map((item, key) => {
+            return < CallCard
+              callNumber={item.callId}
+              customerName={item.customerName}
+              date={item.createdAt}
+              link={`/callmaster/call-details-specific/${item.callId}`}
+              isPending={true}
+              engineers={engineers}
+            />
+            // (
+            // <Link
+            //   to={`/callmaster/call-details-specific/${item.callId}`}
+            //   key={item.callId}
+            // >
+            // { " " }
+
+            // { " " }
+            // </Link>
+            // );
           })}
-        </ol>
+        </Stack>
       ) : (
         <Stack color={"var(--red)"}>No Results</Stack>
       )}

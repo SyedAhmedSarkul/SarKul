@@ -36,7 +36,7 @@ function ClosedCall() {
       let response = await axios.get(url, config);
       // console.log("response in closed");
       // console.log(response.data.data);
-      setArr(response.data.data);
+      setArr(response.data.data.reverse());
       setSuccessMsg(response.data.message);
       setIsLoading(false);
     }
@@ -174,7 +174,7 @@ function ClosedCall() {
           <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>From: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '',padding:'0px' }}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '', padding: '0px' }}
               value={state.date.from}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, from: e.target.value } }) }}
@@ -184,7 +184,7 @@ function ClosedCall() {
           <Stack direction={'row'} gap={1.7} height={'30px'}>
             <label>To: </label>
             <input type='date'
-              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '' ,padding:'0px'}}
+              style={{ cursor: !state.date.disabled ? 'pointer' : '', backgroundColor: state.date.disabled ? '#e0e0e0' : '', padding: '0px' }}
               value={state.date.to}
               disabled={state.date.disabled}
               onChange={(e) => { setState({ ...state, date: { ...state.date, to: e.target.value } }) }}
@@ -215,12 +215,12 @@ function ClosedCall() {
 
 
       {isLoading ? <Loader /> :
-        arr.length>0 ? 
-        <ol>
-          {arr.map((item) => {
-            return <Link to={`/callmaster/call-details-specific/${item.callId}`} key={item.callId}> <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt} /> </Link>;
-          })}
-        </ol>: <Stack color={'var(--red)'}>No Results</Stack>
+        arr.length > 0 ?
+          <Stack alignItems={'center'}>
+            {arr.map((item, key) => {
+              return <CallCard callNumber={item.callId} customerName={item.customerName} date={item.createdAt} link={`/callmaster/call-details-specific/${item.callId}`} isPending={false} />;
+            })}
+          </Stack> : <Stack color={'var(--red)'}>No Results</Stack>
       }
 
       {
