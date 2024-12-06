@@ -5,5 +5,6 @@ import stockRoutes from "./stock.routes.js";
 import transactionRoutes from "./transaction.routes.js";
 import mystocksRoutes from "./mystocks.routes.js";
 import groupRoutes from "./group.routes.js";
+import expenseRoutes from "./expense.routes.js"
 
-export {userRoutes, callRoutes, engineerRoutes, stockRoutes, transactionRoutes, mystocksRoutes,groupRoutes};
+export {userRoutes, callRoutes, engineerRoutes, stockRoutes, transactionRoutes, mystocksRoutes,groupRoutes,expenseRoutes};
