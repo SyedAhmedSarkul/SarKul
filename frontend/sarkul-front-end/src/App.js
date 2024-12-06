@@ -32,6 +32,9 @@ import AllStock from './components/StockManagement/AllStock';
 import BranchStockEntry from './components/StockManagement/BranchStockEntry';
 import BranchStockList from './components/StockManagement/BranchStockList';
 import OfficeRepair from './components/StockManagement/OfficeRepair';
+import Expense from './components/Pages/Expense';
+import ExpenseEntry from './components/Expense/ExpenseEntry';
+import ExpenseList from './components/Expense/ExpenseList';
 
 
 function App() {
@@ -75,6 +78,9 @@ function App() {
             <Route path='/manpower/manpower-info' element={<ManpowerInfo />} />
             <Route path='/manpower/manpower-all' element={<AllEmployee />} />
             <Route path='/manpower/manpower-specific/:empId' element={<EmployeeDetail />} />
+            <Route path='/expense' element={<Expense/>} />
+            <Route path='/expense-entry' element={<ExpenseEntry/>} />
+            <Route path='/expense-list' element={<ExpenseList/>} />
             <Route path='/logout' element={<Logout />} />
           </Routes>
         </div>

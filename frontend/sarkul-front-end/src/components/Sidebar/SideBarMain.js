@@ -12,8 +12,8 @@ function SideBarMain() {
   return <div className="sidebar">
 
     <div className='links-sidebar'>
-      <Link to="/invoice" className='link'>
-        <buton className='sb-btn' style={{ backgroundColor:path.includes('/invoice') && 'var(--white)',color:path.includes('/invoice') && 'var(--black)'}}>Invoice</buton>
+      <Link to="/expense" className='link'>
+        <buton className='sb-btn' style={{ backgroundColor:path.includes('/expense') && 'var(--white)',color:path.includes('/expense') && 'var(--black)'}}>Expense</buton>
       </Link>
       <Link to="/callmaster" className='link'>
         <buton className='sb-btn'style={{ backgroundColor:path.includes('/callmaster') && 'var(--white)',color:path.includes('/callmaster') && 'var(--black)'}} >Call Master</buton>
