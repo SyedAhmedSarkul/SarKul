@@ -177,7 +177,8 @@ const ExpenseEntry = () => {
               helperText={formik.touched.period && formik.errors.period}
             >
               <MenuItem value="1-15">1-15</MenuItem>
-              <MenuItem value="15-30">15-30</MenuItem>
+              <MenuItem value="16-30">16-30</MenuItem>
+              <MenuItem value="1-30">1-30</MenuItem>
             </TextField>
 
 
