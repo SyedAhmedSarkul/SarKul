@@ -100,6 +100,18 @@ function StockEntry() {
                     <MenuItem value={"RAM"}>RAM</MenuItem>
                     <MenuItem value={"CPUFan"}>CPU Fan</MenuItem>
                     <MenuItem value={"Processor"}>Processor</MenuItem>
+                    <MenuItem value={"MilerStrip"}>Miler Strip</MenuItem>
+                    <MenuItem value={"PaperPickupRoller"}>Paper Pickup Roller</MenuItem>
+                    <MenuItem value={"PhotoSensor"}>Photo Sensor</MenuItem>
+                    <MenuItem value={"LogicCard"}>Logic Card</MenuItem>
+                    <MenuItem value={"Processor"}>Print Head</MenuItem>
+                    <MenuItem value={"PrintHead"}>Sensor</MenuItem>
+                    <MenuItem value={"Teflon"}>Teflon</MenuItem>
+                    <MenuItem value={"PressureRoller"}>Pressure Roller</MenuItem>
+                    <MenuItem value={"Gear"}>Gear</MenuItem>
+                    <MenuItem value={"CarriageBlock"}>Carriage Block</MenuItem>
+                    <MenuItem value={"AllInOne"}>All in One</MenuItem>
+                    <MenuItem value={"Cable"}>Cable</MenuItem>
 
                   </Select>
 

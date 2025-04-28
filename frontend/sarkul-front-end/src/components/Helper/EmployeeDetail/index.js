@@ -1,25 +1,55 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import SideBarMp from "../../Sidebar/SideBarMp";
-import Loader from "../../Loader";
-import "./styles.css";
-import Button from "../../Button";
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  CircularProgress,
+  Box,
+  Divider,
+  Paper,
+  Avatar,
+} from "@mui/material";
+import {
+  Person as PersonIcon,
+  Email as EmailIcon,
+  Phone as PhoneIcon,
+  Home as HomeIcon,
+  Work as WorkIcon,
+  Cake as CakeIcon,
+  Event as EventIcon,
+  AttachMoney as MoneyIcon,
+  Star as StarIcon,
+  Description as DescriptionIcon,
+  Badge as BadgeIcon,
+} from "@mui/icons-material";
 
 function EmployeeDetail({ id, setFlagg }) {
-  // const [isParam, setIsParam] = useState(false);
-  let { empId } = useParams();
+  const { empId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [obj, setObj] = useState({});
   const [flag, setFlag] = useState(false);
-  let statusRef = useRef(null);
-  let resignRef = useRef(null);
-  let increementRef = useRef(null);
-  let remarksRef = useRef(null);
+
+  const statusRef = useRef(null);
+  const resignRef = useRef(null);
+  const incrementRef = useRef(null);
+  const remarksRef = useRef(null);
+  const increementAmount = useRef(null);
+  const newCTC = useRef(null);
+  const newDesignation = useRef(null);
 
   if (empId) {
     id = empId;
   }
+
   useEffect(() => {
     getData();
   }, [id]);
@@ -27,200 +57,333 @@ function EmployeeDetail({ id, setFlagg }) {
   async function getData() {
     setIsLoading(true);
     try {
-      let token = sessionStorage.getItem("accessToken");
-      let config = {
+      const token = sessionStorage.getItem("accessToken");
+      const config = {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       };
-
-      let url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
-
-      let response = await axios.get(url, config);
-      console.log("response.data.data");
-      console.log(response.data.data);
+      const url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
+      const response = await axios.get(url, config);
       setObj(response.data.data);
-
-
-      setIsLoading(false);
     } catch (error) {
-      console.log("error found is: " + error);
+      console.error("Error fetching employee:", error);
+      alert(error.response?.data?.message || "Something went wrong");
+    } finally {
       setIsLoading(false);
-      setFlag(false);
-      alert(error.response.data.message);
     }
   }
 
-
-
-
   async function handleUpdate(e) {
-    setIsLoading(true);
     e.preventDefault();
+    setIsLoading(true);
     try {
-      let token = sessionStorage.getItem("accessToken");
-      let config = {
+      const token = sessionStorage.getItem("accessToken");
+      const config = {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      }
-      let url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
-
-      let data = {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const url = `https://sarkultechapi.onrender.com/api/v1/engineer/${id}`;
+      const data = {
         status: statusRef.current.value,
         resignedAt: resignRef.current.value,
-        incrementDueDate: increementRef.current.value,
-        remarks: remarksRef.current.value
-      }
-      let response = await axios.patch(url, data, config);
-      console.log("updated...")
-      console.log(response.data.data);
+        incrementDueDate: incrementRef.current.value,
+        remarks: remarksRef.current.value,
+      };
+      await axios.patch(url, data, config);
+      alert("Updated successfully");
+      setFlag(false);
+      getData();
+    } catch (error) {
+      console.error("Error updating employee:", error);
+      alert(error.response?.data?.message || "Update failed");
+    } finally {
       setIsLoading(false);
-      alert("updated successfully");
+    }
+  }
 
-    }
-    catch (error) {
-      console.log("error while upfating emp");
-      console.log(error.response.data.message);
-      console.log(error);
-      setIsLoading(false);
-    }
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="60vh">
+        <CircularProgress />
+      </Box>
+    );
   }
 
   return (
-    <div>
-      <div>
-        {/* <SideBarMp /> */}
-        <h3 id="employee-detail-h3">Employee Details {id}</h3>
-        {isLoading ? (
-          <Loader />
+    <Box sx={{ p: 3, pl: 20 }}>
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+        <Box display="flex" alignItems="center" mb={3}>
+          <Avatar sx={{ width: 80, height: 80, mr: 3, bgcolor: "primary.main" }}>
+            <PersonIcon sx={{ fontSize: 40 }} />
+          </Avatar>
+          <Box>
+            <Typography variant="h4" fontWeight="bold">
+              {obj.employeeName}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {obj.employeeDesignation}
+            </Typography>
+            <Box display="flex" alignItems="center" mt={1}>
+              <Box
+                sx={{
+                  px: 1.5,
+                  py: 0.5,
+                  borderRadius: 1,
+                  bgcolor: obj.status === "active" ? "success.light" : "error.light",
+                  color: obj.status === "active" ? "success.dark" : "error.dark",
+                  fontWeight: "bold",
+                  fontSize: 12,
+                }}
+              >
+                {obj.status?.toUpperCase()}
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined" sx={{ height: "100%" }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom sx={{ display: "flex", alignItems: "center" }}>
+                  <WorkIcon sx={{ mr: 1 }} /> Professional Details
+                </Typography>
+                <Divider sx={{ mb: 2 }} />
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Designation</Typography>
+                  <Typography>{obj.employeeDesignation}</Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Experience</Typography>
+                  <Typography>{obj.experience} Years</Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Salary</Typography>
+                  <Typography textAlign={'center'} >
+                    ₹{obj.salary}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Joining Date</Typography>
+                  <Typography display="flex" justifyContent="center">
+                    <EventIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.joinDate?.slice(0, 10)}
+                  </Typography>
+                </Box>
+
+                <Box>
+                  <Typography variant="body2" color="text.secondary">Skills</Typography>
+                  <Box display="flex" flexWrap="wrap" gap={1} mt={1} justifyContent={'center'} >
+                    {obj.skills?.map((skill, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: 1,
+                          // bgcolor: "primary.light",
+                          color: "primary.dark",
+                          fontSize: 12,
+                        }}
+                      >
+                        {skill}
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Card variant="outlined" sx={{ height: "100%" }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom sx={{ display: "flex", alignItems: "center" }}>
+                  <PersonIcon sx={{ mr: 1 }} /> Personal Details
+                </Typography>
+                <Divider sx={{ mb: 2 }} />
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Date of Birth</Typography>
+                  <Typography display="flex" justifyContent="center">
+                    <CakeIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeDOB?.slice(0, 10)}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Address</Typography>
+                  <Typography display="flex" justifyContent="center">
+                    <HomeIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeAddress}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Email</Typography>
+                  <Typography display="flex" justifyContent="center">
+                    <EmailIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeEmail}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Contact</Typography>
+                  <Typography display="flex" justifyContent="center">
+                    <PhoneIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeContact}
+                  </Typography>
+                </Box>
+
+                <Box sx={{ mb: 2 }}>
+                  <Typography variant="body2" color="text.secondary">Reference</Typography>
+                  <Typography>{obj.reference}</Typography>
+                </Box>
+
+                <Box display="flex" gap={2} mt={3}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DescriptionIcon />}
+                    component="a"
+                    href={obj.certificate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    Certificate
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    startIcon={<BadgeIcon />}
+                    component="a"
+                    href={obj.idProof}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    ID Proof
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      <Paper elevation={3} sx={{ p: 3 }}>
+        {!flag ? (
+          <Box textAlign="center">
+            <Button
+              variant="contained"
+              onClick={() => setFlag(true)}
+              sx={{ px: 4, py: 1.5 }}
+            >
+              Update Employee Details
+            </Button>
+          </Box>
         ) : (
-          <div>
-            <div className="manpower-detail">
-              <div className="manpower-left">
-                <li className="item">
-                  <label className="update-label call-detail-label">Name: </label>{" "}
-                  {obj.employeeName}{" "}
-                </li>
+          <form onSubmit={handleUpdate}>
+            <Typography variant="h6" gutterBottom mb={3}>
+              Update Employee Information
+            </Typography>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <FormControl fullWidth>
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    inputRef={statusRef}
+                    defaultValue={obj.status || ""}
+                    label="Status"
+                    fullWidth
+                  >
+                    <MenuItem value="active">Active</MenuItem>
+                    <MenuItem value="inactive">Inactive</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
 
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Address:{" "}
-                  </label>{" "}
-                  {obj.employeeAddress}
-                </li>
-                {/* <label className='update-label call-detail-label'>Id Proof: </label> {}<br/><br/> */}
-                <li className="item">
-                  {" "}
-                  <label className="update-label call-detail-label">
-                    Designation:{" "}
-                  </label>{" "}
-                  {obj.employeeDesignation}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Joining Date:{" "}
-                  </label>{" "}
-                  {obj.joinDate?.slice(0, 10)}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">DOB: </label>{" "}
-                  {obj.employeeDOB?.slice(0, 10)}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Sallary:{" "}
-                  </label>{" "}
-                  {obj.salary}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Experience:{" "}
-                  </label>{" "}
-                  {obj.experience} Yrs
-                </li>
-              </div>
-              <div className="manpower-right">
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Qualification:{" "}
-                  </label>{" "}
-                  {obj.qualification}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Email:{" "}
-                  </label>{" "}
-                  {obj.employeeEmail}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Contact:{" "}
-                  </label>{" "}
-                  {obj.employeeContact}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Status:{" "}
-                  </label>{" "}
-                  {obj.status}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Reference:{" "}
-                  </label>{" "}
-                  {obj.reference}
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Certificate:{" "}
-                  </label>{" "}
-                  <a target="_blank"  href={obj.certificate} download>View</a>
-                  { }
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Id Proof:{" "}
-                  </label>{" "}
-                  <a target="_blank" href={obj.idProof} download>View</a>
-                  { }
-                </li>
-                <li className="item">
-                  <label className="update-label call-detail-label">
-                    Skills:{" "}
-                  </label>{" "}
-                 {obj.skills}
-              
-                  { }
-                </li>
-              </div>
-            </div>
-            {!flag ? (<div className="emp-update-btn" onClick={() => { setFlag(true) }}>
-              <Button text={"Update"} outlined={true} />
-            </div>) : (<form className="emp-update-form" onSubmit={handleUpdate}>
-              <div className="emp-update-form-left">
-                <label className="update-label call-detail-label">Status</label> <select id="dropdown" ref={statusRef} >
-                  <option value="">-- Select --</option>
-                  <option value="active">Active</option>
-                  <option value="inactive">Left</option>
-                </select><br />
-                <label className="update-label call-detail-label">Resign Date: </label><input type="date" className="form-input" ref={resignRef} /><br /></div>
-              <div className="emp-update-form-right">
-                <label className="update-label call-detail-label">Increement Due Date: </label><input type="date" className="form-input" ref={increementRef} /><br />
-                <label className="update-label call-detail-label">Remarks: </label> <input type="text" className="form-input" ref={remarksRef} /><br />
-                <input type="submit" value='Submit Update' className="submit-btn submit-btn-emp" onSubmit={handleUpdate} />
-              </div>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  inputRef={resignRef}
+                  type="date"
+                  label="Resign Date"
+                  InputLabelProps={{ shrink: true }}
+                  defaultValue={obj.resignedAt?.slice(0, 10)}
+                />
+              </Grid>
 
-            </form>)}
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  inputRef={incrementRef}
+                  type="date"
+                  label="Increment Due Date"
+                  InputLabelProps={{ shrink: true }}
+                />
+              </Grid>
 
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  inputRef={increementAmount}
+                  label="Increement Amount (in Rs)"
+                  // defaultValue={obj.remarks || ""}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  inputRef={newCTC}
+                  label="New CTC"
+                  // defaultValue={obj.remarks || ""}
+                />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <TextField
+                  fullWidth
+                  inputRef={newDesignation}
+                  label="New Designation"
+                  // defaultValue={obj.remarks || ""}
 
-          </div>
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  inputRef={remarksRef}
+                  label="Remarks"
+                  defaultValue={obj.remarks || ""}
+                  multiline
+                  rows={3}
+                />
+              </Grid>
 
+              <Grid item xs={12} display="flex" justifyContent="flex-end" gap={2}>
+                <Button
+                  variant="outlined"
+                  onClick={() => setFlag(false)}
+                  sx={{ px: 4 }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  sx={{ px: 4 }}
+                >
+                  Submit Update
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
         )}
-      </div>
-    </div>
+      </Paper>
+    </Box>
   );
 }
 
