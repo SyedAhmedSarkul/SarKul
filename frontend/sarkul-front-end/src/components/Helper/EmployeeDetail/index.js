@@ -51,7 +51,7 @@ function EmployeeDetail({ id, setFlagg }) {
   }
 
   useEffect(() => {
-    // getData();
+    getData();
   }, [id]);
 
   async function getData() {
@@ -137,7 +137,7 @@ function EmployeeDetail({ id, setFlagg }) {
                   py: 0.5,
                   borderRadius: 1,
                   bgcolor: obj.status === "active" ? "success.light" : "error.light",
-                  color:  "#fff",
+                  color: "#fff",
                   // fontWeight: "bold",
                   fontSize: 12,
                 }}
@@ -158,17 +158,17 @@ function EmployeeDetail({ id, setFlagg }) {
                 <Divider sx={{ mb: 2 }} />
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }} >
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Designation </Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Designation </Typography>
                   <Typography alignContent={'center'}>{obj.employeeDesignation}</Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Experience</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Experience</Typography>
                   <Typography alignContent={'center'} >{obj.experience} Years</Typography>
                 </Box>
 
                 {obj.increementAmount && <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Increement Amount</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Increement Amount</Typography>
                   <Typography alignContent={'center'} textAlign={'center'} >
                     ₹{obj.increementAmount}
                   </Typography>
@@ -176,21 +176,21 @@ function EmployeeDetail({ id, setFlagg }) {
                 }
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Salary</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Salary</Typography>
                   <Typography alignContent={'center'} textAlign={'center'} >
                     ₹{obj.salary}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Joining Date</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Joining Date</Typography>
                   <Typography alignContent={'center'} display="flex" justifyContent="center">
                     <EventIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.joinDate?.slice(0, 10)}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', flexDirection: 'row', gap: 2 }} >
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Skills</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Skills</Typography>
                   <Box display="flex" flexWrap="wrap" gap={1} mt={1} alignContent={'center'} justifyContent={'center'} >
                     {obj.skills?.map((skill, index) => (
                       <Box
@@ -222,35 +222,35 @@ function EmployeeDetail({ id, setFlagg }) {
                 <Divider sx={{ mb: 2 }} />
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Date of Birth</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Date of Birth</Typography>
                   <Typography alignContent={'center'} display="flex" justifyContent="center">
                     <CakeIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeDOB?.slice(0, 10)}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Address</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Address</Typography>
                   <Typography alignContent={'center'} display="flex" justifyContent="center">
                     <HomeIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeAddress}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Email</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Email</Typography>
                   <Typography alignContent={'center'} display="flex" justifyContent="center">
                     <EmailIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeEmail}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Contact</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Contact</Typography>
                   <Typography alignContent={'center'} display="flex" justifyContent="center">
                     <PhoneIcon sx={{ fontSize: 16, mr: 0.5 }} /> {obj.employeeContact}
                   </Typography>
                 </Box>
 
                 <Box sx={{ display: 'flex', mb: 2, flexDirection: 'row', gap: 2 }}>
-                  <Typography sx={{ alignContent: 'center',width:'90px',textAlign:'start' }} variant="body2" color="text.secondary">Reference</Typography>
+                  <Typography sx={{ alignContent: 'center', width: '90px', textAlign: 'start' }} variant="body2" color="text.secondary">Reference</Typography>
                   <Typography alignContent={'center'} >{obj.reference}</Typography>
                 </Box>
 
