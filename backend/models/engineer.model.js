@@ -70,6 +70,15 @@ const engineerSchema = new Schema(
         incrementDueDate: {
             type: Date,
         },
+        revisedSalary: {
+            type: String,
+        },
+        revisedDesignation: {
+            type: String,
+        },
+        increementAmount: {
+            type: String,
+        },
         remarks: {
             type: String,
         },

@@ -140,7 +140,7 @@ export const createEngineer = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while creating engineer"
+                    "Something went wrong while creating engineer"
                 )
             );
     }
@@ -148,7 +148,7 @@ export const createEngineer = async (req, res) => {
 
 export const updateEngineer = async (req, res) => {
     try {
-        const { status, resignedAt, incrementDueDate, remarks } = req.body;
+        const { status, resignedAt, incrementDueDate, remarks, increementAmount, revisedDesignation, revisedSalary } = req.body;
         const engineer = await Engineer.findOne({
             employeeCode: req.params.employeeCode,
         });
@@ -173,6 +173,15 @@ export const updateEngineer = async (req, res) => {
         if (remarks) {
             engineer.remarks = remarks;
         }
+        if (revisedSalary) {
+            engineer.salary = revisedSalary;
+        }
+        if (revisedDesignation) {
+            engineer.employeeDesignation = revisedDesignation;
+        }
+        if (increementAmount) {
+            engineer.increementAmount = increementAmount;
+        }
         await engineer.save();
         return res
             .status(200)
@@ -187,7 +196,7 @@ export const updateEngineer = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while updating engineer"
+                    "Something went wrong while updating engineer"
                 )
             );
     }
@@ -197,19 +206,31 @@ export const getEngineer = async (req, res) => {
     try {
         const engineer = await Engineer.findOne({
             employeeCode: req.params.employeeCode,
-        });
+        }).lean();
+
         if (!engineer) {
             throw new ApiError(404, "Engineer not found");
         }
-        return res
-            .status(200)
-            .json(
-                new ApiResponse(
-                    200,
-                    engineer,
-                    "Engineer retrieved successfully"
-                )
-            );
+
+        // Get all keys defined in schema
+        const schemaKeys = Object.keys(Engineer.schema.paths).filter(
+            (key) => !["__v", "_id"].includes(key)
+        );
+
+        // Normalize: include all schema keys with default `null` if missing
+        const completeEngineer = {};
+
+        schemaKeys.forEach((key) => {
+            completeEngineer[key] = engineer[key] ?? null;
+        });
+
+        // Include _id separately if needed
+        completeEngineer["_id"] = engineer["_id"];
+
+        return res.status(200).json(
+            new ApiResponse(200, completeEngineer, "Engineer retrieved successfully")
+        );
+
     } catch (error) {
         return res
             .status(error.statusCode || 500)
@@ -218,7 +239,7 @@ export const getEngineer = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving engineer"
+                    "Something went wrong while retrieving engineer"
                 )
             );
     }
@@ -255,7 +276,7 @@ export const getAllEngineers = async (req, res) => {
                     error.statusCode,
                     null,
                     error.message ||
-                        "Something went wrong while retrieving engineers"
+                    "Something went wrong while retrieving engineers"
                 )
             );
     }

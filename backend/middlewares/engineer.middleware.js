@@ -42,7 +42,10 @@ export const updateEngineerValidation = async (req, res, next) => {
             req.body.status ||
             req.body.resignedAt ||
             req.body.incrementDueDate ||
-            req.body.remarks
+            req.body.remarks||
+            req.body.revisedSalary||
+            req.body.revisedDesignation||
+            req.body.increementAmount
         )
     ) {
         return res
