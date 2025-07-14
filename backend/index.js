@@ -33,4 +33,4 @@ app.use("/api/v1/expense", expenseRoutes);
 //     console.log(`Server running on port ${PORT}`);
 // });
 
-export default handler = serverless(app);
+export default serverless(app);
