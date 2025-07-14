@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import serverless from "serverless-http";
 import { connectDB } from "./config/db.js";
 import { userRoutes, callRoutes, engineerRoutes, stockRoutes, transactionRoutes, mystocksRoutes, groupRoutes,expenseRoutes } from "./routes/index.js";
 
@@ -31,3 +32,5 @@ app.use("/api/v1/expense", expenseRoutes);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+export const handler = serverless(app);
