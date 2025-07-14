@@ -29,8 +29,8 @@ app.use("/api/v1/mystocks", mystocksRoutes);
 app.use("/api/v1/group", groupRoutes);
 app.use("/api/v1/expense", expenseRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+// });
 
 export const handler = serverless(app);
